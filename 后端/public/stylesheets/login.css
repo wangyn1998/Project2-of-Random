@@ -1,0 +1,44 @@
+.login{
+    width: 350px;
+    margin: 0 auto;
+    margin-top: 50px;
+}
+form{
+    width: 350px;
+    margin: 10px auto;
+    padding-left: 5px;
+}
+input{
+    border: 1px solid #79be3b;
+    border-radius: 10px;
+    height: 35px;
+}
+#username,#password{
+    width: 310px;
+    margin-top: 20px;
+    padding-left: 10px;
+}
+#test{
+    width: 200px;
+    margin-top: 5px;
+    padding-left: 10px;
+}
+#code{
+    width: 105px;
+    background: #79be3b;
+    color: white;
+    margin-top: 5px;
+    cursor: pointer;
+}
+#login{
+    width: 220px;
+    height: 35px;
+    background: #79be3b;
+    color: white;
+    border: none;
+    margin-top: 20px;
+    margin-left: 65px;
+    border-radius: 10px;
+    font-size: 16px;
+    cursor: pointer;
+}

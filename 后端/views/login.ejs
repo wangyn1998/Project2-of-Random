@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>登录</title>
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
+    <link rel='stylesheet' href='/stylesheets/login.css'/>
+    <!-- 后端登录 --><link rel="stylesheet" href="https://at.alicdn.com/t/font_1506624_tykir5tz1ak.css">
+  </head>
+  <body>
+    <header style="background:#79be3b;width:100%;height:75px;"> 
+      <img src="./images/logo.png" style="width:75px;height:75px;float:left;margin-left:30px;"/>
+      <p style="float:left;color:white;font-size:35px;line-height:70px;margin-left:40px;">盒我学后台管理系统</p>
+    </header>
+    <div class="login">
+      <div class="iconfont icon-wode" style="color:#79be3b;text-align:center"></div>
+      <form>
+        <input type="text" id="username" placeholder="用户名:">
+        <input type="password" id="password" placeholder="密码:">
+        <span class="iconfont icon-eye" id="eye" style="color:#79be3b;"></span>
+        <input type="text" id="test" placeholder="验证码:">
+        <input type="button" id="code" value="获取验证码">
+        <button type="button" id="login">登 录</button>
+      </form>
+    </div>
+  </body>
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+  <script type="text/javascript"></script>
+  <script>
+    function temp(id){
+      return document.getElementById(id);
+    }
+    temp('eye').onmouseout = function(){
+      temp('password').type="password";
+    }
+    temp('eye').onmouseover = function(){
+      temp('password').type="text";
+    }
+   
+    $("#code").click(function() {
+      var code = rand(1000,9999);
+      $('#code').val(code);
+      $('#code').css('font-size','15px');
+    });
+    function rand(min,max){
+      return Math.floor(Math.random()*(max-min))+min;
+    }
+    
+  </script>
+</html>
