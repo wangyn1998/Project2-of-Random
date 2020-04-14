@@ -17,7 +17,8 @@ import Box from './src/box/Box';
 import Block from './src/block/Block';
 import Discover from './src/discover/Discover';
 import My from './src/my/My';
-
+import Login from './src/common/Login';
+import Register from './src/common/Register';
 const styles = StyleSheet.create({
 
 })
@@ -112,6 +113,8 @@ const App = () => {
               </Tabs>
             </Scene>
         </Lightbox>
+        <Scene  key="login" component={Login} initial={true}/>
+        <Scene key="register" component={Register}/>
       </Modal>
       </Overlay>
     </Router>
@@ -119,5 +122,3 @@ const App = () => {
 };
 
 export default App;
-
-{/*  */}
