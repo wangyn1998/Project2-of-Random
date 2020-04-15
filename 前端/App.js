@@ -19,6 +19,7 @@ import Discover from './src/discover/Discover';
 import My from './src/my/My';
 import Login from './src/common/Login';
 import Register from './src/common/Register';
+import Personal from './src/my/Personal';
 const styles = StyleSheet.create({
 
 })
@@ -101,7 +102,8 @@ const App = () => {
                   </Scene>
                   <Scene key='myPage'
                     title='我的'
-                    hideNavBar
+                    navigationBarStyle={{backgroundColor:'#79be3b'}}
+                    titleStyle={{flex:1,textAlign:'center',color:'white'}}
                     icon={
                       ({focused})=><Icon
                       color={focused?'#79be3b':'#949494'}
@@ -110,6 +112,16 @@ const App = () => {
                       }
                   >
                     <Scene key='my' component={My}/>
+                    <Scene 
+                      title='编辑资料'
+                      key="personal" 
+                      component={Personal} 
+                      hideTabBar
+                      navigationBarStyle={{backgroundColor:'#79be3b'}}
+                      titleStyle={{flex:1,textAlign:'center',color:'white'}}
+                      backButtonImage={require('./images/return.png')}
+                      renderRightButton={<Icon name='ellipsis' style={{marginRight:20,color:'white'}}/>}
+                    />
                 </Scene>
               </Tabs>
             </Scene>
