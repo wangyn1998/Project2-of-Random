@@ -63,7 +63,8 @@ const App = () => {
               >
                 <Scene key='boxPage'
                   title='学习盒'
-                  hideNavBar
+                  titleStyle={{color:'#ffffff',textAlign:'center',flex:1}}
+                  navigationBarStyle={{backgroundColor:'#79be3b'}}
                   icon={
                     ({focused})=><Icon
                     color={focused?'#79be3b':'#949494'}
