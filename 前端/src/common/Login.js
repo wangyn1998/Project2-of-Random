@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {View,Text,Image,TextInput,TouchableOpacity, AsyncStorage, ToastAndroid, Alert} from 'react-native'
+import {View,Text,Image,TextInput,TouchableOpacity, AsyncStorage, ToastAndroid, Alert,StyleSheet} from 'react-native'
 import { Icon } from '@ant-design/react-native'
 import { Actions } from 'react-native-router-flux'
 import {myFetch} from './index'
@@ -38,20 +38,12 @@ export default class Login extends Component {
     }
     render() {
         return (
-          <View style={{justifyContent:'center',flex:1}} 
+          <View style={{flex:1,backgroundColor:'#fff',paddingTop:110}} 
       
           >
             <View style={{alignItems:'center'}}>
-              <View style={{
-                width:'80%',
-                borderRadius:10,
-                borderBottomColor:'#ccc',
-                borderBottomWidth:1,
-                flexDirection:'row',
-                alignItems:'center',
-                paddingLeft:20
-              }}>
-                <Icon name="user" color="red"/>
+              <View style={styles.up}>
+                <Icon name="user" color="#79be3b"/>
                 <TextInput placeholder='用户名'
                   onChangeText={this.userhandle}
                 />
@@ -62,52 +54,72 @@ export default class Login extends Component {
                 alignItems:'center'
               }}
             >
-              <View style={{
-                width:'80%',
-                borderRadius:10,
-                borderBottomColor:'#ccc',
-                borderBottomWidth:1,
-                flexDirection:'row',
-                alignItems:'center',
-                paddingLeft:20
-              }}>
-                <Icon name="form" color="red"/>
+              <View style={styles.up}>
+                <Icon name="form" color="#79be3b"/>
                 <TextInput placeholder='密码'
                   onChangeText={this.pwdhandle}
                   secureTextEntry={true} 
                 />
               </View>
               <TouchableOpacity 
-                style={{
-                  width:'80%',
-                  height:40,
-                  backgroundColor:'#ccc',
-                  justifyContent:'center',
-                  alignItems:'center',
-                  marginTop:20,  
-                }}
+                style={styles.login}
                 onPress={this.login}
               >
-                <Text>登录</Text>
+                <Text style={styles.logintxt}>登录</Text>
               </TouchableOpacity>  
-              <TouchableOpacity 
-                style={{
-                  width:'80%',
-                  height:40,
-                  backgroundColor:'#ccc',
-                  justifyContent:'center',
-                  alignItems:'center',
-                  marginTop:20,  
-                }}
-                onPress={()=>Actions.register()}
-              >
-                <Text>去注册</Text>
-              </TouchableOpacity>  
+              <View style={{flexDirection:'row',alignItems:'center',marginTop:30}}>
+                <TouchableOpacity>
+                  <Text style={styles.goto}>忘记密码</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={{marginLeft:'40%'}}>
+                  <Text style={styles.goto}
+                        onPress={()=>Actions.register()}
+                  >去注册</Text>
+                </TouchableOpacity>
+              </View>
+              {/* <View style={{width:'100%',height:'30%',backgroundColor:'red'}}> */}
+                <Image source={require('../../images/girl.jpg')} style={styles.girl}/>
+              {/* </View> */}
             </View>   
-            {
+            {/* {
               this.state.isloading?<View><Text style={{textAlign:'center',marginTop:50}}>正在登录...</Text></View>:null
-            }      
+            }       */}
           </View>
         )
     }
 }
+const styles = StyleSheet.create({
+  up:{
+    width:'60%',
+    height:50,
+    borderRadius:10,
+    borderWidth:2,
+    borderColor:'#79be3b',
+    flexDirection:'row',
+    alignItems:'center',
+    paddingLeft:'2%',
+    marginTop:20
+  },
+  login:{
+    width:'40%',
+    height:40,
+    backgroundColor:'#79be3b',
+    justifyContent:'center',
+    alignItems:'center',
+    marginTop:40,  
+    borderRadius:10
+  },
+  logintxt:{
+    color:'#fff'
+  },
+  goto:{
+    color:'#79be3b',
+    borderBottomWidth:1,
+    borderBottomColor:'#79be3b'
+  },
+  girl:{
+    marginTop:40,
+    width:'100%',
+    height:'45%'
+  }
+})

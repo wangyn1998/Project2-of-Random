@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {View,Text,Image,TextInput,TouchableOpacity, AsyncStorage, StyleSheet,Alert} from 'react-native'
+import {View,Text,Image,TextInput,TouchableOpacity, AsyncStorage, StyleSheet,Alert,ImageBackground} from 'react-native'
 import { Icon } from '@ant-design/react-native'
 import { Actions } from 'react-native-router-flux'
 import {myFetch} from './index'
@@ -8,10 +8,11 @@ export default class Register extends Component {
     constructor(){
       super();
       this.state={
-        phonenumber:'',
+        phonenum:'',
         username:'',
         pwd:'',
         repwd:'',
+        checknum:'',
         isloading:false
       }
     }
@@ -39,6 +40,18 @@ export default class Register extends Component {
             repwd:text
         })
     }
+    phonenumhandle=(text)=>{
+      console.log(text);
+      this.setState({
+        phonenum:text
+      })
+    }
+    checknumhandle=(text)=>{
+      console.log(text);
+      this.setState({
+        checknum:text
+      })
+    }
     register = () => {
       this.setState({isloading:true})
       myFetch.post('/register',{
@@ -47,89 +60,133 @@ export default class Register extends Component {
         pwd:this.state.pwd,
         repwd:this.state.repwd
       }).then(res=>{
-        if(res.data.username == '' || res.data.pwd == '' || res.data.repwd == ''){
-          Alert.alert('用户名或密码或第二次密码为空','点击OK重新输入')
-        }
-        else if(res.data.username != '' && res.data.pwd == res.data.repwd){
-          AsyncStorage.setItem('user',JSON.stringify(res.data))
-            .then(()=>{
-              this.setState({isloading:false})
-              Actions.login();
-            })
-        }
-        else if(res.data.pwd != res.data.repwd){
-          Alert.alert('两次密码输入不一致','点击OK重新输入')
-        }
-        else{
-          Alert.alert('输入错误','点击OK重新输入')
-        }
+        // if(res.data.username == '' || res.data.pwd == '' || res.data.repwd == ''){
+        //   Alert.alert('用户名或密码或第二次密码为空','点击OK重新输入')
+        // }
+        // else if(res.data.username != '' && res.data.pwd == res.data.repwd){
+        //   AsyncStorage.setItem('user',JSON.stringify(res.data))
+        //     .then(()=>{
+        //       this.setState({isloading:false})
+        //       Actions.login();
+        //     })
+        // }
+        // else if(res.data.pwd != res.data.repwd){
+        //   Alert.alert('两次密码输入不一致','点击OK重新输入')
+        // }
+        // else{
+        //   Alert.alert('输入错误','点击OK重新输入')
+        // }
+        Actions.login();
       })
     }
     render() {
         return (
-          <View style={{justifyContent:'center',flex:1}} >
-            <View style={{alignItems:'center'}}>
-              <View style={styles.every}>
-                <Icon name="user" color="red"/>
-                <TextInput placeholder='用户名'
-                  onChangeText={this.userhandle}
-                />
+          <ImageBackground style={{ flex: 1 }}
+          source={require('../../images/back.png')}>
+            <View style={{flex:1,paddingTop:70}}>
+              <View style={{alignItems:'center'}}>
+                <View style={styles.every}>
+                  <Icon name="user" color="#79be3b"/>
+                  <TextInput placeholder='用户名'
+                    placeholderTextColor='#79be3b'
+                    onChangeText={this.userhandle}
+                  />
+                </View>
               </View>
-            </View>
-            <View style={{alignItems:'center'}}>
-              <View style={styles.every}>
-                <Icon name="form" color="red"/>
-                <TextInput placeholder='密码'
-                  onChangeText={this.pwdhandle}
-                  secureTextEntry={true} 
-                />
+              <View style={{alignItems:'center'}}>
+                <View style={styles.every}>
+                  <Icon name="form" color="#79be3b"/>
+                  <TextInput placeholder='密码'
+                    placeholderTextColor='#79be3b'
+                    onChangeText={this.pwdhandle}
+                    secureTextEntry={true} 
+                  />
+                </View>
               </View>
-            </View>
-            <View style={{ alignItems:'center'}}>
-              <View style={styles.every}>
-                <Icon name="form" color="red"/>
-                <TextInput placeholder='重新输入密码'
-                  onChangeText={this.repwdhandle}
-                  secureTextEntry={true} 
-                />
+              <View style={{ alignItems:'center'}}>
+                <View style={styles.every}>
+                  <Icon name="form" color="#79be3b"/>
+                  <TextInput placeholder='重新输入密码'
+                    placeholderTextColor='#79be3b'
+                    onChangeText={this.repwdhandle}
+                    secureTextEntry={true} 
+                  />
+                </View>
+              </View>  
+              <View style={{alignItems:'center'}}>
+                <View style={styles.every}>
+                  <Icon name="phone" color="#79be3b"/>
+                  <TextInput placeholder='手机号'
+                    placeholderTextColor='#79be3b'
+                    onChangeText={this.phonenumhandle}
+                  />
+                </View>
               </View>
-              
-              <TouchableOpacity 
-                style={styles.btn}
-                onPress={this.register}
-              >
-                <Text>注册</Text>
-              </TouchableOpacity>  
-              <TouchableOpacity 
-                style={styles.btn}
-                onPress={()=>Actions.login()}
-              >
-                <Text>去登录</Text>
-              </TouchableOpacity>  
+              <View style={{alignItems:'center'}}>
+                <View style={styles.every}>
+                  <Icon name="form" color="#79be3b"/>
+                  <TextInput placeholder='输入验证码'
+                    placeholderTextColor='#79be3b'
+                    onChangeText={this.checknumhandle}
+                  />
+                </View>
+              </View>
+              <View style={{ alignItems:'center'}}>
+                <TouchableOpacity 
+                  style={styles.every}
+                >
+                  <Icon name="form" color="#79be3b" style={{marginLeft:'25%'}}/>
+                  <Text style={{color:'#79be3b',marginLeft:'3%'}}>点击获取验证码</Text>
+                </TouchableOpacity>
+              </View>  
+              <View style={{flexDirection:'row',marginTop:30}}>
+                <TouchableOpacity 
+                  style={styles.btn}
+                  onPress={()=>Actions.login()}
+                >
+                  <Text style={styles.btntxt}>去登录</Text>
+                </TouchableOpacity> 
+                <TouchableOpacity 
+                  style={styles.btn}
+                  onPress={this.register}
+                >
+                  <Text style={styles.btntxt}>注册</Text>
+                </TouchableOpacity>  
+              </View>
+              {/* {
+                this.state.isloading?<View><Text style={{textAlign:'center',marginTop:50,color:'#fff'}}>正在注册...</Text></View>:null
+              }       */}
             </View>
-            {
-              this.state.isloading?<View><Text style={{textAlign:'center',marginTop:50}}>正在注册...</Text></View>:null
-            }      
-          </View>
+          </ImageBackground>
         )
     }
 }
 const styles = StyleSheet.create({
     every:{
-        width:'80%',
-        borderRadius:10,
-        borderBottomColor:'#ccc',
-        borderBottomWidth:1,
-        flexDirection:'row',
-        alignItems:'center',
-        paddingLeft:20
+      width:'60%',
+      height:45,
+      borderRadius:10,
+      borderWidth:2,
+      borderColor:'#79be3b',
+      flexDirection:'row',
+      alignItems:'center',
+      paddingLeft:'2%',
+      marginTop:20,
+      backgroundColor:'#fff'
     },
     btn:{
-        width:'80%',
-        height:40,
-        backgroundColor:'#ccc',
-        justifyContent:'center',
-        alignItems:'center',
-        marginTop:20,  
-      }
+      width:'30%',
+      height:45,
+      borderRadius:10,
+      backgroundColor:'#79be3b',
+      justifyContent:'center',
+      alignItems:'center',
+      marginTop:20,
+      marginLeft:'13%'
+    },
+    btntxt:{
+      color:'#fff',
+      fontWeight:'bold',
+      fontSize:15
+    }
 })
