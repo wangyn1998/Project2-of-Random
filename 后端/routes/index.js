@@ -33,6 +33,12 @@ router.get('/score/task', function(req, res, next) {
 router.get('/box', function(req, res, next) {
   res.render('Box/box', { title: 'box' });
 });
+router.get('/box/person', function(req, res, next) {
+  res.render('Box/personBox', { title: 'personBox' });
+});
+router.get('/box/card', function(req, res, next) {
+  res.render('Box/card', { title: 'card' });
+});
 //发现管理
 router.get('/discovery', function(req, res, next) {
   res.render('Discovery/discovery', { title: 'discovery' });
