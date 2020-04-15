@@ -88,13 +88,14 @@ const App = () => {
                 <Scene 
                   key='discoverPage'
                   title='发现'
-                  hideNavBar
                   icon={
                     ({focused}) =>  <Icon
                     name={"global"}
                     color={focused?'#79be3b':'#949494'}
                     />
                   }
+                  navigationBarStyle={{backgroundColor:'#79be3b'}}
+                  titleStyle={{color:'white',marginLeft:'48%'}}
                   >
                     <Scene key="discover" component={Discover}/>
                   </Scene>
