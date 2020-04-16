@@ -3,10 +3,13 @@
     <head>
         <title>盒子管理</title>
         <link rel='stylesheet' href='/stylesheets/style.css'/>
+        <link rel='stylesheet' href='/stylesheets/personbox.css'/>
+        <!-- 后端登录 --><link rel="stylesheet" href="https://at.alicdn.com/t/font_1506624_oswwuan5y68.css">
+        <!-- 后端论坛 --><link rel="stylesheet" href="https://at.alicdn.com/t/font_1528101_39ha99o5h31.css">
     </head>
     <body>
         <header style="background:#79be3b;width:100%;height:75px;"> 
-            <img src="./images/logo.png" style="width:75px;height:75px;float:left;margin-left:30px;"/>
+            <img src="../images/logo.png" style="width:75px;height:75px;float:left;margin-left:30px;"/>
             <p style="float:left;color:white;font-size:35px;line-height:70px;margin-left:40px;">盒我学后台管理系统</p>
         </header>
         <div class="left">
@@ -33,12 +36,95 @@
             </div>
         </div>
         <div class="right">
-            
+            <div class="personBoxbox1">
+                <div class='search'>
+                    <form style="line-height: 2.5em;">
+                        <input class='Bar' placeholder="请输入"/>
+                        <div class="iconfont icon-xiaoxi-" style="float:left;">
+                            <input type="submit" value="搜索"style="height:30px;border:none;">
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="Boxbox2">
+                <p style="font-size:22px;font-weight:bold;padding-top:26px ;">盒子列表</p>
+            </div>
+            <div class='Boxbox3'>
+                <ul id="all" style="padding-inline-start: 0px;margin-block-start: 0;
+                margin-block-end: 0">
+                <% for(var i = 0 ; i < 8; i++) {%>
+                    <li>
+                        <div>
+                            <img class="personBoximage" src="../images/box1.png"/>
+                            <p>英语</p>
+                        </div>
+                    </li>
+                <%}%>
+                </ul>
+            </div>
+            <div style=" width: 945px;height:30px;text-align: center;margin:10px auto;"> 
+                <div class="page">
+                    <div id="page">
+                    </div>
+                </div>
+            </div>
         </div>
     </body>
-    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-    <script type="text/javascript"></script>
-    <script>
-        
-    </script>
+    <script type="text/javascript " src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript">
+     console.log(document.body.scrollHeight)    
+        function getzz() {
+        var a = $("ul#all li");
+        var zz =new Array(a.length);
+        for(var i=0;i <a.length;i++){
+            zz[i]=a[i].innerHTML;
+        } //div的字符串数组付给zz
+        return zz;
+    }
+    function change(e){
+        pageno=e;
+        if(e<1){
+            e=1;
+            pageno=1;//就等于第1页 ， 当前页为1
+        }
+        if(e>pageall){  //如果输入页大于最大页
+            e=pageall;
+            pageno=pageall; //输入页和当前页都=最大页
+        }
+        $("#all").html("");//全部清空
+        var html="";
+        for(var i=0;i<pagesize;i++){
+            if(zz[(e-1)*pagesize+i]){
+                html += '<li>' + zz[(e-1)*pagesize+i] +'</li>';//创建一页的li列表
+            }
+            if(zz[(e-1)*pagesize+i+1]==null) break;//超出最后的范围跳出
+        }
+        $("ul#all").html(html);//给ul列表写入html
+        var ye="";
+        for(var j=1;j<=pageall;j++){
+            if(e==j){
+                ye=ye+"<span><a href='#' onClick='change("+j+")' style='color:#FF0000'>"+j+"</a></span> "
+            }else{
+                ye=ye+"<a href='#' onClick='change("+j+")'>"+j+"</a> "
+            }
+        }
+        var pageContent="";
+            pageContent +='第<span id=\"a2\">'+pageno+'</span>/';
+            pageContent +='<span id="a1">'+pageall+'</span>页';
+            pageContent +="<span id='a3' style='text-decoration:underline;margin-left:10px'>"+ye+'</span>';
+            pageContent +='<a href="#" style="text-decoration:underline;margin-left:10px;" onClick="change(--pageno)">上一页</a>';
+            pageContent +='<a href="#" style="text-decoration:underline;margin-left:5px;" onClick="change(++pageno)">下一页</a>';
+        $("#page").html(pageContent);
+    }
+        var zz=getzz()
+        var pageno=1 ; //当前页
+        var pagesize=6; //每页多少条信息
+        if(zz.length%pagesize==0){
+            var  pageall =zz.length/pagesize ;
+        }else{
+            var  pageall =parseInt(zz.length/pagesize)+1;
+        }   //一共多少页
+        change(1);
+
+        </script>
 </html>
