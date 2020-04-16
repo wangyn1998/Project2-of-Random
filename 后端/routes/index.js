@@ -34,6 +34,13 @@ router.get('/score', function(req, res, next) {
 router.get('/score/list', function(req, res, next) {
   res.render('Score/list', { title: 'list' });
 });
+router.get('/score/slist', function(req, res, next) {
+  res.render('Score/listIn', { title: 'listIn' });
+});
+router.post('/searchuserscore', function(req, res, next) {
+  var userName=req.body.userName;
+  res.render('Score/searchUserScore', { title: 'user',userName:userName });
+});
 //积分任务管理
 router.get('/score/task', function(req, res, next) {
   res.render('Score/task', { title: 'task' });
