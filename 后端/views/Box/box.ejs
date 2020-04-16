@@ -64,36 +64,15 @@
                         margin-block-end: 0;">操作</h2>
                         </div>
                     </li> -->
-                    <li>
+                    <% for(var i = 0 ; i < 6; i++) {%>
+                        <li>
                         <img class="Boximg" src="https://dss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1107263072,1224997471&fm=26&gp=0.jpg"/>   
                         <p class="Boxname"style="margin-block-start: 0;margin-block-end:0;overflow:hidden;">用户名</p>      
                         <p class="Boxnum"style="float:left;margin-top:12px;margin-left:80px;font-size:20px" id="time">6</p>
-                        <button class='Boxcheck'>查看盒子</button>  
+                        <a href="/box/person"><button class='Boxcheck'>查看盒子</button></a>
+                        <button class='Boxcheck1'>查看学习记录</button>   
                     </li>
-                    <li>
-                        <img class="Boximg" src="https://dss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1107263072,1224997471&fm=26&gp=0.jpg"/>   
-                        <p class="Boxname"style="margin-block-start: 0;margin-block-end:0;overflow:hidden;">用户名</p>      
-                        <p class="Boxnum"style="float:left;margin-top:12px;margin-left:80px;font-size:20px" id="time">6</p>
-                        <button class='Boxcheck'>查看盒子</button>  
-                    </li>
-                    <li>
-                        <img class="Boximg" src="https://dss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1107263072,1224997471&fm=26&gp=0.jpg"/>   
-                        <p class="Boxname"style="margin-block-start: 0;margin-block-end:0;overflow:hidden;">用户名</p>      
-                        <p class="Boxnum"style="float:left;margin-top:12px;margin-left:80px;font-size:20px" id="time">6</p>
-                        <button class='Boxcheck'>查看盒子</button>  
-                    </li>
-                    <li>
-                        <img class="Boximg" src="https://dss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1107263072,1224997471&fm=26&gp=0.jpg"/>   
-                        <p class="Boxname"style="margin-block-start: 0;margin-block-end:0;overflow:hidden;">用户名</p>      
-                        <p class="Boxnum"style="float:left;margin-top:12px;margin-left:80px;font-size:20px" id="time">6</p>
-                        <button class='Boxcheck'>查看盒子</button>  
-                    </li>
-                    <li>
-                        <img class="Boximg" src="https://dss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1107263072,1224997471&fm=26&gp=0.jpg"/>   
-                        <p class="Boxname"style="margin-block-start: 0;margin-block-end:0;overflow:hidden;">用户名</p>      
-                        <p class="Boxnum"style="float:left;margin-top:12px;margin-left:80px;font-size:20px" id="time">6</p>
-                        <button class='Boxcheck'>查看盒子</button>  
-                    </li>
+                    <%}%>
                 </ul>
             </div>
             <div style=" width: 945px;height:30px;text-align: center;margin:10px auto;"> 
@@ -105,7 +84,8 @@
         </div>
     </body>
     <script type="text/javascript " src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-    <script type="text/javascript">    
+    <script type="text/javascript">
+     console.log(document.body.scrollHeight)    
         function getzz() {
         var a = $("ul#all li");
         var zz =new Array(a.length);
