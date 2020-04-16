@@ -13,6 +13,15 @@ router.get('/home', function(req, res, next) {
 router.get('/user', function(req, res, next) {
   res.render('User/user', { title: 'user' });
 });
+/**删除用户 */
+router.get('/deleteuser', function(req, res, next) {
+  res.render('User/deleteUser', { title: 'user' });
+});
+/**搜索用户 */
+router.post('/searchuser', function(req, res, next) {
+  var userName=req.body.userName;
+  res.render('User/searchUser', { title: 'user',userName:userName });
+});
 //盒塘管理
 router.get('/block', function(req, res, next) {
   res.render('Block/block', { title: 'block' });
