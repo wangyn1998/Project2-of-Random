@@ -1,0 +1,151 @@
+/* 积分表 */
+/* 积分对照表 */
+#bianji{
+    background-color: #61b3ed;
+    color: #fff;
+}
+.Listbox3{
+    width:92%;
+    height: 300px;
+    margin-left: 50px;
+    margin-top: 10px;
+    border:1px solid #eee;
+    color: #000;
+    margin-bottom: 10px;
+}
+.Listbox3 ul{
+    /* width: 1100px; */
+    width: 100%;
+    height: 300px;
+    float: left;
+  }
+.Listbox3 li{
+    width: 100%;
+    height: 58px;
+    border:1px solid #eee;
+    float: left;
+}
+.Listhead{
+    text-align: center;
+    line-height:3.7rem;
+    color:#000;
+    border:1px solid #eee;
+    /* line-height:3rem; */
+    /* background-color: pink; */
+}
+.Listhead1{
+    float: left;
+    width: 20%;
+    color: black;  
+}
+.Listbody{
+    float: left;
+    width: 20%;
+    text-align: center;
+    line-height:3.7rem;
+}
+/* 个人详细积分 */
+.ListInbox3{
+    width:92%;
+    height: 300px;
+    margin-top:30px;
+    margin-left: 50px;
+    /* background-color: #eee; */
+    border:1px solid #eee;
+    margin-bottom: 10px;
+}
+.ListInbox3 ul{
+    width: 100%;
+    height: 300px;
+    float: left;
+}
+.ListInbox3 li{
+    width: 100%;
+    height: 58px;
+    border:1px solid #eee;
+    /* background-color: pink; */
+    float: left;
+} 
+.ListInhead{
+    background-color:white;
+    text-align: center;
+    line-height:3.7rem;
+}
+.ListInhead1{
+    float: left;
+    width: 33%;
+    color: black;
+}
+
+.ListInimg{
+    float: left;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin: 10px 0 0 35%;
+}
+.ListInbody{
+    float: left;
+    width: 33%;
+    color: black;
+    text-align: center;
+    line-height:3.7rem;
+}
+/* 积分对照表 */
+.Taskbox3{
+    width:92%;
+    height: 300px;
+    margin-left: 50px;
+    margin-top: 10px;
+    border:1px solid #eee;
+    margin-bottom: 10px;
+}
+.Taskbox3 ul{
+    width: 100%;
+    height: 300px;
+    float: left;
+}
+.Taskbox3 li{
+    width: 100%;
+    height: 58px;
+    border:1px solid #eee;
+    /* background-color: pink; */
+    float: left;
+}
+.Taskhead{
+    background-color:white;
+    color:#000;
+    text-align: center;
+    line-height:3.7rem;
+}
+.Taskhead1{
+    float: left;
+    /* width: 135px; */
+    width: 25%;
+    color: black;
+}
+.Taskbody{
+    float: left;
+    /* width: 135px; */
+    width: 25%;
+    color: black;
+    text-align: center;
+    line-height:3.7rem;
+}
+.Topicoperation{
+    float: left;
+    margin:2px 0 0 30%;
+}
+.operation1{
+    width: 60px;
+    float: left;
+    height: 30px;
+}
+.operation1>button{
+    width: 60px;
+    background-color: #79be3b;
+    border:1px solid #888;
+    color: #fff;
+    height: 30px;
+}
+
