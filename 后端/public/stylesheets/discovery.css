@@ -1,25 +1,24 @@
-/* 游戏管理 */
 .Gamebox3{
-    width: 70%;
-    height: 310px;
+    width: 85%;
+    height: 300px;
     margin-left: 50px;
     border:1px solid #eee;
     margin-bottom: 10px;
 }
 .Gamebox3 ul{
     width: 100%;
-    height: 310px;
+    height: 300px;
     float: left;
 }
 .Gamebox3 li{
     width: 100%;
-    height: 50px;
+    height: 58px;
     border:1px solid #eee;
     float: left;
 } 
 .Gamehead{
     text-align: center;
-    line-height:3rem;
+    line-height:3.7rem;
 }
 .Gamehead1{
     float: left;
@@ -29,24 +28,22 @@
     float: left;
     width: 25%;
     text-align: center;
-    line-height:3rem;
+    line-height:3.7rem;
 }
 .Gamebody button{
     width: 50px;
     height: 30px;
     float: left;
-    border: none;
-    text-align: center;
     border:1px solid #888;
-    margin-top: 10px;
+    margin-top: 15px;
 }
 .Gamebianji{
+    margin-left: 28%;
     color: white;
-    margin-left: 40px;
     background: #79be3b;
 }
 .Gamedel{
-    margin-left: 10px;
+    margin-left: 3%;
     background-color: #fff;
     color: #79be3b;
 }

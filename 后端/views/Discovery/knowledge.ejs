@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>游戏管理</title>
+        <title>知识管理</title>
         <link rel='stylesheet' href='/stylesheets/style.css'/>
+        <link rel='stylesheet' href='/stylesheets/discovery.css'/>
+        <!-- 后端登录 --><link rel="stylesheet" href="https://at.alicdn.com/t/font_1506624_oswwuan5y68.css">
     </head>
     <body>
         <header style="background:#79be3b;width:100%;height:75px;"> 
@@ -27,12 +29,156 @@
             </div>
         </div>
         <div class="right">
-            
-        </div>
+            <div class="box1">
+                <div class='search'>
+                    <form style="line-height: 2.5em;">
+                        <input class='Bar' placeholder="请输入要搜索的知识"/>
+                        <div class="iconfont icon-xiaoxi-" style="float:left;">
+                            <input type="submit" value="搜索"style="height:30px;border:none;">
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="box2">
+                <p style="font-size:22px;font-weight:bold">盒我学知识管理
+                    <span style="margin-left:30px" class="iconfont icon-wuuiconxiangjifangda" id="btn"></span>
+                    <span style="font-size:20px;margin-left:5px;font-weight:lighter">添加</span>
+                </p>
+            </div>
+            <div class='Gamebox3'>
+                <ul id="all">
+                    <!-- <li>
+                        <div class="Gamehead">
+                            <h3 class='Gamehead1'>编号</h3>
+                            <h3 class='Gamehead1'>知识标题</h3>
+                            <h3 class='Gamehead1'>知识内容</h3>
+                            <h3 class='Gamehead1'>操作</h3>
+                        </div>
+                    </li>  -->
+                    <li> 
+                        <p class='Gamebody'>01</p>
+                        <p class='Gamebody'>知识1</p>
+                        <p class='Gamebody'>xxxx</p>
+                        <p class='Gamebody'>
+                            <a href=''><button class='Gamebianji'>编辑</button></a>
+                            <a href=''><button class='Gamedel'>移除</button></a>
+                        </p>
+                    </li>
+                    <li> 
+                        <p class='Gamebody'>02</p>
+                        <p class='Gamebody'>知识2</p>
+                        <p class='Gamebody'>xxxx</p>
+                        <p class='Gamebody'>
+                            <a href=''><button class='Gamebianji'>编辑</button></a>
+                            <a href=''><button class='Gamedel'>移除</button></a>
+                        </p>
+                    </li>
+                    <li> 
+                        <p class='Gamebody'>03</p>
+                        <p class='Gamebody'>知识3</p>
+                        <p class='Gamebody'>xxxx</p>
+                        <p class='Gamebody'>
+                            <a href=''><button class='Gamebianji'>编辑</button></a>
+                            <a href=''><button class='Gamedel'>移除</button></a>
+                        </p>
+                    </li>
+                    <li> 
+                        <p class='Gamebody'>04</p>
+                        <p class='Gamebody'>知识4</p>
+                        <p class='Gamebody'>xxxx</p>
+                        <p class='Gamebody'>
+                            <a href=''><button class='Gamebianji'>编辑</button></a>
+                            <a href=''><button class='Gamedel'>移除</button></a>
+                        </p>
+                    </li>
+                    <li> 
+                        <p class='Gamebody'>05</p>
+                        <p class='Gamebody'>知识5</p>
+                        <p class='Gamebody'>xxxx</p>
+                        <p class='Gamebody'>
+                            <a href=''><button class='Gamebianji'>编辑</button></a>
+                            <a href=''><button class='Gamedel'>移除</button></a>
+                        </p>
+                    </li>
+                </ul>
+            </div>
+            <div style="width:945px;height:30px;text-align:center;margin:0 auto;"> 
+                <div class="page">
+                    <div id="page">
+                    </div>
+                </div>
+            </div>
+        </div>    
     </body>
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script type="text/javascript"></script>
     <script>
-        
+        function getzz() {
+            var a = $("ul#all li");
+            var zz =new Array(a.length);
+            for(var i=0;i <a.length;i++){
+                zz[i]=a[i].innerHTML;
+            } //div的字符串数组付给zz
+            return zz;
+        }
+        function change(e){
+            pageno=e;
+            if(e<1){
+                e=1;pageno=1;//就等于第1页 ， 当前页为1
+            }
+            if(e>pageall){  //如果输入页大于最大页
+                e=pageall;pageno=pageall; //输入页和当前页都=最大页
+            }
+            $("#all").html("");//全部清空
+            if(pageno==1){
+                var html='<li>'
+                            +'<div class="Gamehead">'
+                                +'<h3 class="Gamehead1">编号</h3>'
+                                +'<h3 class="Gamehead1">知识标题</h3>'
+                                +'<h3 class="Gamehead1">知识内容</h3>'
+                                +'<h3 class="Gamehead1">操作</h3>'
+                            +'</div>'
+                        +'</li>';
+            }
+            else{
+                var html='<li>'
+                            +'<div class="Gamehead">'
+                                +'<h3 class="Gamehead1">编号</h3>'
+                                +'<h3 class="Gamehead1">知识标题</h3>'
+                                +'<h3 class="Gamehead1">知识内容</h3>'
+                                +'<h3 class="Gamehead1">操作</h3>'
+                            +'</div>'
+                        +'</li>';
+            }
+            for(var i=0;i<pagesize;i++){
+                html += '<li>' + zz[(e-1)*pagesize+i] +'</li>';//创建一页的li列表
+                if(zz[(e-1)*pagesize+i+1]==null) break;//超出最后的范围跳出
+            }
+            $("ul#all").html(html);//给ul列表写入html
+            var ye="";
+            for(var j=1;j<=pageall;j++){
+                if(e==j){
+                    ye=ye+"<span><a href='#' onClick='change("+j+")' style='color:#FF0000'>"+j+"</a></span> "
+                }else{
+                    ye=ye+"<a href='#' onClick='change("+j+")'>"+j+"</a> "
+                }
+            }
+            var pageContent="";
+            pageContent +='第<span id=\"a2\">'+pageno+'</span>/';
+            pageContent +='<span id="a1">'+pageall+'</span>页';
+            pageContent +="<span id='a3' style='margin-left:10px'>"+ye+'</span>';
+            pageContent +='<a href="#" style="margin-left:10px;" onClick="change(--pageno)">上一页</a>';
+            pageContent +='<a href="#" style="margin-left:5px;" onClick="change(++pageno)">下一页</a>';
+            $("#page").html(pageContent);
+        }
+        var zz=getzz()
+        var pageno=1 ; //当前页
+        var pagesize=4; //每页多少条信息
+        if(zz.length%pagesize==0){
+            var pageall = zz.length/pagesize ;
+        }else{
+            var pageall = parseInt(zz.length/pagesize)+1;
+        }   //一共多少页
+        change(1);
     </script>
 </html>
