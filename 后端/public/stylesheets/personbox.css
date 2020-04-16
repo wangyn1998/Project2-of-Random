@@ -1,0 +1,60 @@
+.personBoxbox1{
+    height: 40px;
+    width:500px;
+    margin-top: 25px; 
+    margin-left: 50px;
+}
+.search{
+    float: left;
+    width: 400px;
+    height: 40px;
+    border-radius: 20px;
+    border:1px solid #eee;
+    background: #eee;
+    font-size: 18px;
+}
+.Bar{
+    float: left;
+    width: 330px;
+    height: 40px;
+    border-radius: 20px;
+    border: none;
+    background: #eee;
+    padding-left: 10px;
+}
+.Boxbox2{
+    height: 80px;
+    width: 500px;
+    margin-top: 5px; 
+    margin-left: 50px;
+}
+.Boxbox3{
+    width: 95%;
+    height: 300px;
+    margin-top:10px;
+    margin-left: 50px;
+    border:1px solid #eee;
+    margin-bottom: 10px;
+}
+.Boxbox3 ul{
+    width: 100%;
+    height: 300px;
+    float: left;
+}
+.Boxbox3 li{
+    width: 33%;
+    height: 148px;
+    border:1px solid #eee;
+    float: left;
+    text-align: center;
+}
+.personBoximage{
+    width: 120px;
+    height: 120px;
+}
+.Boxhead{
+    text-align: center;
+    color: #000;
+    text-align: center;
+    line-height:3.7rem;
+}
