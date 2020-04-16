@@ -20,6 +20,9 @@ import My from './src/my/My';
 import Login from './src/common/Login';
 import Register from './src/common/Register';
 import Personal from './src/my/Personal';
+import Signin from './src/my/Signin';
+import Xian from './src/my/Xian';
+import Bing from './src/my/Bing';
 const styles = StyleSheet.create({
 
 })
@@ -117,6 +120,36 @@ const App = () => {
                       title='编辑资料'
                       key="personal" 
                       component={Personal} 
+                      hideTabBar
+                      navigationBarStyle={{backgroundColor:'#79be3b'}}
+                      titleStyle={{flex:1,textAlign:'center',color:'white'}}
+                      backButtonImage={require('./images/return.png')}
+                      renderRightButton={<Icon name='ellipsis' style={{marginRight:20,color:'white'}}/>}
+                    />
+                    <Scene 
+                      title='签到领积分'
+                      key="signin" 
+                      component={Signin} 
+                      hideTabBar
+                      navigationBarStyle={{backgroundColor:'#79be3b'}}
+                      titleStyle={{flex:1,textAlign:'center',color:'white'}}
+                      backButtonImage={require('./images/return.png')}
+                      renderRightButton={<Icon name='ellipsis' style={{marginRight:20,color:'white'}}/>}
+                    />
+                    <Scene 
+                      title='线性图'
+                      key="xian" 
+                      component={Xian} 
+                      hideTabBar
+                      navigationBarStyle={{backgroundColor:'#79be3b'}}
+                      titleStyle={{flex:1,textAlign:'center',color:'white'}}
+                      backButtonImage={require('./images/return.png')}
+                      renderRightButton={<Icon name='ellipsis' style={{marginRight:20,color:'white'}}/>}
+                    />
+                    <Scene 
+                      title='饼状图'
+                      key="bing" 
+                      component={Bing} 
                       hideTabBar
                       navigationBarStyle={{backgroundColor:'#79be3b'}}
                       titleStyle={{flex:1,textAlign:'center',color:'white'}}
