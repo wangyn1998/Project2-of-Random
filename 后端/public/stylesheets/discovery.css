@@ -47,3 +47,91 @@
     background-color: #fff;
     color: #79be3b;
 }
+#pop-container {
+    display: none;
+    z-index: 999;
+}
+/*遮盖层*/
+#cover-tier {
+    background-color: #D9D9D9;
+    opacity: 0.5; 
+}
+/*弹出层内容*/
+#pop-tier {
+    width: 400px;
+    height: 380px;
+    border: 2px solid #C3C3C3;
+    background-color: #fff;
+    margin: auto;
+    text-align: center;
+}
+/*关闭弹框*/
+#close-pop {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
+.popPosition {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+.text{
+    width: 280px;
+    height: 32px;
+    margin: 20px auto;
+}
+h4{
+    width: 80px;
+    height: 32px;
+    float: left;
+    line-height: 30px;
+    text-align: left;
+}
+.text input{
+    width: 190px;
+    height: 30px;
+    border: 1px solid #a9a9a9;
+    float: left;
+    padding-left: 5px;
+}
+.content{
+    width: 280px;
+    height: 152px;
+    margin: 20px auto;
+}
+.content textarea{
+    width: 190px;
+    height: 150px;
+    border: 1px solid #a9a9a9;
+    float: left;
+    padding-left: 5px;
+}
+.systemSave{
+    border:1px solid #888;
+    width:50px;
+    height:30px;
+    background:#79be3b;
+    color:white;
+}
+/* 提示框 */
+.tip{
+    width: 250px;
+    height: 130px;
+    margin: 150px auto;
+    font-size: 25px;
+    text-align: center;
+    background:#c4f1bf;
+    padding-top: 10px;
+}
+.tip button{
+    width: 50px;
+    height: 30px;
+    margin-top:30px;
+    background: white;
+    color:#79be3b;
+    border: 1px solid #79be3b;
+} 
