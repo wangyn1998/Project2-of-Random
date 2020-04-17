@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
         <title>积分任务管理</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -26,21 +26,9 @@
         </div>
         <div class="right">
             <div class="box1">
-                <div class='search'>
-                    <form style="line-height: 2.5em;"  method="post" action="/searchtask">
-                        <input class='Bar' placeholder="请输入要查找的任务编号" name='taskId'/>
-                        <div class="iconfont icon-xiaoxi-" style="float:left;">
-                            <input type="submit" value="搜索"style="height:30px;border:none;">
-                        </div>
-                    </form>
-                </div>
+                <h2>您搜索的结果是:</h2>
             </div>
-            <div class="box2">
-                <p style="font-size:22px;font-weight:bold">盒我学任务管理
-                    <span style="margin-left:30px" class="iconfont icon-wuuiconxiangjifangda" id="btn"></span>
-                    <span style="font-size:20px;margin-left:5px;font-weight:lighter">添加</span>
-                </p>
-            </div>
+            <br/>
             <div class='Taskbox3'>
                 <ul id="all">
                     <li>
@@ -49,7 +37,7 @@
                         <h3 class='Taskhead1'><b>任务内容</b></h3>
                         <h3 class='Taskhead1'><b>分数</b></h3>
                         <h3 class='Taskhead1'><b>操作</b></h3>
-                         </div>
+                            </div>
                     </li>
                     <% for(var i = 0 ; i < 6; i++) {%>
                         <li>
@@ -58,7 +46,7 @@
                             <p class='Taskbody'>1</p>  
                             <div class='Taskbody'>
                                 <div class='Topicoperation'>
-                                    <form method="post" action="/edit" class="operation1">
+                                    <form method="post" action="/edit1" class="operation1">
                                         <button style="color: white;border:1px solid white;width: 50px;
                                         height: 30px;">编辑
                                             <input type='submit' style="float: right;border:1px solid #79be3b;background-color: #79be3b;" id='bianji' name="task" value='1'></button>
@@ -80,13 +68,18 @@
                     </div>
                 </div>
             </div>
+            <div style="margin-right:4%;float:right">
+                <a style="text-decoration:none" href='/score/task'>
+                    <button style="background-color: white;color:#79be3b;border: 1px solid #79be3b;width: 50px;height: 30px;">返回</button>
+                </a>
+            </div>
         </div>
         <div >
-            <div id="pop-container">
-                <div id="cover-tier" class="popPosition"></div>
-                <div id="pop-tier" class="popPosition">
-                    <i id="close-pop">&#10006;</i>
-                    <form action="/addtask" method="post">
+            <div id="pop-container1" style="display: block;">
+                <div id="cover-tier1" class="popPosition1"></div>
+                <div id="pop-tier1" class="popPosition1">
+                    <i id="close-pop1">&#10006;</i>
+                    <form action="/updatetask" method="post">
                     <div style="width:380px;float:left;">
                         <h2 style="float:left;margin-left:20px;margin-top:25px;margin-bottom: 10px;">任务内容:</h2>
                         <input type='text' id="content" style="width:340px;height:200px;"name="content"  />
@@ -99,73 +92,72 @@
             </div>
         </div>
     </body>
-    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script type="text/javascript">    
-    function temp(id) {
+     function temp(id) {
         return document.getElementById(id);
     }
-    // 点击按钮出现弹出层
-    temp('btn').onclick = function() {
-        temp('pop-container').style.display = 'block';
-    }
     // 点击右上角X弹出层隐藏
-    temp('close-pop').onclick = function() {
-        temp('pop-container').style.display = 'none';
+    temp('close-pop1').onclick = function() {
+        temp('pop-container1').style.display = 'none';
+        window.location.href="/score/task"
+
     }
-    function getzz() {
-        var a = $("ul#all li");
-        var zz =new Array(a.length);
-        for(var i=0;i <a.length;i++){
-            zz[i]=a[i].innerHTML;
-        } //div的字符串数组付给zz
-        return zz;
+      function getzz() {
+    var a = $("ul#all li");
+    var zz =new Array(a.length);
+    for(var i=0;i <a.length;i++){
+        zz[i]=a[i].innerHTML;
+    } //div的字符串数组付给zz
+    return zz;
+}
+function change(e){
+    pageno=e;
+    if(e<1){
+        e=1;pageno=1;//就等于第1页 ， 当前页为1
     }
-    function change(e){
-        pageno=e;
-        if(e<1){
-            e=1;pageno=1;//就等于第1页 ， 当前页为1
-        }
-        if(e>pageall){  //如果输入页大于最大页
-            e=pageall;pageno=pageall; //输入页和当前页都=最大页
-        }
-        $("#all").html("");//全部清空
-        if(pageno==1){
-            var html="";
-        }
-        else{
-            var html="<li><div class='Taskhead'><h3 class='Taskhead1'><b>任务编号</b></h3><h3 class='Taskhead1'><b>任务内容</b></h3><h3 class='Taskhead1'><b>分数</b></h3><h3 class='Taskhead1'><b>操作</b></h3></div></li>";
-        }
-        for(var i=0;i<pagesize;i++){
-            html += '<li>' + zz[(e-1)*pagesize+i] +'</li>';//创建一页的li列表
-            if(zz[(e-1)*pagesize+i+1]==null) break;//超出最后的范围跳出
-        }
-        $("ul#all").html(html);//给ul列表写入html
-        var ye="";
-        for(var j=1;j<=pageall;j++){
-            if(e==j){
-                ye=ye+"<span><a href='#' onClick='change("+j+")' style='color:#FF0000'>"+j+"</a></span> "
-            }else{
-                ye=ye+"<a href='#' onClick='change("+j+")'>"+j+"</a> "
-            }
-        }
-        var pageContent="";
-            pageContent +='第<span id=\"a2\">'+pageno+'</span>/';
-            pageContent +='<span id="a1">'+pageall+'</span>页';
-            pageContent +="<span id='a3' style='margin-left:10px'>"+ye+'</span>';
-            pageContent +='<a href="#" style="margin-left:10px;" onClick="change(--pageno)">上一页</a>';
-            pageContent +='<a href="#" style="margin-left:5px;" onClick="change(++pageno)">下一页</a>';
-            $("#page").html(pageContent);
+    if(e>pageall){  //如果输入页大于最大页
+        e=pageall;pageno=pageall; //输入页和当前页都=最大页
     }
-        var zz=getzz()
-        var pageno=1 ; //当前页
-        var pagesize=5; //每页多少条信息
-        if(zz.length%pagesize==0){
-            var  pageall =zz.length/pagesize ;
+    $("#all").html("");//全部清空
+    if(pageno==1){
+        var html="";
+    }
+    else{
+        var html="<li><div class='Taskhead'><h3 class='Taskhead1'><b>任务编号</b></h3><h3 class='Taskhead1'><b>任务内容</b></h3><h3 class='Taskhead1'><b>分数</b></h3><h3 class='Taskhead1'><b>操作</b></h3></div></li>";
+    }
+    for(var i=0;i<pagesize;i++){
+        html += '<li>' + zz[(e-1)*pagesize+i] +'</li>';//创建一页的li列表
+        if(zz[(e-1)*pagesize+i+1]==null) break;//超出最后的范围跳出
+    }
+    $("ul#all").html(html);//给ul列表写入html
+    var ye="";
+    for(var j=1;j<=pageall;j++){
+        if(e==j){
+            ye=ye+"<span><a href='#' onClick='change("+j+")' style='color:#FF0000'>"+j+"</a></span> "
         }else{
-            var  pageall =parseInt(zz.length/pagesize)+1;
-        }   //一共多少页
-        change(1);
-        console.log(window.screen.height);
-        console.log(document.body.scrollHeight)
-    </script>
+            ye=ye+"<a href='#' onClick='change("+j+")'>"+j+"</a> "
+        }
+    }
+    var pageContent="";
+        pageContent +='第<span id=\"a2\">'+pageno+'</span>/';
+        pageContent +='<span id="a1">'+pageall+'</span>页';
+        pageContent +="<span id='a3' style='margin-left:10px'>"+ye+'</span>';
+        pageContent +='<a href="#" style="margin-left:10px;" onClick="change(--pageno)">上一页</a>';
+        pageContent +='<a href="#" style="margin-left:5px;" onClick="change(++pageno)">下一页</a>';
+        $("#page").html(pageContent);
+}
+    var zz=getzz()
+    var pageno=1 ; //当前页
+    var pagesize=5; //每页多少条信息
+    if(zz.length%pagesize==0){
+        var  pageall =zz.length/pagesize ;
+    }else{
+        var  pageall =parseInt(zz.length/pagesize)+1;
+    }   //一共多少页
+    change(1);
+    console.log(window.screen.height);
+    console.log(document.body.scrollHeight)
+
+        </script>
 </html>

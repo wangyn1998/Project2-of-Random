@@ -82,11 +82,11 @@
             </div>
         </div>
         <div >
-            <div id="pop-container">
-                <div id="cover-tier" class="popPosition"></div>
-                <div id="pop-tier" class="popPosition">
-                    <i id="close-pop">&#10006;</i>
-                    <form action="/addtask" method="post">
+            <div id="pop-container1" style="display: block;">
+                <div id="cover-tier1" class="popPosition1"></div>
+                <div id="pop-tier1" class="popPosition1">
+                    <i id="close-pop1">&#10006;</i>
+                    <form action="/updatetask" method="post">
                     <div style="width:380px;float:left;">
                         <h2 style="float:left;margin-left:20px;margin-top:25px;margin-bottom: 10px;">任务内容:</h2>
                         <input type='text' id="content" style="width:340px;height:200px;"name="content"  />
@@ -104,13 +104,11 @@
     function temp(id) {
         return document.getElementById(id);
     }
-    // 点击按钮出现弹出层
-    temp('btn').onclick = function() {
-        temp('pop-container').style.display = 'block';
-    }
     // 点击右上角X弹出层隐藏
-    temp('close-pop').onclick = function() {
-        temp('pop-container').style.display = 'none';
+    temp('close-pop1').onclick = function() {
+        temp('pop-container1').style.display = 'none';
+        window.location.href="/score/task"
+
     }
     function getzz() {
         var a = $("ul#all li");
