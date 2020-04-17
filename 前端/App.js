@@ -23,6 +23,9 @@ import Personal from './src/my/Personal';
 import Signin from './src/my/Signin';
 import Xian from './src/my/Xian';
 import Bing from './src/my/Bing';
+import Set from './src/my/Set';
+import About from './src/my/About';
+import Help from './src/my/Help';
 import Selection from './src/box/Selection';
 import Test from './src/box/Test';
 import Learn from './src/box/Learn';
@@ -153,6 +156,36 @@ const App = () => {
                       title='饼状图'
                       key="bing" 
                       component={Bing} 
+                      hideTabBar
+                      navigationBarStyle={{backgroundColor:'#79be3b'}}
+                      titleStyle={{flex:1,textAlign:'center',color:'white'}}
+                      backButtonImage={require('./images/return.png')}
+                      renderRightButton={<Icon name='ellipsis' style={{marginRight:20,color:'white'}}/>}
+                    />
+                    <Scene 
+                      title='设置'
+                      key="set" 
+                      component={Set} 
+                      hideTabBar
+                      navigationBarStyle={{backgroundColor:'#79be3b'}}
+                      titleStyle={{flex:1,textAlign:'center',color:'white'}}
+                      backButtonImage={require('./images/return.png')}
+                      renderRightButton={<Icon name='ellipsis' style={{marginRight:20,color:'white'}}/>}
+                    />
+                    <Scene 
+                      title='帮助反馈'
+                      key="help" 
+                      component={Help} 
+                      hideTabBar
+                      navigationBarStyle={{backgroundColor:'#79be3b'}}
+                      titleStyle={{flex:1,textAlign:'center',color:'white'}}
+                      backButtonImage={require('./images/return.png')}
+                      renderRightButton={<Icon name='ellipsis' style={{marginRight:20,color:'white'}}/>}
+                    />
+                    <Scene 
+                      title='关于我们'
+                      key="about" 
+                      component={About} 
                       hideTabBar
                       navigationBarStyle={{backgroundColor:'#79be3b'}}
                       titleStyle={{flex:1,textAlign:'center',color:'white'}}
