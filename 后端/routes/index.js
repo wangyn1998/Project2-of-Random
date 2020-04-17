@@ -45,6 +45,29 @@ router.post('/searchuserscore', function(req, res, next) {
 router.get('/score/task', function(req, res, next) {
   res.render('Score/task', { title: 'task' });
 });
+router.get('/score/deletetask', function(req, res, next) {
+  res.render('Score/deleteTask', { title: 'task' });
+});
+router.post('/searchtask', function(req, res, next) {
+  var taskId=taskId;
+  res.render('Score/searchTask', { title: 'user',taskId:taskId });
+});
+router.post('/addtask', function(req, res, next) {
+  var taskId=taskId;
+  res.render('Score/addTask', { title: 'user',taskId:taskId });
+});
+router.post('/edit', function(req, res, next) {
+  var taskId=taskId;
+  res.render('Score/editTask', { title: 'user',taskId:taskId });
+});
+router.post('/edit1', function(req, res, next) {
+  var taskId=taskId;
+  res.render('Score/editTask1', { title: 'user',taskId:taskId });
+});
+router.post('/updatetask', function(req, res, next) {
+  var taskId=taskId;
+  res.render('Score/updateTask', { title: 'user',taskId:taskId });
+});
 //盒子管理
 router.get('/box', function(req, res, next) {
   res.render('Box/box', { title: 'box' });
