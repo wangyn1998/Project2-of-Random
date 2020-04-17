@@ -55,27 +55,60 @@ router.get('/box/person', function(req, res, next) {
 router.get('/box/card', function(req, res, next) {
   res.render('Box/card', { title: 'card' });
 });
-//发现管理
+
+/*发现管理*/
 router.get('/discovery', function(req, res, next) {
   res.render('Discovery/discovery', { title: 'discovery' });
 });
 //游戏管理
 router.get('/discovery/game', function(req, res, next) {
-  res.render('Discovery/game', { title: 'game' });
+  res.render('Discovery/Game/game', { title: 'game' });
+});
+//编辑游戏
+router.get('/discovery/editgame', function(req, res, next) {
+  res.render('Discovery/Game/editgame', { title: 'editgame' });
+});
+//删除游戏
+router.get('/discovery/deletegame', function(req, res, next) {
+  res.render('Discovery/Game/delgame', { title: 'deletegame' });
 });
 //知识管理
 router.get('/discovery/knowledge', function(req, res, next) {
-  res.render('Discovery/knowledge', { title: 'knowledge' });
+  res.render('Discovery/Knowledge/knowledge', { title: 'knowledge' });
+});
+//编辑知识
+router.get('/discovery/editknowledge', function(req, res, next) {
+  res.render('Discovery/Knowledge/editknowledge', { title: 'editknowledge' });
+});
+//删除知识
+router.get('/discovery/deleteknowledge', function(req, res, next) {
+  res.render('Discovery/Knowledge/delknowledge', { title: 'deleteknowledge' });
 });
 //每日推荐管理
 router.get('/discovery/recommend', function(req, res, next) {
-  res.render('Discovery/recommend', { title: 'recommend' });
+  res.render('Discovery/Recommend/recommend', { title: 'recommend' });
+});
+//编辑每日推荐
+router.get('/discovery/editrecommend', function(req, res, next) {
+  res.render('Discovery/Recommend/editrecommend', { title: 'editrecommend' });
+});
+//删除每日推荐
+router.get('/discovery/deleterecommend', function(req, res, next) {
+  res.render('Discovery/Recommend/delrecommend', { title: 'deleterecommend' });
 });
 //考试信息管理
 router.get('/discovery/test', function(req, res, next) {
-  res.render('Discovery/test', { title: 'test' });
+  res.render('Discovery/Test/test', { title: 'test' });
 });
-//系统管理
+//编辑考试信息
+router.get('/discovery/edittest', function(req, res, next) {
+  res.render('Discovery/Test/edittest', { title: 'edittest' });
+});
+// 删除考试信息
+router.get('/discovery/deletetest', function(req, res, next) {
+  res.render('Discovery/Test/deltest', { title: 'deletetest' });
+});
+/*系统管理*/
 router.get('/system', function(req, res, next) {
   res.render('System/system', { title: 'system' });
 });
