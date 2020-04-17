@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import {View,Text,Image,TextInput,TouchableOpacity, AsyncStorage, StyleSheet,Alert,ScrollView, FlatList} from 'react-native'
 import { Icon } from '@ant-design/react-native'
 import { Actions } from 'react-native-router-flux'
-import Xian from './Xian';
 const boxes = [
     {name:'盒子',num:6,img:require('../../images/my-box1.png'),unit:'个',txtcolor:'#ff8e14'},
     {name:'卡片',num:6,img:require('../../images/my-box2.png'),unit:'个',txtcolor:'#67e5fb'},
@@ -75,6 +74,35 @@ export default class My extends Component {
                                 <Text>饼状图</Text>
                             </TouchableOpacity>
                         </View>
+                    </View>
+                    <View style={styles.biglist}>
+                        <TouchableOpacity style={styles.littlelist}>
+                            <Text style={styles.listtxt}>退出登录</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={styles.littlelist}>
+                            <Text style={styles.listtxt}>夜间模式</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity 
+                            style={styles.littlelist}
+                            onPress={()=>{Actions.set()}}
+                        >
+                            <Text style={styles.listtxt}>设置</Text>
+                            <Text style={styles.listtxt1}>详细信息 ></Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity 
+                            style={styles.littlelist}
+                            onPress={()=>{Actions.help()}}
+                        >
+                            <Text style={styles.listtxt}>帮助反馈</Text>
+                            <Text style={styles.listtxt1}>详细信息 ></Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity 
+                            style={styles.littlelist}
+                            onPress={()=>{Actions.about()}}
+                        >
+                            <Text style={styles.listtxt}>关于我们</Text>
+                            <Text style={styles.listtxt1}>详细信息 ></Text>
+                        </TouchableOpacity>
                     </View>
                 </View>
             </ScrollView>
@@ -159,5 +187,30 @@ const styles = StyleSheet.create({
         flexDirection:'row',
         alignItems:'center',
         justifyContent:'center'
+    },
+    biglist:{
+        alignItems:'center',
+        marginTop:20,
+        width:'100%',
+        borderTopColor:'#ccc',
+        borderTopWidth:1,
+    },
+    littlelist:{
+        width:'100%',
+        borderBottomColor:'#ccc',
+        borderBottomWidth:1,
+        height:45,
+        paddingLeft:'5%',
+        alignItems:'center',
+        flexDirection:'row'
+    },
+    listtxt:{
+        fontSize:17,
+        width:'30%',
+    },
+    listtxt1:{
+        fontSize:17,
+        color:'#bbb',
+        marginLeft:'45%'
     }
 })
