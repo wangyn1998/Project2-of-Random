@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>盒子管理</title>
+        <link rel='stylesheet' href='/stylesheets/style.css'/>
+        <link rel='stylesheet' href='/stylesheets/record.css'/>
+        <!-- 后端登录 --><link rel="stylesheet" href="https://at.alicdn.com/t/font_1506624_oswwuan5y68.css">
+        <!-- 后端论坛 --><link rel="stylesheet" href="https://at.alicdn.com/t/font_1528101_39ha99o5h31.css">
+        <link rel="stylesheet" href="https://at.alicdn.com/t/font_1528101_ta96e29j5ne.css">
+    </head>
+    <body>
+        <header style="background:#79be3b;width:100%;height:75px;"> 
+            <img src="../images/logo.png" style="width:75px;height:75px;float:left;margin-left:30px;"/>
+            <p style="float:left;color:white;font-size:35px;line-height:70px;margin-left:40px;">盒我学后台管理系统</p>
+        </header>
+        <div class="left">
+            <div class="nav">
+                <a href="/user">用户管理</a>
+            </div>
+            <div class="nav">
+                <a href="/block">盒塘管理</a>
+            </div>
+            <div class="nav">
+                <a href="/score">积分管理</a>
+            </div>
+            <div class="nav" style="background: #427911;">
+                <a href="/box">盒子管理</a>
+            </div>
+            <div class="nav">
+                <a href="/discovery">发现管理</a>
+            </div>
+            <div class="nav">
+                <a href="/system">系统管理</a>
+            </div>
+            <div class="nav">
+                <a href="/home">返回</a>
+            </div>
+        </div>
+        <div class="right">        
+            <div class="recordbox1">
+                <p style="font-size:22px;font-weight:bold;padding-top:26px ;">学习记录
+                    <a href="/box" style="color:#79be3b"><span style="margin-left:30px" class="iconfont icon-fanhui" id="btn"></span></a>
+                </p>
+            </div>
+            <div class='recordbox2'>
+                <ul id="all" style="padding-inline-start: 0px;margin-block-start: 0;
+                margin-block-end: 0">
+                    <li>
+                        <div class='recordhead'>
+                        <h2 class='recordhead1' style="margin-block-start:0;
+                        margin-block-end: 0;">累计学习天数</h2>
+                        <h2 class='recordhead2' style="margin-block-start:0;
+                        margin-block-end: 0;">打卡数</h2>
+                        <h2 class='recordhead3' style="margin-block-start:0;
+                        margin-block-end: 0;">星星数</h2>
+                        <h2 class='recordhead3' style="margin-block-start:0;
+                        margin-block-end: 0;">成就</h2>
+                        </div>
+                    </li>
+                    <li>
+                        <div class='recordhead'>
+                        <h2 class='recordhead1' style="margin-block-start:0;
+                        margin-block-end: 0;">41</h2>
+                        <h2 class='recordhead2' style="margin-block-start:0;
+                        margin-block-end: 0;">5</h2>
+                        <h2 class='recordhead3' style="margin-block-start:0;
+                        margin-block-end: 0;">6</h2>
+                        <a href="/box/achievementdetail"><h2 class='recordhead3' style="margin-block-start:0;
+                        margin-block-end: 0;">4</h2></a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div id='recordbox3'>
+                
+            </div>
+            
+        </div>
+    </body>
+    <script src="https://cdn.bootcss.com/echarts/4.2.1-rc1/echarts.min.js"></script>
+    <script type="text/javascript " src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script>
+        
+        var myChart = echarts.init(document.getElementById('recordbox3'));
+        // 指定图表的配置项和数据
+        var option = {
+            title: {
+                text: '周学习情况'
+            },
+            tooltip: {},
+            xAxis: {
+                data: ["星期一","星期二","星期三","星期四","星期五","星期六","星期日"]
+            },
+            yAxis: {},
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'line',
+            }},
+            series: [{
+                name: '排名',
+                type: 'bar',
+                data: [30, 25, 6, 0, 20]
+            }]
+        };
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+    </script>
+</html>
