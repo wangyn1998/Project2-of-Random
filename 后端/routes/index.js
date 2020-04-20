@@ -78,7 +78,21 @@ router.get('/box/person', function(req, res, next) {
 router.get('/box/card', function(req, res, next) {
   res.render('Box/card', { title: 'card' });
 });
-
+router.get('/box/record', function(req, res, next) {
+  res.render('Box/record', { title: 'card' });
+});
+router.get('/box/achievementdetail', function(req, res, next) {
+  res.render('Box/achievementDetail', { title: 'card' });
+});
+router.get('/box/deletecard', function(req, res, next) {
+  res.render('Box/deleteCard', { title: 'deletegame' });
+});
+router.get('/box/question', function(req, res, next) {
+  res.render('Box/question', { title: 'deletegame' });
+});
+router.get('/box/answer', function(req, res, next) {
+  res.render('Box/answer', { title: 'deletegame' });
+});
 /*发现管理*/
 router.get('/discovery', function(req, res, next) {
   res.render('Discovery/discovery', { title: 'discovery' });
