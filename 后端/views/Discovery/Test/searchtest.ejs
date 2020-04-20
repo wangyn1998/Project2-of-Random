@@ -30,21 +30,9 @@
         </div>
         <div class="right">
             <div class="box1">
-                <div class='search'>
-                    <form style="line-height: 2.5em;" method="post" action="/searchtest">
-                        <input class='Bar' placeholder="请输入要查找的标题"/>
-                        <div class="iconfont icon-xiaoxi-" style="float:left;">
-                            <input type="submit" value="搜索"style="height:30px;border:none;">
-                        </div>
-                    </form>
-                </div>
+                <h2>您搜索的结果是:</h2>
             </div>
-            <div class="box2">
-                <p style="font-size:22px;font-weight:bold">盒我学考试信息管理
-                    <span style="margin-left:30px" class="iconfont icon-wuuiconxiangjifangda" id="add"></span>
-                    <span style="font-size:20px;margin-left:5px;font-weight:lighter">添加</span>
-                </p>
-            </div>
+            <br/>
             <div class='Gamebox3'>
                 <ul id="all">
                     <!-- <li>
@@ -72,51 +60,22 @@
                     <% } %>
                 </ul>
             </div>
-            <div style="width:945px;height:30px;text-align:center;margin:0 auto;"> 
+            <div style="width:945px;height:30px;text-align:center;margin:20px auto;"> 
                 <div class="page">
                     <div id="page">
                     </div>
                 </div>
             </div>
-        </div>
-        <div>
-            <div id="pop-container">
-                <div id="cover-tier" class="popPosition"></div>
-                <div id="pop-tier" class="popPosition">
-                    <i id="close-pop">&#10006;</i>
-                    <form style="margin-top:50px;">
-                        <div class='text'>
-                            <h4>编号：</h4>
-                            <input type="text" name="gameId"/>
-                        </div>
-                        <div class='text'>
-                            <h4>标题：</h4>
-                            <input type="text" name="gameName"/>
-                        </div>
-                        <div class='content'>
-                            <h4>详细信息：</h4>
-                            <textarea name="gameContent"></textarea>
-                        </div>
-                        <button type="submit" id="save" class="systemSave">保存</button> 
-                    </form>
-                </div>
+            <div style="margin-right:10%;float:right">
+                <a href='/discovery/test'>
+                    <button class="return">返回</button>
+                </a>
             </div>
         </div>
     </body>
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script type="text/javascript"></script>
     <script>
-        function temp(id) {
-            return document.getElementById(id);
-        }
-        //点击按钮出现弹出层
-        temp('add').onclick = function() {
-            temp('pop-container').style.display = 'block';
-        }
-        // 点击右上角X弹出层隐藏
-        temp('close-pop').onclick = function() {
-            temp('pop-container').style.display = 'none';
-        }
         // 分页
         function getzz() {
             var a = $("ul#all li");
