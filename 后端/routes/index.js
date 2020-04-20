@@ -72,6 +72,33 @@ router.post('/updatetask', function(req, res, next) {
   var taskId=taskId;
   res.render('Score/updateTask', { title: 'user',taskId:taskId });
 });
+//成就管理
+router.get('/score/achievement', function(req, res, next) {
+  res.render('Score/achievement', { title: 'task' });
+});
+router.get('/score/deletestar', function(req, res, next) {
+  res.render('Score/deleteStar', { title: 'task' });
+});
+router.post('/searchstar', function(req, res, next) {
+  var taskId=taskId;
+  res.render('Score/searchStar', { title: 'user',taskId:taskId });
+});
+router.post('/addstar', function(req, res, next) {
+  var taskId=taskId;
+  res.render('Score/addStar', { title: 'user',taskId:taskId });
+});
+router.post('/editstar', function(req, res, next) {
+  var taskId=taskId;
+  res.render('Score/editStar', { title: 'user',taskId:taskId });
+});
+router.post('/editstar1', function(req, res, next) {
+  var taskId=taskId;
+  res.render('Score/editStar1', { title: 'user',taskId:taskId });
+});
+router.post('/updatestar', function(req, res, next) {
+  var taskId=taskId;
+  res.render('Score/updateStar', { title: 'user',taskId:taskId });
+});
 //盒子管理
 router.get('/box', function(req, res, next) {
   res.render('Box/box', { title: 'box' });
