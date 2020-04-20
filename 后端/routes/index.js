@@ -22,9 +22,13 @@ router.post('/searchuser', function(req, res, next) {
   var userName=req.body.userName;
   res.render('User/searchUser', { title: 'user',userName:userName });
 });
-//盒塘管理
+/*盒塘管理*/
 router.get('/block', function(req, res, next) {
   res.render('Block/block', { title: 'block' });
+});
+//删除帖子
+router.get('/deletepost', function(req, res, next) {
+  res.render('Block/delpost', { title: 'deletepost' });
 });
 //积分管理
 router.get('/score', function(req, res, next) {
@@ -93,13 +97,17 @@ router.get('/box/question', function(req, res, next) {
 router.get('/box/answer', function(req, res, next) {
   res.render('Box/answer', { title: 'deletegame' });
 });
-/*发现管理*/
+/**发现管理*/
 router.get('/discovery', function(req, res, next) {
   res.render('Discovery/discovery', { title: 'discovery' });
 });
-//游戏管理
+/*游戏管理*/
 router.get('/discovery/game', function(req, res, next) {
   res.render('Discovery/Game/game', { title: 'game' });
+});
+//搜索游戏
+router.post('/searchgame', function(req, res, next) {
+  res.render('Discovery/Game/searchgame', { title: 'searchgame' });
 });
 //编辑游戏
 router.get('/discovery/editgame', function(req, res, next) {
@@ -109,9 +117,13 @@ router.get('/discovery/editgame', function(req, res, next) {
 router.get('/discovery/deletegame', function(req, res, next) {
   res.render('Discovery/Game/delgame', { title: 'deletegame' });
 });
-//知识管理
+/*知识管理*/
 router.get('/discovery/knowledge', function(req, res, next) {
   res.render('Discovery/Knowledge/knowledge', { title: 'knowledge' });
+});
+//搜索知识
+router.post('/searchknowledge', function(req, res, next) {
+  res.render('Discovery/Knowledge/findknowledge', { title: 'searchknowledge' });
 });
 //编辑知识
 router.get('/discovery/editknowledge', function(req, res, next) {
@@ -121,9 +133,13 @@ router.get('/discovery/editknowledge', function(req, res, next) {
 router.get('/discovery/deleteknowledge', function(req, res, next) {
   res.render('Discovery/Knowledge/delknowledge', { title: 'deleteknowledge' });
 });
-//每日推荐管理
+/*每日推荐管理*/
 router.get('/discovery/recommend', function(req, res, next) {
   res.render('Discovery/Recommend/recommend', { title: 'recommend' });
+});
+//搜索每日推荐
+router.post('/searchrecommend', function(req, res, next) {
+  res.render('Discovery/Recommend/findrecommend', { title: 'searchrecommend' });
 });
 //编辑每日推荐
 router.get('/discovery/editrecommend', function(req, res, next) {
@@ -133,9 +149,13 @@ router.get('/discovery/editrecommend', function(req, res, next) {
 router.get('/discovery/deleterecommend', function(req, res, next) {
   res.render('Discovery/Recommend/delrecommend', { title: 'deleterecommend' });
 });
-//考试信息管理
+/*考试信息管理*/
 router.get('/discovery/test', function(req, res, next) {
   res.render('Discovery/Test/test', { title: 'test' });
+});
+//搜索考试信息
+router.post('/searchtest', function(req, res, next) {
+  res.render('Discovery/Test/searchtest', { title: 'searchtest' });
 });
 //编辑考试信息
 router.get('/discovery/edittest', function(req, res, next) {
