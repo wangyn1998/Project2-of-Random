@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>盒子管理</title>
+        <link rel='stylesheet' href='/stylesheets/style.css'/>
+        <link rel='stylesheet' href='/stylesheets/card.css'/>
+        <!-- 后端登录 --><link rel="stylesheet" href="https://at.alicdn.com/t/font_1506624_oswwuan5y68.css">
+        <!-- 后端论坛 --><link rel="stylesheet" href="https://at.alicdn.com/t/font_1528101_39ha99o5h31.css">
+        <link rel="stylesheet" href="https://at.alicdn.com/t/font_1528101_ta96e29j5ne.css">
+    </head>
+    <body>
+        <header style="background:#79be3b;width:100%;height:75px;"> 
+            <img src="../images/logo.png" style="width:75px;height:75px;float:left;margin-left:30px;"/>
+            <p style="float:left;color:white;font-size:35px;line-height:70px;margin-left:40px;">盒我学后台管理系统</p>
+        </header>
+        <div class="left">
+            <div class="nav">
+                <a href="/user">用户管理</a>
+            </div>
+            <div class="nav">
+                <a href="/block">盒塘管理</a>
+            </div>
+            <div class="nav">
+                <a href="/score">积分管理</a>
+            </div>
+            <div class="nav" style="background: #427911;">
+                <a href="/box">盒子管理</a>
+            </div>
+            <div class="nav">
+                <a href="/discovery">发现管理</a>
+            </div>
+            <div class="nav">
+                <a href="/system">系统管理</a>
+            </div>
+            <div class="nav">
+                <a href="/home">返回</a>
+            </div>
+        </div>
+        <div class="right">
+            <div class="cardbox1">
+                <div class='search'>
+                    <form style="line-height: 2.5em;">
+                        <input class='Bar' placeholder="请输入"/>
+                        <div class="iconfont icon-xiaoxi-" style="float:left;">
+                            <input type="submit" value="搜索"style="height:30px;border:none;">
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="cardbox2">
+                <p style="font-size:22px;font-weight:bold">卡片列表
+                    <a href="/box/person" style="color:#79be3b"><span style="margin-left:30px" class="iconfont icon-fanhui" id="btn"></span></a>
+                </p>
+            </div>
+            <div class='cardbox3'>
+                <ul id="all" style="padding-inline-start: 0px;margin-block-start: 0;
+                margin-block-end: 0">
+                    <!-- <li><div class='cardhead'><h2 class='cardhead1' style='margin-block-start:0;margin-block-end: 0;'>卡片题目</h2><h2 class='cardhead1' style='margin-block-start:0;margin-block-end: 0;'>卡片答案</h2><h2 class='cardhead3' style='margin-block-start:0;margin-block-end: 0;'>操作</h2></div></li> -->
+                    <% for(var i = 0 ; i < 7; i++) {%>
+                        <li>
+                        <p class="cardQues"style="margin-block-start: 0;margin-top:15px;margin-block-end:0;overflow:hidden;">1111111111</p>      
+                        <p class="cardAns"style="float:left;margin-top:15px;font-size:20px" id="time">2222222</p>
+                        <a href="/box/deletecard"><button class='cardcheck'>移除</button></a> 
+                    </li>
+                    <%}%>
+                </ul>
+            </div>
+            <div style=" width: 945px;height:30px;text-align: center;margin:0px auto;"> 
+                <div class="page">
+                    <div id="page">
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div id="pop-container1" style="display: block;">
+                    <div id="cover-tier1" class="popPosition1"></div>
+                    <div id="pop-tier1" class="popPosition1">
+                        <i id="close-pop1">&#10006;</i>
+                        <div>
+                            <h2>卡片答案</h2>
+                            <div style="margin:30px 0 0 30px;width: 320px;height: 300px;border: 1px solid #427911;">
+                                2222222222
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </body>
+    <script type="text/javascript " src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript">
+        function temp(id) {
+            return document.getElementById(id);
+        }
+        temp('close-pop1').onclick = function() {
+            temp('pop-container1').style.display = 'none';
+            window.location.href="/box/card"
+        }
+        function getzz() {
+        var a = $("ul#all li");
+        var zz =new Array(a.length);
+        for(var i=0;i <a.length;i++){
+            zz[i]=a[i].innerHTML;
+        } //div的字符串数组付给zz
+        return zz;
+    }
+    function change(e){
+        pageno=e;
+        if(e<1){
+            e=1;
+            pageno=1;//就等于第1页 ， 当前页为1
+        }
+        if(e>pageall){  //如果输入页大于最大页
+            e=pageall;
+            pageno=pageall; //输入页和当前页都=最大页
+        }
+        $("#all").html("");//全部清空
+        var html="<li><div class='cardhead'><h2 class='cardhead1' style='margin-block-start:0;margin-block-end: 0;'>卡片题目</h2><h2 class='cardhead1' style='margin-block-start:0;margin-block-end: 0;'>卡片答案</h2><h2 class='cardhead3' style='margin-block-start:0;margin-block-end: 0;'>操作</h2></div></li>";
+        for(var i=0;i<pagesize;i++){
+            if(zz[(e-1)*pagesize+i]){
+                html += '<li>' + zz[(e-1)*pagesize+i] +'</li>';//创建一页的li列表
+            }
+            if(zz[(e-1)*pagesize+i+1]==null) break;//超出最后的范围跳出
+        }
+        $("ul#all").html(html);//给ul列表写入html
+        var ye="";
+        for(var j=1;j<=pageall;j++){
+            if(e==j){
+                ye=ye+"<span><a href='#' onClick='change("+j+")' style='color:#FF0000'>"+j+"</a></span> "
+            }else{
+                ye=ye+"<a href='#' onClick='change("+j+")'>"+j+"</a> "
+            }
+        }
+        var pageContent="";
+            pageContent +='第<span id=\"a2\">'+pageno+'</span>/';
+            pageContent +='<span id="a1">'+pageall+'</span>页';
+            pageContent +="<span id='a3' style='margin-left:10px'>"+ye+'</span>';
+            pageContent +='<a href="#" style="margin-left:10px;" onClick="change(--pageno)">上一页</a>';
+            pageContent +='<a href="#" style="margin-left:5px;" onClick="change(++pageno)">下一页</a>';
+        $("#page").html(pageContent);
+    }
+        var zz=getzz()
+        var pageno=1 ; //当前页
+        var pagesize=4; //每页多少条信息
+        if(zz.length%pagesize==0){
+            var  pageall =zz.length/pagesize ;
+        }else{
+            var  pageall =parseInt(zz.length/pagesize)+1;
+        }   //一共多少页
+        change(1);
+
+        </script>
+</html>
