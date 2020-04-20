@@ -5,6 +5,9 @@
     margin-top: 25px; 
     margin-left: 50px;
 }
+a{
+    text-decoration: none;
+}
 .search{
     float: left;
     width: 400px;
