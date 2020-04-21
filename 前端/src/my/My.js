@@ -6,7 +6,11 @@ const boxes = [
     {name:'盒子',num:6,img:require('../../images/my-box1.png'),unit:'个',txtcolor:'#ff8e14'},
     {name:'卡片',num:6,img:require('../../images/my-box2.png'),unit:'个',txtcolor:'#67e5fb'},
     {name:'积分',num:6,img:require('../../images/my-box3.png'),unit:'分',txtcolor:'#fed2df'},
-
+]
+const pai = [
+    {name:'Coisini',img:require('../../images/my-guanjun.png'),grade:95,tou:require('../../images/touxiang.png')},
+    {name:'Coisini',img:require('../../images/my-yajun.png'),grade:93,tou:require('../../images/touxiang.png')},
+    {name:'Coisini',img:require('../../images/my-jijun.png'),grade:89,tou:require('../../images/touxiang.png')},
 ]
 export default class My extends Component {
     render() {
@@ -75,6 +79,36 @@ export default class My extends Component {
                             </TouchableOpacity>
                         </View>
                     </View>
+                    <View style={styles.studystu0}>
+                        <Text style={{color:'#79be3b',fontSize:15,textAlign:'center',marginBottom:10}}>积分排行榜</Text>
+                        <FlatList
+                            data = {pai}
+                            numColumns = {1}
+                            renderItem={({item})=>(
+                                <View style={styles.every}>
+                                    <Image style={styles.paiimg0}
+                                        resizeMode="contain"
+                                        source={item.img}
+                                    />
+                                    <View style={styles.toukuang}>
+                                        <Image style={styles.paiimg1}
+                                            resizeMode="contain"
+                                            source={item.tou}
+                                        />
+                                    </View>
+                                    <Text style={styles.username}>{item.name}</Text>
+                                    <Text style={styles.grade}>{item.grade}</Text>
+                                    <Text style={styles.gradetxt}>分</Text>
+                                </View>
+                            )}
+                        />
+                        <TouchableOpacity onPress={()=>{
+                                Actions.rank()}}
+                                style={styles.sign}
+                        >
+                            <Text style={{color:'#79be3b'}}>点击查看更多></Text>
+                        </TouchableOpacity>
+                    </View>
                     <View style={styles.biglist}>
                         <TouchableOpacity style={styles.littlelist}>
                             <Text style={styles.listtxt}>退出登录</Text>
@@ -110,6 +144,54 @@ export default class My extends Component {
     }
 }
 const styles = StyleSheet.create({
+    studystu0:{
+        width:'90%',
+        height:280,
+        borderRadius:30,
+        backgroundColor:'#fff',
+        borderWidth:3,
+        borderColor:'#79be3b',
+        marginTop:20,
+    },
+    every:{
+        flexDirection:'row',
+        width:'90%',
+        height:70,
+        alignItems:'center',
+        marginLeft:'5%',
+    },
+    paiimg0:{
+        width:40,
+        height:40
+    },
+    paiimg1:{
+        width:50,
+        height:50
+    },
+    toukuang:{
+        width:50,
+        height:50,
+        borderRadius:25,
+        marginLeft:'5%',
+        overflow:'hidden',
+        borderWidth:1,
+        borderColor:'#ccc'
+    },
+    username:{
+        fontSize:20,
+        marginLeft:'10%',
+        color:'#67e5fb'
+    },
+    grade:{
+        fontSize:25,
+        marginLeft:'30%',
+        color:'orange'
+    },
+    gradetxt:{
+        fontSize:15,
+        marginLeft:'1%',
+        color:'#aaa'
+    },
     introduce:{
         flexDirection:'row',
         width:'100%',
