@@ -45,6 +45,10 @@ router.post('/searchuser', function(req, res, next) {
 router.get('/block', function(req, res, next) {
   res.render('Block/block', { title: 'block' });
 });
+//搜索帖子
+router.post('/searchpost', function(req, res, next) {
+  res.render('Block/searchpost', { title: 'searchpost' });
+});
 //删除帖子
 router.get('/deletepost', function(req, res, next) {
   res.render('Block/delpost', { title: 'deletepost' });
