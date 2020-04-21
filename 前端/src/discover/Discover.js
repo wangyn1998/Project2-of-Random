@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Button from 'react-native-button';
 import Swiper from 'react-native-swiper';
+import { Actions } from 'react-native-router-flux';
 import {
     StyleSheet,
     ScrollView,
@@ -9,6 +10,7 @@ import {
     Image,
     AsyncStorage,
     ToastAndroid,
+    TouchableOpacity,
     BackHandler
   } from 'react-native';
 
@@ -48,7 +50,7 @@ const styles = StyleSheet.create({
         marginBottom:30,
         backgroundColor:'#FED2DF'
     },
-    test:{
+    exam:{
         height:180,
         width:'30%',
         marginLeft:'5%',
@@ -85,24 +87,24 @@ export default class Discover extends Component {
                     </View>
                     <View style={styles.body}>
                         <View style={styles.game}>
-                            <Button>
+                            <TouchableOpacity onPress={()=>Actions.game()}>
                                 <Text style={styles.txt1}>游戏</Text>
-                            </Button>
+                            </TouchableOpacity>
                         </View>
                         <View style={styles.knowledge}>
-                            <Button>
+                            <TouchableOpacity onPress={()=>Actions.knowledge()}>
                                 <Text style={styles.txt1}>知识</Text>
-                            </Button>
+                            </TouchableOpacity>
                         </View>
                         <View style={styles.everyday}>
-                            <Button>
+                            <TouchableOpacity onPress={()=>Actions.everyday()}>
                                 <Text style={styles.txt2}>每日推荐</Text>
-                            </Button>
+                            </TouchableOpacity>
                         </View>
-                        <View style={styles.test}>
-                            <Button>
+                        <View style={styles.exam}>
+                            <TouchableOpacity onPress={()=>Actions.exam()}>
                                 <Text style={styles.txt2}>考试信息</Text>
-                            </Button>
+                            </TouchableOpacity>
                         </View>
                     </View>
                 </ScrollView>
