@@ -16,6 +16,10 @@ import {
 import Box from './src/box/Box';
 import Block from './src/block/Block';
 import Discover from './src/discover/Discover';
+import Game from './src/discover/Game';
+import Exam from './src/discover/Exam';
+import Knowledge from './src/discover/Knowledge';
+import Everyday from './src/discover/Everyday';
 import My from './src/my/My';
 import Login from './src/common/Login';
 import Register from './src/common/Register';
@@ -109,6 +113,46 @@ const App = () => {
                   titleStyle={{color:'white',marginLeft:'48%'}}
                   >
                     <Scene key="discover" component={Discover}/>
+                    <Scene 
+                      title='游戏'
+                      key="game" 
+                      component={Game} 
+                      hideTabBar
+                      navigationBarStyle={{backgroundColor:'#79be3b'}}
+                      titleStyle={{flex:1,textAlign:'center',color:'white'}}
+                      backButtonImage={require('./images/return.png')}
+                      renderRightButton={<Icon name='ellipsis' style={{marginRight:20,color:'white'}}/>}
+                    />
+                    <Scene 
+                      title='知识'
+                      key="knowledge" 
+                      component={Knowledge} 
+                      hideTabBar
+                      navigationBarStyle={{backgroundColor:'#79be3b'}}
+                      titleStyle={{flex:1,textAlign:'center',color:'white'}}
+                      backButtonImage={require('./images/return.png')}
+                      renderRightButton={<Icon name='ellipsis' style={{marginRight:20,color:'white'}}/>}
+                    />
+                    <Scene 
+                      title='每日推荐'
+                      key="everyday" 
+                      component={Everyday} 
+                      hideTabBar
+                      navigationBarStyle={{backgroundColor:'#79be3b'}}
+                      titleStyle={{flex:1,textAlign:'center',color:'white'}}
+                      backButtonImage={require('./images/return.png')}
+                      renderRightButton={<Icon name='ellipsis' style={{marginRight:20,color:'white'}}/>}
+                    />
+                    <Scene 
+                      title='考试信息'
+                      key="exam" 
+                      component={Exam} 
+                      hideTabBar
+                      navigationBarStyle={{backgroundColor:'#79be3b'}}
+                      titleStyle={{flex:1,textAlign:'center',color:'white'}}
+                      backButtonImage={require('./images/return.png')}
+                      renderRightButton={<Icon name='ellipsis' style={{marginRight:20,color:'white'}}/>}
+                    />
                   </Scene>
                   <Scene key='myPage'
                     title='我的'
