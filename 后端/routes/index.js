@@ -1,9 +1,28 @@
 var express = require('express');
 var router = express.Router();
 
-//登录页
+/*登录页*/
 router.get('/', function(req, res, next) {
   res.render('login', { title: 'login' });
+});
+//验证身份
+router.post('/home', function(req, res, next) {
+  var data = req.body;
+  var username = data.username;
+  var pwd = data.password;
+  var code = data.code;
+  var getcode = data.getcode; 
+  if(username == "admin" && pwd == "123456"){
+    if(code == getcode){
+      res.end('success');
+    }
+    else{
+      res.end('code-error');
+    }
+  }
+  else{
+    res.end('error');
+  }
 });
 //首页
 router.get('/home', function(req, res, next) {
