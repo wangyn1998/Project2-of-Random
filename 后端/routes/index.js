@@ -30,6 +30,18 @@ router.get('/block', function(req, res, next) {
 router.get('/deletepost', function(req, res, next) {
   res.render('Block/delpost', { title: 'deletepost' });
 });
+//帖子回复
+router.get('/block/reply', function(req, res, next) {
+  res.render('Block/reply', { title: 'reply' });
+});
+// 帖子详情
+router.get('/block/detail', function(req, res, next) {
+  res.render('Block/postDetail', { title: 'postDetail' });
+});
+// 删除回复
+router.get('/delreply', function(req, res, next) {
+  res.render('Block/delreply', { title: 'delReply' });
+});
 //积分管理
 router.get('/score', function(req, res, next) {
   res.render('Score/score', { title: 'score' });

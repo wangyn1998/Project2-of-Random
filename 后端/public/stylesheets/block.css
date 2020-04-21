@@ -106,3 +106,80 @@
     color:#79be3b;
     border: 1px solid #79be3b;
 } 
+#popLayer{
+    position: absolute;
+    display:none;
+    left:0;
+    top:0;
+    z-index:0;
+    background:#fff;
+    opacity:0.8;
+    filter: alpha(opacity=80);/* 只支持IE6、7、8、9 */
+}
+.pop{
+    border: 2px solid #888;
+}
+.popPosition {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+#pop-container {
+    display: none;
+    z-index: 999;
+}
+/*遮盖层*/
+#cover-tier {
+    background-color: #D9D9D9;
+    opacity: 0.5;
+}
+/*弹出层内容*/
+#pop-tier {
+    width: 380px;
+    height: 390px;
+    border: 2px solid #C3C3C3;
+    background-color: #fff;
+    margin: auto;
+    text-align: center;
+}
+/*关闭弹框*/
+#close-pop {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
+.popPosition1 {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+#pop-container1 {
+    display: none;
+    z-index: 999;
+}
+/*遮盖层*/
+#cover-tier1 {
+    background-color: #D9D9D9;
+    opacity: 0.5;
+}
+/*弹出层内容*/
+#pop-tier1 {
+    width: 380px;
+    height: 390px;
+    border: 2px solid #C3C3C3;
+    background-color: #fff;
+    margin: auto;
+    text-align: center;
+}
+/*关闭弹框*/
+#close-pop1 {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
