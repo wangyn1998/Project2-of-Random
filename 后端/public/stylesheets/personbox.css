@@ -30,7 +30,7 @@
     margin-left: 50px;
 }
 .personBoxbox3{
-    width: 95%;
+    width: 92%;
     height: 300px;
     margin-top:10px;
     margin-left: 50px;
@@ -43,9 +43,9 @@
     float: left;
 }
 .personBoxbox3 li{
-    width: 33%;
+    width: 33.15%;
     height: 148px;
-    border:1px solid #eee;
+    /* border:1px solid #; */
     float: left;
     text-align: center;
 }
