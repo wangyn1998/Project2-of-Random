@@ -253,6 +253,7 @@ const App = () => {
               <Scene key='learn' component={Learn} title='全部卡片' titleStyle={{textAlign:'center',flex:1,color:'#ffffff'}} renderRightButton={<Icon name='plus-square' color='#ffffff' size='lg' style={{marginRight:20}} onPress={()=>{Actions.addLearn()}}/>} navigationBarStyle={{backgroundColor:'#79be3b',color:'#ffffff'}} navBarButtonColor='#ffffff'/>
               <Scene  key='addLearn' component={AddLearn} hideNavBar title='添加卡片'/>
               <Scene  key='learnMsg' component={LearnMsg} hideNavBar title='卡片详情'/>
+              <Scene  key='cardTest' component={CardTest} hideNavBar title='卡片测试'/>
             </Scene>
             <Scene key='light' component={Selection}/>
         </Lightbox>
