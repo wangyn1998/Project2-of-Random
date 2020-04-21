@@ -7,7 +7,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel='stylesheet' href='/stylesheets/style.css' />
     <link rel='stylesheet' href='/stylesheets/score.css' />
-    <link rel="stylesheet" href="https://at.alicdn.com/t/font_1506624_rw0sat5f54l.css">
+    <!-- 后端登录 --><link rel="stylesheet" href="https://at.alicdn.com/t/font_1506624_oswwuan5y68.css">
+        <!-- 后端论坛 --><link rel="stylesheet" href="https://at.alicdn.com/t/font_1528101_39ha99o5h31.css">
+        <link rel="stylesheet" href="https://at.alicdn.com/t/font_1528101_ta96e29j5ne.css">
 </head>
 <body>
     <header style="background:#79be3b;width:100%;height:75px;"> 
@@ -27,7 +29,9 @@
     </div>
     <div class="right">
         <div class="box1">
-            <p style="font-size:22px;font-weight:bold">个人积分明细</p>
+            <p style="font-size:22px;font-weight:bold">个人积分明细
+                <a href="/score/list" style="color:#79be3b"><span style="margin-left:30px" class="iconfont icon-fanhui" id="btn"></span></a>
+            </p>
         </div>
         <div class='ListInbox3'>
             <ul id="all" >
@@ -58,11 +62,11 @@
                 </div>
             </div>
         </div>
-        <div style="margin-right:4%;float:right;">
+        <!-- <div style="margin-right:4%;float:right;">
             <a style="text-decoration:none" href='/score/list'>
                 <button style="background-color: white;color:#79be3b;border: 1px solid #79be3b;width: 50px;height: 30px;">返回</button>
             </a>
-        </div>
+        </div> -->
     </div>
 </body>
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>

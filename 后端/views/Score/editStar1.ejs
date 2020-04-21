@@ -69,10 +69,34 @@
                 </a>
             </div>
         </div>
+        <div >
+            <div id="pop-container1" style="display: block;">
+                <div id="cover-tier1" class="popPosition1"></div>
+                <div id="pop-tier1" class="popPosition1">
+                    <i id="close-pop1">&#10006;</i>
+                    <form action="/updatestar" method="post">
+                    <div style="width:380px;float:left;">
+                        <h2 style="float:left;margin-left:20px;margin-top:25px;margin-bottom: 10px;">星星数:</h2>
+                        <input type='text' id="content" style="width:340px;height:200px;"name="content"  />
+                    </div>
+                    <h2 style="float:left;margin-left:20px;margin-top:25px;" >成就:</h2>
+                    <input type='text' id="create" style="width:265px;height:30px;margin-top:25px;"name='score'/>
+                    <br/>
+                    <input value="保存" id="save" type="submit" style="float:right;border:'1px soild #61b3ed';margin-right:20px;width:55px;height:30px;background-color:#79be3b;color:'#ffffff';margin-top: 10px;"/>
+                </form>
+            </div>
+        </div>
     </body>
-<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-    <script type="text/javascript"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script type="text/javascript">    
+    function temp(id) {
+        return document.getElementById(id);
+    }
+    // 点击右上角X弹出层隐藏
+    temp('close-pop1').onclick = function() {
+        temp('pop-container1').style.display = 'none';
+        window.location.href="/score/achievement"
+    }
     function getzz() {
         var a = $("ul#all li");
         var zz =new Array(a.length);

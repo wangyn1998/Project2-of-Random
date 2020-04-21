@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
     <head>
         <title>星星成就管理</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,9 +23,21 @@
         </div>
         <div class="right">
             <div class="box1">
-                <h2>您搜索的结果是:</h2>
+                <div class='search'>
+                    <form style="line-height: 2.5em;"  method="post" action="/searchstar">
+                        <input class='Bar' placeholder="请输入要查找的星星数" name='taskId'/>
+                        <div class="iconfont icon-xiaoxi-" style="float:left;">
+                            <input type="submit" value="搜索"style="height:30px;border:none;">
+                        </div>
+                    </form>
+                </div>
             </div>
-            <br/>
+            <div class="box2">
+                <p style="font-size:22px;font-weight:bold">盒我学星星成就管理
+                    <span style="margin-left:30px" class="iconfont icon-wuuiconxiangjifangda" id="btn"></span>
+                    <span style="font-size:20px;margin-left:5px;font-weight:lighter">添加</span>
+                </p>
+            </div>
             <div class='starbox3'>
                 <ul id="all">
                     <li>
@@ -37,11 +49,11 @@
                     </li>
                     <% for(var i = 0 ; i < 6; i++) {%>
                         <li>
-                            <p class='starbody'>1</p>  
+                            <p class='starbody'><%= i%></p>  
                             <p class='starbody'>1</p>  
                             <div class='starbody'>
                                 <div class='Topicoperation'>
-                                    <form method="post" action="/editstar1" class="operation1">
+                                    <form method="post" action="/editstar" class="operation1">
                                         <button style="color: white;border:1px solid white;width: 50px;
                                         height: 30px;">编辑
                                             <input type='submit' style="float: right;border:1px solid #79be3b;background-color: #79be3b;" id='bianji' name="task" value=''></button>
@@ -63,16 +75,53 @@
                     </div>
                 </div>
             </div>
-            <div style="margin-right:4%;float:right">
-                <a style="text-decoration:none" href='/score/achievement'>
-                    <button style="background-color: white;color:#79be3b;border: 1px solid #79be3b;width: 50px;height: 30px;">返回</button>
-                </a>
+        </div>
+        <div >
+            <div id="pop-container">
+                <div id="cover-tier" class="popPosition"></div>
+                <div id="pop-tier" class="popPosition">
+                    <i id="close-pop">&#10006;</i>
+                    <form action="/addstar" method="post">
+                    <div style="width:380px;float:left;">
+                        <h2 style="float:left;margin-left:20px;margin-top:25px;margin-bottom: 10px;">成就:</h2>
+                        <input type='text' id="content" style="width:340px;height:200px;"name="content"  />
+                    </div>
+                    <h2 style="float:left;margin-left:20px;margin-top:25px;" >星星数:</h2>
+                    <input type='text' id="create" style="width:265px;height:30px;margin-top:25px;"name='score'/>
+                    <br/>
+                    <input value="保存" id="save" type="submit" style="float:right;border:'1px soild #61b3ed';margin-right:20px;width:55px;height:30px;background-color:#79be3b;color:'#ffffff';margin-top: 10px;"/>
+                </form>
+            </div>
+        </div>
+        <div >
+            <div id="pop-container1" style="display: block;">
+                <div id="cover-tier1" class="popPosition1"></div>
+                <div id="pop-tier1" class="popPosition1">
+                    <i id="close-pop1">&#10006;</i>
+                    <form action="/updatestar" method="post">
+                    <div style="width:380px;float:left;">
+                        <h2 style="float:left;margin-left:20px;margin-top:25px;margin-bottom: 10px;">星星数:</h2>
+                        <input type='text' id="content" style="width:340px;height:200px;"name="content"  />
+                    </div>
+                    <h2 style="float:left;margin-left:20px;margin-top:25px;" >成就:</h2>
+                    <input type='text' id="create" style="width:265px;height:30px;margin-top:25px;"name='score'/>
+                    <br/>
+                    <input value="保存" id="save" type="submit" style="float:right;border:'1px soild #61b3ed';margin-right:20px;width:55px;height:30px;background-color:#79be3b;color:'#ffffff';margin-top: 10px;"/>
+                </form>
             </div>
         </div>
     </body>
-<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-    <script type="text/javascript"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script type="text/javascript">    
+     function temp(id) {
+        return document.getElementById(id);
+    }
+    // 点击右上角X弹出层隐藏
+    temp('close-pop1').onclick = function() {
+        temp('pop-container1').style.display = 'none';
+        window.location.href="/score/achievement"
+
+    }
     function getzz() {
         var a = $("ul#all li");
         var zz =new Array(a.length);
@@ -128,6 +177,5 @@
         change(1);
         console.log(window.screen.height);
         console.log(document.body.scrollHeight)
-
-        </script>
+    </script>
 </html>
