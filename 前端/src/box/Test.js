@@ -40,7 +40,7 @@ export default class Test extends Component {
             <View style={{backgroundColor:'#ffffff'}}>
                 <ScrollView>
                 <FlatList data={data1} numColumns={3}  renderItem={({item})=>(
-                    <TouchableOpacity style={{width:'33.3%',alignItems:'center',paddingTop:30,position:'relative'}} onPress={()=>{Actions.learnMsg()}}>
+                    <TouchableOpacity style={{width:'33.3%',alignItems:'center',paddingTop:30,position:'relative'}} onPress={()=>{Actions.cardTest()}}>
                         <Image source={require('../../images/box-pic2.jpg')} style={{width:0.3*w,height:0.25*h,resizeMode:'stretch'}}/>
                     </TouchableOpacity>
                 )}/>
