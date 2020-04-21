@@ -1,7 +1,7 @@
 .login{
     width: 350px;
     margin: 0 auto;
-    margin-top: 50px;
+    margin-top: 60px;
 }
 form{
     width: 350px;
@@ -18,17 +18,19 @@ input{
     margin-top: 20px;
     padding-left: 10px;
 }
-#test{
-    width: 200px;
-    margin-top: 5px;
-    padding-left: 10px;
-}
 #code{
+    width: 200px;
+    padding-left: 10px;
+    float: left;
+}
+#getcode{
     width: 105px;
+    height: 36px;
     background: #79be3b;
     color: white;
-    margin-top: 5px;
     cursor: pointer;
+    float: left;
+    margin-left:6px;
 }
 #login{
     width: 220px;
