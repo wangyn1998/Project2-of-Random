@@ -30,6 +30,7 @@ import Bing from './src/my/Bing';
 import Set from './src/my/Set';
 import About from './src/my/About';
 import Help from './src/my/Help';
+import Rank from './src/my/Rank';
 import Selection from './src/box/Selection';
 import Test from './src/box/Test';
 import Learn from './src/box/Learn';
@@ -230,6 +231,16 @@ const App = () => {
                       title='关于我们'
                       key="about" 
                       component={About} 
+                      hideTabBar
+                      navigationBarStyle={{backgroundColor:'#79be3b'}}
+                      titleStyle={{flex:1,textAlign:'center',color:'white'}}
+                      backButtonImage={require('./images/return.png')}
+                      renderRightButton={<Icon name='ellipsis' style={{marginRight:20,color:'white'}}/>}
+                    />
+                    <Scene 
+                      title='积分排行榜'
+                      key="rank" 
+                      component={Rank} 
                       hideTabBar
                       navigationBarStyle={{backgroundColor:'#79be3b'}}
                       titleStyle={{flex:1,textAlign:'center',color:'white'}}
