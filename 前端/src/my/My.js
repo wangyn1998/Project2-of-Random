@@ -52,7 +52,7 @@ export default class My extends Component {
                         </TouchableOpacity>
                     </View>
                     <View style={styles.studystu}>
-                        <Text style={{color:'#79be3b',fontSize:15}}>我的学习情况</Text>
+                        <Text style={{color:'#79be3b',fontSize:20}}>我的学习情况</Text>
                         <View style={styles.tu}>
                             <TouchableOpacity onPress={()=>{Actions.xian()}}
                                 style={{
@@ -80,7 +80,7 @@ export default class My extends Component {
                         </View>
                     </View>
                     <View style={styles.studystu0}>
-                        <Text style={{color:'#79be3b',fontSize:15,textAlign:'center',marginBottom:10}}>积分排行榜</Text>
+                        <Text style={{color:'#79be3b',fontSize:20,textAlign:'center',marginBottom:10}}>积分排行榜</Text>
                         <FlatList
                             data = {pai}
                             numColumns = {1}
@@ -110,9 +110,6 @@ export default class My extends Component {
                         </TouchableOpacity>
                     </View>
                     <View style={styles.biglist}>
-                        <TouchableOpacity style={styles.littlelist}>
-                            <Text style={styles.listtxt}>退出登录</Text>
-                        </TouchableOpacity>
                         <TouchableOpacity style={styles.littlelist}>
                             <Text style={styles.listtxt}>夜间模式</Text>
                         </TouchableOpacity>
