@@ -3,7 +3,7 @@
     <head>
         <title>盒子管理</title>
         <link rel='stylesheet' href='/stylesheets/style.css'/>
-        <link rel='stylesheet' href='/stylesheets/card.css'/>
+        <link rel='stylesheet' href='/stylesheets/box.css'/>
         <!-- 后端登录 --><link rel="stylesheet" href="https://at.alicdn.com/t/font_1506624_oswwuan5y68.css">
         <!-- 后端论坛 --><link rel="stylesheet" href="https://at.alicdn.com/t/font_1528101_39ha99o5h31.css">
         <link rel="stylesheet" href="https://at.alicdn.com/t/font_1528101_ta96e29j5ne.css">
@@ -58,10 +58,10 @@
                     <!-- <li><div class='cardhead'><h2 class='cardhead1' style='margin-block-start:0;margin-block-end: 0;'>卡片题目</h2><h2 class='cardhead1' style='margin-block-start:0;margin-block-end: 0;'>卡片答案</h2><h2 class='cardhead3' style='margin-block-start:0;margin-block-end: 0;'>操作</h2></div></li> -->
                     <% for(var i = 0 ; i < 7; i++) {%>
                         <li>
-                        <a href="/box/question" style="color:#000;"><p class="cardQues"style="margin-block-start: 0;margin-top:15px;margin-block-end:0;overflow:hidden;">1111111111</p></a>
-                        <a href="/box/answer" style="color:#000;"><p class="cardAns"style="float:left;margin-top:15px;font-size:20px" id="time">2222222</p></a>
-                        <a href="/box/deletecard" style="color:#000;"><button class='cardcheck'>移除</button></a> 
-                    </li>
+                            <div class="cardhead1"><a href="/box/question" style="color:#000;"><p class="cardQues">1111111111</p></a></div>
+                            <div class="cardhead1"><a href="/box/answer" style="color:#000;"><p class="cardAns">2222222</p></a></div>
+                            <div class="cardhead3"><a href="/box/deletecard" style="color:#000;"><button class='cardcheck'>移除</button></a> </div>
+                        </li>
                     <%}%>
                 </ul>
             </div>

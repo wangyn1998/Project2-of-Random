@@ -66,11 +66,19 @@
                     </li> -->
                     <% for(var i = 0 ; i < 6; i++) {%>
                         <li>
-                            <img class="Boximg" src="https://dss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1107263072,1224997471&fm=26&gp=0.jpg"/>   
-                            <p class="Boxname"style="margin-block-start: 0;margin-block-end:0;overflow:hidden;">用户名</p>      
-                            <p class="Boxnum"style="float:left;margin-top:12px;margin-left:80px;font-size:20px" id="time">6</p>
-                            <a href="/box/person"><button class='Boxcheck'>查看盒子</button></a>
-                            <a href="/box/record"><button class='Boxcheck1'>查看学习记录</button></a>
+                            <div class='Boxhead1'>
+                                <img class="Boximg" src="https://dss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1107263072,1224997471&fm=26&gp=0.jpg"/>   
+                            </div>
+                            <div class='Boxhead2'>
+                                <p class="Boxname">用户名</p>      
+                            </div>
+                            <div class='Boxhead3'>
+                                 <p class="Boxnum">6</p>
+                            </div>
+                            <div class='Boxhead3'>
+                                <a href="/box/person"><button class='Boxcheck'>查看盒子</button></a>
+                                <a href="/box/record"><button class='Boxcheck1'>查看学习记录</button></a>
+                            </div>
                         </li>
                     <%}%>
                 </ul>
