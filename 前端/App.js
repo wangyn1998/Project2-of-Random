@@ -34,6 +34,8 @@ import Rank from './src/my/Rank';
 import Selection from './src/box/Selection';
 import Test from './src/box/Test';
 import Learn from './src/box/Learn';
+import Alterpwd from './src/my/Alterpwd';
+import Findpwd from './src/my/Findpwd';
 const styles = StyleSheet.create({
 
 })
@@ -241,6 +243,26 @@ const App = () => {
                       title='积分排行榜'
                       key="rank" 
                       component={Rank} 
+                      hideTabBar
+                      navigationBarStyle={{backgroundColor:'#79be3b'}}
+                      titleStyle={{flex:1,textAlign:'center',color:'white'}}
+                      backButtonImage={require('./images/return.png')}
+                      renderRightButton={<Icon name='ellipsis' style={{marginRight:20,color:'white'}}/>}
+                    />
+                    <Scene 
+                      title='修改密码'
+                      key="alterpwd" 
+                      component={Alterpwd} 
+                      hideTabBar
+                      navigationBarStyle={{backgroundColor:'#79be3b'}}
+                      titleStyle={{flex:1,textAlign:'center',color:'white'}}
+                      backButtonImage={require('./images/return.png')}
+                      renderRightButton={<Icon name='ellipsis' style={{marginRight:20,color:'white'}}/>}
+                    />
+                    <Scene 
+                      title='找回密码'
+                      key="findpwd" 
+                      component={Findpwd} 
                       hideTabBar
                       navigationBarStyle={{backgroundColor:'#79be3b'}}
                       titleStyle={{flex:1,textAlign:'center',color:'white'}}
