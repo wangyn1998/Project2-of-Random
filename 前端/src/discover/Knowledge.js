@@ -14,6 +14,7 @@ const styles = StyleSheet.create({
     line:{
         height:50,
         width:'100%',
+        backgroundColor:'white'
     },
     txt:{
         fontSize:40,
@@ -84,12 +85,12 @@ const data=[
 export default class Knowledge extends Component {
     render() {
         return (
-            <View>
+            <View style={{backgroundColor:'white'}}>
                 <ScrollView>
                     <View style={styles.wrapper}>
                         <Image source={require('../../images/knowledge.jpg')} style={{width:"100%",height:"100%"}}/>
                     </View>
-                    <View style={{marginBottom:20,marginTop:10}}></View>
+                    <View style={{marginBottom:10,marginTop:10}}></View>
                     {
                         data.map((item)=>(
                             <View style={styles.line}>
@@ -97,7 +98,7 @@ export default class Knowledge extends Component {
                                     <Text style={{color:'#E67D34',width:30,paddingLeft:10}}>{item.num}</Text>
                                     <Text style={{color:'black'}}>{item.content}</Text>
                                 </View>
-                                <View style={{backgroundColor:'#79BE3B',height:3,width:'100%'}}></View>
+                                <View style={{backgroundColor:'lightgrey',height:2,width:'100%'}}></View>
                             </View>
                         ))
                     }
