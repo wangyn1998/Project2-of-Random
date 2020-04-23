@@ -28,13 +28,14 @@ export default class Login extends Component {
     login = () => {
       // myFetch.get('/topics',{limit:4,user:'sss'})
       //   .then(res=>console.log(res))
-      this.setState({isloading:true})
-      myFetch.post('/login',{
-        username:this.state.username,
-        pwd:this.state.pwd
-      }).then(res=>{
-        Actions.boxPage();
-      })
+      // this.setState({isloading:true})
+      // myFetch.post('/login',{
+      //   username:this.state.username,
+      //   pwd:this.state.pwd
+      // }).then(res=>{
+      //   Actions.boxPage();
+      // })
+      Actions.boxPage();
     }
     render() {
         return (
@@ -69,11 +70,13 @@ export default class Login extends Component {
               </TouchableOpacity>  
               <View style={{flexDirection:'row',alignItems:'center',marginTop:30}}>
                 <TouchableOpacity>
-                  <Text style={styles.goto}>忘记密码</Text>
+                  <Text style={styles.goto}
+                        onPress={()=>Actions.findpwd()}
+                  >忘记密码</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={{marginLeft:'40%'}}>
                   <Text style={styles.goto}
-                        onPress={()=>Actions.register()}
+                        onPress={()=>Actions.findpwd()}
                   >去注册</Text>
                 </TouchableOpacity>
               </View>
