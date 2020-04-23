@@ -60,34 +60,21 @@ export default class AddBox extends Component {
                         <Text style={{fontSize:27,marginRight:20,marginTop:10}}>盒子图片</Text>
                         <View style={{width:'55%',height:h*0.25}}>
                             {
-                                [1].map((item)=>{
-                                    if(this.state.num==0){
-                                        return (
-                                            <FlatList data={imglist} numColumns={3} renderItem={({item})=>(
+                                [1].map((item)=>(
+                                    <FlatList data={imglist} numColumns={3} renderItem={({item})=>{
+                                        if(item.num==this.state.num){
+                                            return (
+                                                <TouchableOpacity style={{margin:10,borderColor:'#79be3b',borderWidth:2}} onPress={()=>{this.clickNum(item.num)}}><Image source={item.img} style={{width:w*0.13,height:h*0.07}}/></TouchableOpacity>
+                                            )
+                                        }
+                                        else{
+                                            return (
                                                 <TouchableOpacity style={{margin:10}} onPress={()=>{this.clickNum(item.num)}}><Image source={item.img} style={{width:w*0.13,height:h*0.07}}/></TouchableOpacity>
-                                            )}/>
-                                        )
-                                    }else{
-                                        return (
-                                            <FlatList data={imglist} numColumns={3} renderItem={({item})=>{
-                                                if(item.num==this.state.num){
-                                                    return (
-                                                        <TouchableOpacity style={{margin:10,borderColor:'red',borderWidth:2}} onPress={()=>{this.clickNum(item.num)}}><Image source={item.img} style={{width:w*0.13,height:h*0.07}}/></TouchableOpacity>
-                                                    )
-                                                }
-                                                else{
-                                                    return (
-                                                        <TouchableOpacity style={{margin:10}} onPress={()=>{this.clickNum(item.num)}}><Image source={item.img} style={{width:w*0.13,height:h*0.07}}/></TouchableOpacity>
-                                                    )
-                                                }
-                                            }}/>
-                                        )
-                                    }
-                                })
+                                            )
+                                        }
+                                    }}/>
+                                ))
                             }
-                            {/* <FlatList data={imglist} numColumns={3} renderItem={({item})=>(
-                                <TouchableOpacity style={{margin:10,borderColor:'red',borderWidth:2}} onPress={()=>{this.clickNum(item.num)}}><Image source={item.img} style={{width:w*0.13,height:h*0.07}}/></TouchableOpacity>
-                            )}/> */}
                         </View>
                     </View>
                     <TouchableOpacity style={styles.btn} onPress={()=>{Actions.pop()}}><Text style={{fontSize:20}}>保存</Text></TouchableOpacity>
