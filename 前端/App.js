@@ -276,8 +276,11 @@ const App = () => {
               <Scene  key='addLearn' component={AddLearn} hideNavBar title='添加卡片'/>
               <Scene  key='learnMsg' component={LearnMsg} hideNavBar title='卡片详情'/>
               <Scene  key='cardTest' component={CardTest} hideNavBar title='卡片测试'/>
+              <Scene  key='updateLearn' component={UpdateLearn} hideNavBar title='编辑卡片'/>
+              <Scene  key='addBox' component={AddBox} hideNavBar title='添加盒子'/>
             </Scene>
             <Scene key='light' component={Selection}/>
+            <Scene  key='delCard' component={DelCard} hideNavBar title='删除卡片'/>
         </Lightbox>
         <Scene  key="login" component={Login} initial={true}/>
         <Scene key="register" component={Register}/>
