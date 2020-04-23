@@ -35,7 +35,7 @@ import Selection from './src/box/Selection';
 import Test from './src/box/Test';
 import Learn from './src/box/Learn';
 import Alterpwd from './src/my/Alterpwd';
-import Findpwd from './src/my/Findpwd';
+import Findpwd from './src/common/Findpwd';
 import Sended from './src/block/Sended';
 import Send from './src/block/Send';
 import Hand from './src/my/Hand';
