@@ -122,7 +122,7 @@ export default class My extends Component {
                         </TouchableOpacity>
                         <TouchableOpacity 
                             style={styles.littlelist}
-                            onPress={()=>{Actions.help()}}
+                            onPress={()=>{Actions.hand()}}
                         >
                             <Text style={styles.listtxt}>帮助反馈</Text>
                             <Text style={styles.listtxt1}>详细信息 ></Text>
