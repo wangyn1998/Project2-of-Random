@@ -36,6 +36,7 @@ import Test from './src/box/Test';
 import Learn from './src/box/Learn';
 import Alterpwd from './src/my/Alterpwd';
 import Findpwd from './src/my/Findpwd';
+import Hand from './src/my/Hand';
 const styles = StyleSheet.create({
 
 })
@@ -221,13 +222,13 @@ const App = () => {
                     />
                     <Scene 
                       title='帮助反馈'
-                      key="help" 
-                      component={Help} 
+                      key="hand" 
+                      component={Hand} 
                       hideTabBar
-                      navigationBarStyle={{backgroundColor:'#79be3b'}}
-                      titleStyle={{flex:1,textAlign:'center',color:'white'}}
-                      backButtonImage={require('./images/return.png')}
-                      renderRightButton={<Icon name='ellipsis' style={{marginRight:20,color:'white'}}/>}
+                      navigationBarStyle={{backgroundColor:'#fff'}}
+                      titleStyle={{flex:1,textAlign:'center'}}
+                      backButtonImage={require('./images/my-cuo.png')}
+                      renderRightButton={<Text style={{marginRight:20,color:'#79be3b'}}>提交</Text>}
                     />
                     <Scene 
                       title='关于我们'
@@ -259,16 +260,6 @@ const App = () => {
                       backButtonImage={require('./images/return.png')}
                       renderRightButton={<Icon name='ellipsis' style={{marginRight:20,color:'white'}}/>}
                     />
-                    <Scene 
-                      title='找回密码'
-                      key="findpwd" 
-                      component={Findpwd} 
-                      hideTabBar
-                      navigationBarStyle={{backgroundColor:'#79be3b'}}
-                      titleStyle={{flex:1,textAlign:'center',color:'white'}}
-                      backButtonImage={require('./images/return.png')}
-                      renderRightButton={<Icon name='ellipsis' style={{marginRight:20,color:'white'}}/>}
-                    />
                 </Scene>
               </Tabs>
               <Scene key='test' component={Test} title='测试' titleStyle={{textAlign:'center',flex:1,color:'#ffffff'}} renderRightButton={<Icon name='ellipsis' color='#ffffff' size='lg' style={{marginRight:20}}/>} navigationBarStyle={{backgroundColor:'#79be3b',color:'#ffffff'}} navBarButtonColor='#ffffff' />
@@ -284,6 +275,7 @@ const App = () => {
         </Lightbox>
         <Scene  key="login" component={Login} initial={true}/>
         <Scene key="register" component={Register}/>
+        <Scene key="findpwd" component={Findpwd}/>
       </Modal>
       </Overlay>
     </Router>
