@@ -36,6 +36,8 @@ import Test from './src/box/Test';
 import Learn from './src/box/Learn';
 import Alterpwd from './src/my/Alterpwd';
 import Findpwd from './src/my/Findpwd';
+import Sended from './src/block/Sended';
+import Send from './src/block/Send';
 import Hand from './src/my/Hand';
 const styles = StyleSheet.create({
 
@@ -94,15 +96,36 @@ const App = () => {
                 <Scene  
                   key='blockPage'
                   title='盒塘'
-                  hideNavBar
+                  titleStyle={{color:'#ffffff',textAlign:'center',flex:1}}
+                  navigationBarStyle={{backgroundColor:'#79be3b'}}
                   icon={
-                    ({focused}) =>  <Icon
-                    name={"home"} 
+                    ({focused})=><Icon
                     color={focused?'#79be3b':'#949494'}
-                    />
+                    name="home"
+                  />
                   }
                 >
                   <Scene key="block" component={Block}/>
+                  <Scene 
+                    title='发帖'
+                    key="send" 
+                    component={Send} 
+                    hideTabBar
+                    navigationBarStyle={{backgroundColor:'#fff'}}
+                    titleStyle={{flex:1,textAlign:'center'}}
+                    backButtonImage={require('./images/my-cuo.png')}
+                    renderRightButton={<Text style={{marginRight:20,color:'#79be3b'}}>提交</Text>}
+                  />
+                  <Scene 
+                    title='详情'
+                    key="sended" 
+                    component={Sended} 
+                    hideTabBar
+                    navigationBarStyle={{backgroundColor:'#79be3b'}}
+                    titleStyle={{flex:1,textAlign:'center',color:'white'}}
+                    backButtonImage={require('./images/return.png')}
+                    renderRightButton={<Icon name='ellipsis' style={{marginRight:20,color:'white'}}/>}
+                  />
                 </Scene>
                 <Scene 
                   key='discoverPage'
