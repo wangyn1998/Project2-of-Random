@@ -16,10 +16,14 @@ export default class LearnMsg extends Component {
                    <Text style={{fontSize:32,padding:20}}>n. 苹果，苹果树，苹果似的东西；[美俚]炸弹，手榴弹，（棒球的）球；[美俚]人，家伙。[网络] 苹果；苹果公司；苹果电脑[专业] 苹果 [农业科学]；苹果 [机械工程]</Text>
                </View>
                <View style={styles.edit}>
+                   <TouchableOpacity style={styles.btn} onPress={()=>{Actions.updateLearn()}}>
                    <Icon name='edit' color='#FD8F71'/>
                    <Text style={{marginRight:10,marginLeft:5}}>编辑</Text>
+                   </TouchableOpacity>
+                   <TouchableOpacity style={styles.btn} onPress={()=>{Actions.delCard()}}>
                    <Icon name='delete' color="#FFD331"/>
                    <Text style={{marginRight:10,marginLeft:5}}>删除</Text>
+                   </TouchableOpacity>
                </View>
             </View>
         )
@@ -30,6 +34,10 @@ const styles=StyleSheet.create({
         position:'absolute',
         right:80,
         bottom:80,
+        flexDirection:'row',
+        alignItems:'center'
+    },
+    btn:{
         flexDirection:'row',
         alignItems:'center'
     }
