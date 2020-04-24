@@ -63,7 +63,7 @@ export default class My extends Component {
                                 }}
                             >
                                 <Image source={require('../../images/my-xian.png')}/>
-                                <Text>线形图</Text>
+                                <Text>柱状图</Text>
                             </TouchableOpacity>
                             <TouchableOpacity onPress={()=>{Actions.bing()}}
                                 style={{

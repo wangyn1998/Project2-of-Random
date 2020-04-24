@@ -29,21 +29,11 @@ import Xian from './src/my/Xian';
 import Bing from './src/my/Bing';
 import Set from './src/my/Set';
 import About from './src/my/About';
+import Help from './src/my/Help';
 import Rank from './src/my/Rank';
 import Selection from './src/box/Selection';
 import Test from './src/box/Test';
 import Learn from './src/box/Learn';
-import Alterpwd from './src/my/Alterpwd';
-import Findpwd from './src/common/Findpwd';
-import Sended from './src/block/Sended';
-import Send from './src/block/Send';
-import Hand from './src/my/Hand';
-import AddLearn from './src/box/AddLearn';
-import LearnMsg from './src/box/LearnMsg';
-import CardTest from './src/box/CardTest';
-import DelCard from './src/box/DelCard';
-import UpdateLearn from './src/box/UpdateLearn';
-import AddBox from './src/box/AddBox';
 const styles = StyleSheet.create({
 
 })
@@ -101,36 +91,15 @@ const App = () => {
                 <Scene  
                   key='blockPage'
                   title='盒塘'
-                  titleStyle={{color:'#ffffff',textAlign:'center',flex:1}}
-                  navigationBarStyle={{backgroundColor:'#79be3b'}}
+                  hideNavBar
                   icon={
-                    ({focused})=><Icon
+                    ({focused}) =>  <Icon
+                    name={"home"} 
                     color={focused?'#79be3b':'#949494'}
-                    name="home"
-                  />
+                    />
                   }
                 >
                   <Scene key="block" component={Block}/>
-                  <Scene 
-                    title='发帖'
-                    key="send" 
-                    component={Send} 
-                    hideTabBar
-                    navigationBarStyle={{backgroundColor:'#fff'}}
-                    titleStyle={{flex:1,textAlign:'center'}}
-                    backButtonImage={require('./images/my-cuo.png')}
-                    renderRightButton={<Text style={{marginRight:20,color:'#79be3b'}}>提交</Text>}
-                  />
-                  <Scene 
-                    title='详情'
-                    key="sended" 
-                    component={Sended} 
-                    hideTabBar
-                    navigationBarStyle={{backgroundColor:'#79be3b'}}
-                    titleStyle={{flex:1,textAlign:'center',color:'white'}}
-                    backButtonImage={require('./images/return.png')}
-                    renderRightButton={<Icon name='ellipsis' style={{marginRight:20,color:'white'}}/>}
-                  />
                 </Scene>
                 <Scene 
                   key='discoverPage'
@@ -219,7 +188,7 @@ const App = () => {
                       renderRightButton={<Icon name='ellipsis' style={{marginRight:20,color:'white'}}/>}
                     />
                     <Scene 
-                      title='柱状图'
+                      title='线性图'
                       key="xian" 
                       component={Xian} 
                       hideTabBar
@@ -250,13 +219,13 @@ const App = () => {
                     />
                     <Scene 
                       title='帮助反馈'
-                      key="hand" 
-                      component={Hand} 
+                      key="help" 
+                      component={Help} 
                       hideTabBar
-                      navigationBarStyle={{backgroundColor:'#fff'}}
-                      titleStyle={{flex:1,textAlign:'center'}}
-                      backButtonImage={require('./images/my-cuo.png')}
-                      renderRightButton={<Text style={{marginRight:20,color:'#79be3b'}}>提交</Text>}
+                      navigationBarStyle={{backgroundColor:'#79be3b'}}
+                      titleStyle={{flex:1,textAlign:'center',color:'white'}}
+                      backButtonImage={require('./images/return.png')}
+                      renderRightButton={<Icon name='ellipsis' style={{marginRight:20,color:'white'}}/>}
                     />
                     <Scene 
                       title='关于我们'
@@ -278,32 +247,18 @@ const App = () => {
                       backButtonImage={require('./images/return.png')}
                       renderRightButton={<Icon name='ellipsis' style={{marginRight:20,color:'white'}}/>}
                     />
-                    <Scene 
-                      title='修改密码'
-                      key="alterpwd" 
-                      component={Alterpwd} 
-                      hideTabBar
-                      navigationBarStyle={{backgroundColor:'#79be3b'}}
-                      titleStyle={{flex:1,textAlign:'center',color:'white'}}
-                      backButtonImage={require('./images/return.png')}
-                      renderRightButton={<Icon name='ellipsis' style={{marginRight:20,color:'white'}}/>}
-                    />
                 </Scene>
               </Tabs>
               <Scene key='test' component={Test} title='测试' titleStyle={{textAlign:'center',flex:1,color:'#ffffff'}} renderRightButton={<Icon name='ellipsis' color='#ffffff' size='lg' style={{marginRight:20}}/>} navigationBarStyle={{backgroundColor:'#79be3b',color:'#ffffff'}} navBarButtonColor='#ffffff' />
-              <Scene key='learn' component={Learn} title='全部卡片' titleStyle={{textAlign:'center',flex:1,color:'#ffffff'}} renderRightButton={<Icon name='plus-square' color='#ffffff' size='lg' style={{marginRight:20}} onPress={()=>{Actions.addLearn()}}/>} navigationBarStyle={{backgroundColor:'#79be3b',color:'#ffffff'}} navBarButtonColor='#ffffff'/>
+              {/* <Scene key='learn' component={Learn} title='全部卡片' titleStyle={{textAlign:'center',flex:1,color:'#ffffff'}} renderRightButton={<Icon name='plus-square' color='#ffffff' size='lg' style={{marginRight:20}} onPress={()=>{Actions.addLearn()}}/>} navigationBarStyle={{backgroundColor:'#79be3b',color:'#ffffff'}} navBarButtonColor='#ffffff'/>
               <Scene  key='addLearn' component={AddLearn} hideNavBar title='添加卡片'/>
               <Scene  key='learnMsg' component={LearnMsg} hideNavBar title='卡片详情'/>
-              <Scene  key='cardTest' component={CardTest} hideNavBar title='卡片测试'/>
-              <Scene  key='updateLearn' component={UpdateLearn} hideNavBar title='编辑卡片'/>
-              <Scene  key='addBox' component={AddBox} hideNavBar title='添加盒子'/>
+              <Scene  key='cardTest' component={CardTest} hideNavBar title='卡片测试'/> */}
             </Scene>
             <Scene key='light' component={Selection}/>
-            <Scene  key='delCard' component={DelCard} hideNavBar title='删除卡片'/>
         </Lightbox>
         <Scene  key="login" component={Login} initial={true}/>
         <Scene key="register" component={Register}/>
-        <Scene key="findpwd" component={Findpwd}/>
       </Modal>
       </Overlay>
     </Router>
