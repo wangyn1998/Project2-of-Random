@@ -39,6 +39,15 @@ import Findpwd from './src/common/Findpwd';
 import Sended from './src/block/Sended';
 import Send from './src/block/Send';
 import Hand from './src/my/Hand';
+import Selection from './src/box/Selection';
+import Test from './src/box/Test';
+import Learn from './src/box/Learn';
+import AddLearn from './src/box/AddLearn';
+import LearnMsg from './src/box/LearnMsg';
+import CardTest from './src/box/CardTest';
+import DelCard from './src/box/DelCard';
+import UpdateLearn from './src/box/UpdateLearn';
+import AddBox from './src/box/AddBox';
 const styles = StyleSheet.create({
 
 })
