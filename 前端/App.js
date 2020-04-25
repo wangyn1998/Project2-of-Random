@@ -110,7 +110,20 @@ const App = () => {
                   />
                   }
                 >
-                  <Scene key="block" component={Block}/>
+                  <Scene
+                    key="block"
+                    component={Block}
+                    renderLeftButton={
+                      <TouchableOpacity onPress={()=>{Actions.sended()}}>
+                        <Text style={{color:'white',marginLeft:20}}>我发出的</Text>
+                      </TouchableOpacity>
+                    }
+                    renderRightButton={
+                      <TouchableOpacity onPress={()=>{Actions.send()}}>
+                        <Icon style={{color:'white',marginRight:5}} name='ellipsis'/>
+                      </TouchableOpacity>
+                    }
+                  />
                   <Scene 
                     title='发帖'
                     key="send" 
