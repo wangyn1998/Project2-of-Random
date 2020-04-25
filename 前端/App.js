@@ -8,6 +8,7 @@ import {
   View,
   Text,
   Image,
+  TouchableOpacity,
   AsyncStorage,
   ToastAndroid,
   BackHandler
