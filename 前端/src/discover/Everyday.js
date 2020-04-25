@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
 export default class Everyday extends Component {
     render() {
         return (
-            <View>
+            <View style={{color:'white'}}>
                 <ScrollView>
                 <View style={styles.wrapper}>
                         <Image source={require('../../images/recommend.png')} style={{width:"100%",height:"100%"}}/>

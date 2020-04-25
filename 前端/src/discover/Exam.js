@@ -95,7 +95,7 @@ export default class Exam extends Component {
                         data.map((item)=>(
                             <View style={styles.line}>
                                 <View style={styles.txt}>
-                                    <Text style={{color:'#E67D34',width:40,paddingLeft:15}}>{item.num}</Text>
+                                    <Text style={{color:item.num<4?'red':'#E67D34',width:40,paddingLeft:15}}>{item.num}</Text>
                                     <Text style={{color:'black'}}>{item.content}</Text>
                                 </View>
                                 <View style={{backgroundColor:'lightgrey',height:2,width:'100%'}}></View>
