@@ -6,7 +6,7 @@ export default class Hand extends Component {
         return (
             <ScrollView style={{backgroundColor:'#fff',width:'100%',height:'100%'}}>
                 <View style={{flex:1}}>
-                    <View style={{width:'100%',height:650,borderTopColor:'#ccc',borderTopWidth:1}}>
+                    <View style={{width:'100%',height:710,borderTopColor:'#ccc',borderTopWidth:1}}>
                         <TextInput 
                             placeholder='请在此处写下您的反馈意见...'
                             placeholderTextColor={"#ccc"} 
