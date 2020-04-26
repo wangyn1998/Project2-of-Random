@@ -121,7 +121,7 @@ const App = () => {
                     }
                     renderRightButton={
                       <TouchableOpacity onPress={()=>{Actions.send()}}>
-                        <Icon style={{color:'white',marginRight:5}} name='ellipsis'/>
+                        <Icon style={{color:'white',marginRight:5}} name='edit'/>
                       </TouchableOpacity>
                     }
                   />
