@@ -143,7 +143,7 @@ const App = () => {
                     hideTabBar
                     navigationBarStyle={{backgroundColor:'#79be3b'}}
                     titleStyle={{flex:1,textAlign:'center',color:'white'}}
-                    backButtonImage={require('./images/return.png')}
+                    navBarButtonColor='#ffffff'
                     renderRightButton={<Icon name='ellipsis' style={{marginRight:20,color:'white'}}/>}
                   />
                   <Scene key='blockMsg'
@@ -177,7 +177,7 @@ const App = () => {
                       hideTabBar
                       navigationBarStyle={{backgroundColor:'#79be3b'}}
                       titleStyle={{flex:1,textAlign:'center',color:'white'}}
-                      backButtonImage={require('./images/return.png')}
+                      navBarButtonColor='#ffffff'
                       renderRightButton={<Icon name='ellipsis' style={{marginRight:20,color:'white'}}/>}
                     />
                     <Scene 
@@ -187,7 +187,7 @@ const App = () => {
                       hideTabBar
                       navigationBarStyle={{backgroundColor:'#79be3b'}}
                       titleStyle={{flex:1,textAlign:'center',color:'white'}}
-                      backButtonImage={require('./images/return.png')}
+                      navBarButtonColor='#ffffff'
                       renderRightButton={<Icon name='ellipsis' style={{marginRight:20,color:'white'}}/>}
                     />
                     <Scene 
@@ -197,7 +197,7 @@ const App = () => {
                       hideTabBar
                       navigationBarStyle={{backgroundColor:'#79be3b'}}
                       titleStyle={{flex:1,textAlign:'center',color:'white'}}
-                      backButtonImage={require('./images/return.png')}
+                      navBarButtonColor='#ffffff'
                       renderRightButton={<Icon name='ellipsis' style={{marginRight:20,color:'white'}}/>}
                     />
                     <Scene 
@@ -207,7 +207,7 @@ const App = () => {
                       hideTabBar
                       navigationBarStyle={{backgroundColor:'#79be3b'}}
                       titleStyle={{flex:1,textAlign:'center',color:'white'}}
-                      backButtonImage={require('./images/return.png')}
+                      navBarButtonColor='#ffffff'
                       renderRightButton={<Icon name='ellipsis' style={{marginRight:20,color:'white'}}/>}
                     />
                   </Scene>
@@ -230,7 +230,7 @@ const App = () => {
                       hideTabBar
                       navigationBarStyle={{backgroundColor:'#79be3b'}}
                       titleStyle={{flex:1,textAlign:'center',color:'white'}}
-                      backButtonImage={require('./images/return.png')}
+                      navBarButtonColor='#ffffff'
                       renderRightButton={<Icon name='ellipsis' style={{marginRight:20,color:'white'}}/>}
                     />
                     <Scene 
@@ -240,7 +240,7 @@ const App = () => {
                       hideTabBar
                       navigationBarStyle={{backgroundColor:'#79be3b'}}
                       titleStyle={{flex:1,textAlign:'center',color:'white'}}
-                      backButtonImage={require('./images/return.png')}
+                      navBarButtonColor='#ffffff'
                       renderRightButton={<Icon name='ellipsis' style={{marginRight:20,color:'white'}}/>}
                     />
                     <Scene 
@@ -250,7 +250,7 @@ const App = () => {
                       hideTabBar
                       navigationBarStyle={{backgroundColor:'#79be3b'}}
                       titleStyle={{flex:1,textAlign:'center',color:'white'}}
-                      backButtonImage={require('./images/return.png')}
+                      navBarButtonColor='#ffffff'
                       renderRightButton={<Icon name='ellipsis' style={{marginRight:20,color:'white'}}/>}
                     />
                     <Scene 
@@ -260,7 +260,7 @@ const App = () => {
                       hideTabBar
                       navigationBarStyle={{backgroundColor:'#79be3b'}}
                       titleStyle={{flex:1,textAlign:'center',color:'white'}}
-                      backButtonImage={require('./images/return.png')}
+                      navBarButtonColor='#ffffff'
                       renderRightButton={<Icon name='ellipsis' style={{marginRight:20,color:'white'}}/>}
                     />
                     <Scene 
@@ -270,7 +270,7 @@ const App = () => {
                       hideTabBar
                       navigationBarStyle={{backgroundColor:'#79be3b'}}
                       titleStyle={{flex:1,textAlign:'center',color:'white'}}
-                      backButtonImage={require('./images/return.png')}
+                      navBarButtonColor='#ffffff'
                       renderRightButton={<Icon name='ellipsis' style={{marginRight:20,color:'white'}}/>}
                     />
                     <Scene 
@@ -290,7 +290,7 @@ const App = () => {
                       hideTabBar
                       navigationBarStyle={{backgroundColor:'#79be3b'}}
                       titleStyle={{flex:1,textAlign:'center',color:'white'}}
-                      backButtonImage={require('./images/return.png')}
+                      navBarButtonColor='#ffffff'
                       renderRightButton={<Icon name='ellipsis' style={{marginRight:20,color:'white'}}/>}
                     />
                     <Scene 
@@ -300,7 +300,7 @@ const App = () => {
                       hideTabBar
                       navigationBarStyle={{backgroundColor:'#79be3b'}}
                       titleStyle={{flex:1,textAlign:'center',color:'white'}}
-                      backButtonImage={require('./images/return.png')}
+                      navBarButtonColor='#ffffff'
                       renderRightButton={<Icon name='ellipsis' style={{marginRight:20,color:'white'}}/>}
                     />
                     <Scene 
@@ -310,21 +310,20 @@ const App = () => {
                       hideTabBar
                       navigationBarStyle={{backgroundColor:'#79be3b'}}
                       titleStyle={{flex:1,textAlign:'center',color:'white'}}
-                      backButtonImage={require('./images/return.png')}
+                      navBarButtonColor='#ffffff'
                       renderRightButton={<Icon name='ellipsis' style={{marginRight:20,color:'white'}}/>}
                     />
+
+
+                      <Scene key='test' hideTabBar component={Test} title='测试' titleStyle={{textAlign:'center',flex:1,color:'#ffffff'}} renderRightButton={<Icon name='ellipsis' color='#ffffff' size='lg' style={{marginRight:20}}/>} navigationBarStyle={{backgroundColor:'#79be3b',color:'#ffffff'}} navBarButtonColor='#ffffff' />
+                      <Scene key='learn' hideTabBar component={Learn} title='全部卡片' titleStyle={{textAlign:'center',flex:1,color:'#ffffff'}} renderRightButton={<Icon name='plus-square' color='#ffffff' size='lg' style={{marginRight:20}} onPress={()=>{Actions.addLearn()}}/>} navigationBarStyle={{backgroundColor:'#79be3b',color:'#ffffff'}} navBarButtonColor='#ffffff'/>
+                      <Scene  key='addLearn' hideTabBar component={AddLearn} hideNavBar title='添加卡片'/>
+                      <Scene  key='learnMsg' hideTabBar component={LearnMsg} hideNavBar title='卡片详情'/>
+                      <Scene  key='cardTest' hideTabBar component={CardTest} hideNavBar title='卡片测试'/>
+                      <Scene  key='updateLearn' hideTabBar component={UpdateLearn} hideNavBar title='编辑卡片'/>
+                      <Scene  key='addBox' hideTabBar component={AddBox} hideNavBar title='添加盒子'/>
                 </Scene>
-              </Tabs>
-              <Scene key='test' component={Test} title='测试' titleStyle={{textAlign:'center',flex:1,color:'#ffffff'}} renderRightButton={<Icon name='ellipsis' color='#ffffff' size='lg' style={{marginRight:20}}/>} navigationBarStyle={{backgroundColor:'#79be3b',color:'#ffffff'}} navBarButtonColor='#ffffff' />
-              <Scene key='learn' component={Learn} title='全部卡片' titleStyle={{textAlign:'center',flex:1,color:'#ffffff'}} renderRightButton={<Icon name='plus-square' color='#ffffff' size='lg' style={{marginRight:20}} onPress={()=>{Actions.addLearn()}}/>} navigationBarStyle={{backgroundColor:'#79be3b',color:'#ffffff'}} navBarButtonColor='#ffffff'/>
-              <Scene  key='addLearn' component={AddLearn} hideNavBar title='添加卡片'/>
-              <Scene  key='learnMsg' component={LearnMsg} hideNavBar title='卡片详情'/>
-              <Scene  key='cardTest' component={CardTest} hideNavBar title='卡片测试'/>
-              <Scene  key='updateLearn' component={UpdateLearn} hideNavBar title='编辑卡片'/>
-              <Scene  key='addBox' component={AddBox} hideNavBar title='添加盒子'/>
-                
-                
-              
+              </Tabs>              
             </Scene>
             <Scene key='light' component={Selection}/>
             <Scene  key='delCard' component={DelCard} hideNavBar title='删除卡片'/>
