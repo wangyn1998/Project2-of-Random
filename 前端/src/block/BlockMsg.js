@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Text, View,Dimensions, TouchableOpacity, Image, ScrollView,StyleSheet, FlatList } from 'react-native'
-import {Icon} from '@ant-design/react-native';
+import {Icon,Accordion, List} from '@ant-design/react-native';
 const {width,scale,height}=Dimensions.get('window');
 const w=width,h=height;
 
@@ -19,8 +19,12 @@ export default class BlockMsg extends Component {
         super();
         this.state={
             isCare:false,
+            activeSections:[],
             isCare2:false
         }
+        this.onChange = activeSections => {
+            this.setState({ activeSections });
+        };
     }
     changeCare=()=>{
         var a=!this.state.isCare;
@@ -79,12 +83,12 @@ export default class BlockMsg extends Component {
                     </View>
                     <View>
                         <Text style={{margin:20,fontSize:18}}>评论 10</Text>
-                        <View style={{width:w*0.99,borderWidth:1,borderColor:'#B5B4AA',borderRadius:3}}>
+                        <View style={{width:w*0.99,borderWidth:1,borderColor:'#B5B4AA',borderRadius:3,backgroundColor:'#fff',paddingBottom:20,margin:1}}>
                             <View style={{flexDirection:'row',padding:10,paddingLeft:20}}>
                                 <View style={{borderRadius:80,borderWidth:1,borderColor:'red',width:w*0.13,height:h*0.08,overflow:'hidden'}}><Image source={require('../../images/block-pka.jpg')} style={{width:w*0.13,height:h*0.08,resizeMode:'stretch'}}/></View>
                                 <View  style={{marginLeft:20,marginRight:16,width:'45%'}}>
-                                    <Text style={{fontSize:20}}>learning</Text>
-                                    <Text>学到了，笔芯！！！</Text>
+                                    <Text style={{fontSize:20}}>小白</Text>
+                                    <Text>哇哦，果断关注！！！</Text>
                                 </View>
                                 {
                                     [1].map(()=>{
@@ -99,6 +103,37 @@ export default class BlockMsg extends Component {
                                         }
                                     })
                                 }
+                            </View>
+                            <View style={{width:'70%',marginLeft:'6%'}}>
+                            <View  style={{marginLeft:20,marginRight:16,width:'45%',flexDirection:'row',alignItems:'center'}}>
+                                <Text style={{fontSize:17,marginRight:10,color:'#79be3b'}}>初学者:</Text>
+                                <Text>学到了，笔芯！！！</Text>
+                            </View>
+                            <View  style={{marginLeft:20,marginRight:16,width:'45%',flexDirection:'row',alignItems:'center',marginBottom:5}}>
+                                <Text style={{fontSize:17,marginRight:10,color:'#79be3b'}}>每天都要学习:</Text>
+                                <Text>为你点赞！！！</Text>
+                            </View>
+                            <Accordion
+                                onChange={this.onChange}
+                                activeSections={this.state.activeSections}
+                                >
+                                <Accordion.Panel header="查看更多回复" headerStyle={{color:'#79be3b'}}>
+                                    <List>
+                                        <List.Item>
+                                            <View  style={{marginLeft:20,marginRight:16,width:'45%',flexDirection:'row',alignItems:'center'}}>
+                                                <Text style={{fontSize:17,marginRight:10,color:'#79be3b'}}>running:</Text>
+                                                <Text>学到了，笔芯！！！</Text>
+                                            </View>
+                                        </List.Item>
+                                        <List.Item>
+                                            <View  style={{marginLeft:20,marginRight:16,width:'45%',flexDirection:'row',alignItems:'center'}}>
+                                                <Text style={{fontSize:17,marginRight:10,color:'#79be3b'}}>learning:</Text>
+                                                <Text>学到了！！！</Text>
+                                            </View>
+                                        </List.Item>
+                                    </List>
+                                </Accordion.Panel>
+                            </Accordion>
                             </View>
                         </View>
                     </View>
