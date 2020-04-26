@@ -38,6 +38,7 @@ import Alterpwd from './src/my/Alterpwd';
 import Findpwd from './src/common/Findpwd';
 import Sended from './src/block/Sended';
 import Send from './src/block/Send';
+import BlockMsg from './src/block/BlockMsg';
 import Hand from './src/my/Hand';
 import AddLearn from './src/box/AddLearn';
 import LearnMsg from './src/box/LearnMsg';
@@ -121,7 +122,7 @@ const App = () => {
                     }
                     renderRightButton={
                       <TouchableOpacity onPress={()=>{Actions.send()}}>
-                        <Icon style={{color:'white',marginRight:5}} name='edit'/>
+                        <Icon style={{color:'white',marginRight:15}} name='edit'/>
                       </TouchableOpacity>
                     }
                   />
@@ -136,7 +137,7 @@ const App = () => {
                     renderRightButton={<Text style={{marginRight:20,color:'#79be3b'}}>提交</Text>}
                   />
                   <Scene 
-                    title='详情'
+                    title='我的发出'
                     key="sended" 
                     component={Sended} 
                     hideTabBar
@@ -145,6 +146,7 @@ const App = () => {
                     backButtonImage={require('./images/return.png')}
                     renderRightButton={<Icon name='ellipsis' style={{marginRight:20,color:'white'}}/>}
                   />
+                  <Scene key='blockMsg' component={BlockMsg} title='详情' titleStyle={{textAlign:'center',flex:1,color:'#ffffff'}} renderRightButton={<Icon name='ellipsis' color='#ffffff' size='lg' style={{marginRight:20}}/>} navigationBarStyle={{backgroundColor:'#79be3b',color:'#ffffff'}} navBarButtonColor='#ffffff'/>
                 </Scene>
                 <Scene 
                   key='discoverPage'
@@ -313,7 +315,7 @@ const App = () => {
               <Scene  key='addBox' component={AddBox} hideNavBar title='添加盒子'/>
                 
                 
-              <Scene key='blockMsg' component={BlockMsg} title='详情' titleStyle={{textAlign:'center',flex:1,color:'#ffffff'}} renderRightButton={<Icon name='ellipsis' color='#ffffff' size='lg' style={{marginRight:20}}/>} navigationBarStyle={{backgroundColor:'#79be3b',color:'#ffffff'}} navBarButtonColor='#ffffff'/>
+              
             </Scene>
             <Scene key='light' component={Selection}/>
             <Scene  key='delCard' component={DelCard} hideNavBar title='删除卡片'/>
