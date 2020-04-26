@@ -16,7 +16,7 @@ export default class Send extends Component {
                             <Text style={styles.navtxtsubmit}>提交</Text>
                         </TouchableOpacity>
                     </View> */}
-                    <View style={{width:'100%',height:650,borderTopColor:'#ccc',borderTopWidth:1}}>
+                    <View style={{width:'100%',height:710,borderTopColor:'#ccc',borderTopWidth:1}}>
                         <TextInput 
                             placeholder='XXXXXXXXXXXXX......'
                             placeholderTextColor={"#ccc"} 
