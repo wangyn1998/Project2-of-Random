@@ -30,7 +30,7 @@ export default class DelCard extends Component {
                     <View style={{justifyContent:'center',height:'70%'}}>
                     <Text style={{textAlign:'center',width:'100%',fontSize:19}}>确定要删除吗</Text>
                     <View style={{flexDirection:'row',justifyContent:'space-evenly',marginTop:30}}>
-                        <TouchableOpacity style={styles.btn} onPress={()=>{Actions.pop();Actions.learn()}}><Text>确定</Text></TouchableOpacity>
+                        <TouchableOpacity style={styles.btn} onPress={()=>{Actions.popTo('learn')}}><Text>确定</Text></TouchableOpacity>
                         <TouchableOpacity style={styles.btn} onPress={()=>{Actions.pop()}}><Text>取消</Text></TouchableOpacity>
                     </View>
                     </View>
