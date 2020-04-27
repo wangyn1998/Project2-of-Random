@@ -62,7 +62,7 @@ export default class Block extends Component {
             <View>
                 <ScrollView style={{backgroundColor:'#fff',width:'100%',height:'100%',padding:10}}>
                     <View style={{flex:1,alignItems:'center',paddingBottom:50}}>
-                        <View style={styles.kuang}>
+                        <TouchableOpacity style={styles.kuang} onPress={()=>{Actions.blockMsg()}}>
                             <View style={styles.user}>
                                 <View style={styles.touxiang}>
                                     <Image source={require('../../images/touxiang.png')} style={{width:80,height:80}}/>
@@ -93,7 +93,7 @@ export default class Block extends Component {
                                     <Text style={styles.numtxt}>10</Text>
                                 </TouchableOpacity>
                             </View>  
-                        </View>
+                        </TouchableOpacity>
                         <View style={styles.kuang}>
                             <View style={styles.user}>
                                 <View style={styles.touxiang}>
