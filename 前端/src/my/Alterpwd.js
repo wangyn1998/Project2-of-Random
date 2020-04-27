@@ -10,9 +10,11 @@ export default class Alterpwd extends Component {
           oldpwd:'',
           newpwd:'',
           oldeye:require('../../images/my-see.png'),
+          oldeye1:'see',
           oldsecure:false,
           newsecure:true,
           neweye:require('../../images/my-see.png'),
+          neweye1:'see',
         }
       }
     oldpwdhandle=(text)=>{
@@ -28,33 +30,37 @@ export default class Alterpwd extends Component {
         })
     }
     oldpwdpress=()=>{
-        if(this.state.oldeye == "20"){
+        if(this.state.oldeye1 == "see"){
             console.log('true')
             this.setState({
                 oldeye:require('../../images/my-notsee.png'),
+                oldeye1:'notsee',
                 oldsecure:true,
             })
         }
-        if(this.state.oldeye == "23"){
+        if(this.state.oldeye1 == "notsee"){
             console.log('true')
             this.setState({
                 oldeye:require('../../images/my-see.png'),
+                oldeye1:'see',
                 oldsecure:false,
             })
         }
     }
     newpwdpress=()=>{
-        if(this.state.neweye == "20"){
+        if(this.state.neweye1 == "see"){
             console.log('true')
             this.setState({
                 neweye:require('../../images/my-notsee.png'),
+                neweye1:'notsee',
                 newsecure:true,
             })
         }
-        if(this.state.neweye == "23"){
+        if(this.state.neweye1 == "notsee"){
             console.log('true')
             this.setState({
                 neweye:require('../../images/my-see.png'),
+                neweye1:'see',
                 newsecure:false,
             })
         }

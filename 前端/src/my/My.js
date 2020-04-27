@@ -25,7 +25,7 @@ export default class My extends Component {
                             <Text style={styles.intxt}>用户名</Text>
                             <TouchableOpacity onPress={()=>{
                                 Actions.personal()}}>
-                                <Text style={styles.intxt}>点击查看个人资料></Text>
+                                <Text style={styles.intxt}>点击编辑个人资料></Text>
                             </TouchableOpacity>
                         </View>
                     </View>
@@ -110,9 +110,9 @@ export default class My extends Component {
                         </TouchableOpacity>
                     </View>
                     <View style={styles.biglist}>
-                        <TouchableOpacity style={styles.littlelist}>
+                        {/* <TouchableOpacity style={styles.littlelist}>
                             <Text style={styles.listtxt}>夜间模式</Text>
-                        </TouchableOpacity>
+                        </TouchableOpacity> */}
                         <TouchableOpacity 
                             style={styles.littlelist}
                             onPress={()=>{Actions.set()}}
