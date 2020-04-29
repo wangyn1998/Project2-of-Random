@@ -168,7 +168,9 @@ router.get('/discovery/game', function(req, res, next) {
   res.render('Discovery/Game/game', { title: 'game' });
 });
 //搜索游戏
-router.post('/searchgame', function(req, res, next) {
+router.post('/discovery/searchgame', function(req, res, next) {
+  var game = req.body.game;
+  console.log(game);
   res.render('Discovery/Game/searchgame', { title: 'searchgame' });
 });
 //编辑游戏
@@ -177,6 +179,8 @@ router.get('/discovery/editgame', function(req, res, next) {
 });
 //删除游戏
 router.get('/discovery/deletegame', function(req, res, next) {
+  var gameId = req.query.gameId;
+  console.log(gameId);
   res.render('Discovery/Game/delgame', { title: 'deletegame' });
 });
 /*知识管理*/
@@ -228,7 +232,17 @@ router.get('/discovery/deletetest', function(req, res, next) {
   res.render('Discovery/Test/deltest', { title: 'deletetest' });
 });
 /*系统管理*/
+//显示管理员信息
 router.get('/system', function(req, res, next) {
+  res.render('System/system', { title: 'system' });
+});
+//编辑管理员信息
+router.post('/system', function(req, res, next) {
+  var data = req.body; 
+  var sex = data.sex;
+  var phone = data.phone;
+  var position = data.position;
+  console.log(data);
   res.render('System/system', { title: 'system' });
 });
 
