@@ -31,8 +31,8 @@
         <div class="right">
             <div class="box1">
                 <div class='search'>
-                    <form style="line-height: 2.5em;" method="post" action="/searchgame">
-                        <input class='Bar' placeholder="请输入要搜索的游戏名"/>
+                    <form style="line-height: 2.5em;" method="post" action="searchgame">
+                        <input class='Bar' placeholder="请输入要搜索的游戏名" name="game"/>
                         <div class="iconfont icon-xiaoxi-" style="float:left;">
                             <input type="submit" value="搜索"style="height:30px;border:none;">
                         </div>
@@ -64,7 +64,7 @@
                                 <a href="editgame">
                                     <button class='Gamebianji' id="bianji">编辑</button>
                                 </a>
-                                <a href="deletegame">
+                                <a href="deletegame?gameId=1">
                                     <button class='Gamedel' id="remove">移除</button>
                                 </a>
                             </p>
@@ -117,6 +117,7 @@
         temp('close-pop').onclick = function() {
             temp('pop-container').style.display = 'none';
         }
+
         // 分页
         function getzz() {
             var a = $("ul#all li");
