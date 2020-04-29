@@ -76,7 +76,7 @@ export default class Login extends Component {
                 </TouchableOpacity>
                 <TouchableOpacity style={{marginLeft:'40%'}}>
                   <Text style={styles.goto}
-                        onPress={()=>Actions.findpwd()}
+                        onPress={()=>Actions.register()}
                   >去注册</Text>
                 </TouchableOpacity>
               </View>
