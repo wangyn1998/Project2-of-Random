@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View,Dimensions, TouchableOpacity, Image, ScrollView,StyleSheet, FlatList } from 'react-native'
+import { Text, View,Dimensions, TouchableOpacity, Image, ScrollView,StyleSheet, FlatList, TextInput } from 'react-native'
 import {Icon,Accordion, List} from '@ant-design/react-native';
 const {width,scale,height}=Dimensions.get('window');
 const w=width,h=height;
@@ -137,7 +137,14 @@ export default class BlockMsg extends Component {
                             </View>
                         </View>
                     </View>
+                    {/* <View style={{width:'100%',height:h*0.06,backgroundColor:'red',position:"absolute",bottom:0}}><Text>321</Text></View> */}
                 </ScrollView>
+                <View style={{width:'100%',height:h*0.06,backgroundColor:'#fff',position:"absolute",bottom:0,flexDirection:'row',alignItems:'center',justifyContent:'space-evenly'}}>
+                    <View style={{width:'60%',height:'65%',borderRadius:10,backgroundColor:'#BBB',opacity:0.5}}>
+                        <TextInput placeholder='说点什么。。。' placeholderTextColor='#A2A2A2'/>
+                    </View>
+                    <TouchableOpacity style={styles.btn3}><Text>发送</Text></TouchableOpacity>
+                </View>
             </View>
         )
     }
@@ -194,5 +201,15 @@ const styles=StyleSheet.create({
         flexDirection:'row',
         alignItems:'center',
         marginLeft:'15%'
+    },
+    btn3:{
+        justifyContent:'center',
+        alignItems:'center',
+        width:w*0.13,
+        height:'60%',
+        borderColor:'#79be3b',
+        borderRadius:13,
+        borderWidth:2,
+        marginLeft:10
     }
 })
