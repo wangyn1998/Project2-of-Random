@@ -108,7 +108,7 @@ export default class Box extends Component {
                         <Text style={{fontSize:17}}>我的盒子</Text>
                         <View style={{flexDirection:'row',alignItems:'center',width:'30%',borderWidth:1,borderColor:'#BBBBBB',borderRadius:8}}>
                             <Icon name='search' style={{marginLeft:10}} color='#BBBBBB'/>
-                            <TextInput placeholder='搜索' placeholderTextColor='#BBBBBB' style={{height:30}} onEndEditing={(event)=>{this.submit(event.nativeEvent.text)}} onChangeText={(text)=>{this.clearText(text)}}/>
+                            <TextInput placeholder='搜索' placeholderTextColor='#BBBBBB' style={{height:30}} onSubmitEditing={(event)=>{this.submit(event.nativeEvent.text)}} onChangeText={(text)=>{this.clearText(text)}}/>
                         </View>
                     </View>
                     <FlatList data={this.state.data} numColumns={2}  renderItem={({item})=>{
