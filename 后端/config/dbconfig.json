@@ -1,6 +1,6 @@
 {
     "host":"localhost",
-    "database":"aiyou",
+    "database":"box",
     "user":"root",
     "password":"",
     "multipleStatements": true
