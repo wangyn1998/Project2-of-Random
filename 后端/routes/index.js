@@ -2,6 +2,7 @@ var express = require('express');
 var mysql = require('mysql');
 var router = express.Router();
 var dbconfig=require('../config/dbconfig.json');
+var manager = '';
 
 /*登录页*/
 router.get('/', function(req, res, next) {
@@ -10,10 +11,11 @@ router.get('/', function(req, res, next) {
 //验证身份
 router.post('/home', function(req, res, next) {
   var data = req.body;
-  var username = data.username;
-  var pwd = data.password;
+  var username = data.adminUsername;
+  var pwd = data.adminPwd;
   var code = data.code;
   var getcode = data.getcode; 
+  manager = username;
   if(username == "admin" && pwd == "123456"){
     if(code == getcode){
       res.end('success');
@@ -236,7 +238,16 @@ router.get('/discovery/deletetest', function(req, res, next) {
 /*系统管理*/
 //显示管理员信息
 router.get('/system', function(req, res, next) {
-  res.render('System/system', { title: 'system' });
+  var con = mysql.createConnection(dbconfig);
+  con.connect();
+  con.query("select * from ainfList where adminUsername=?",[manager],function(err,result){
+    if(err){
+      console.log(err);
+    }
+    else{
+      res.render('System/system', { manager: result[0] });   
+    }
+  });
 });
 //编辑管理员信息
 router.post('/system', function(req, res, next) {

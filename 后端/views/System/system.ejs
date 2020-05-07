@@ -43,11 +43,11 @@
                     <div style="width:150px;float:left;margin-top:10%;margin-left:20px;">
                         <p>
                             用户名：
-                            <span>admin</span>
+                            <span><%= manager.adminUsername%></span>
                         </p>
                         <p style="margin-top:10px">
                             真实姓名：
-                            <span>杨扬杨</span>
+                            <span><%= manager.adminName%></span>
                         </p>
                     </div> 
                     <a href="/">
@@ -57,22 +57,22 @@
                 <div style="width:70%;height:210px;margin:20px auto;text-align:center;line-height:40px;">
                     <div class="systemText">
                         <p>性别：
-                            <span id="sex">女</span>
+                            <span id="sex"><%= manager.adminSex%></span>
                         </p>
                     </div>
                     <div class="systemText">
                         <p>手机号：
-                            <span id="phone">12345678912</span>
+                            <span id="phone"><%= manager.adminTel%></span>
                         </p>
                     </div>
                     <div class="systemText">
                         <p>邮箱：
-                            <span id="email">123456789@qq.com</span>
+                            <span id="email"><%= manager.adminEmail%></span>
                         </p>
                     </div>
                     <div class="systemText">
                         <p>职位：
-                            <span id="position">开发</span>
+                            <span id="position"><%= manager.adminPosition%></span>
                         </p>
                     </div>
                     <button id="btn" class="systembianji">编辑</button>
