@@ -1,5 +1,7 @@
 var express = require('express');
+var mysql = require('mysql');
 var router = express.Router();
+var dbconfig=require('../config/dbconfig.json');
 
 /*登录页*/
 router.get('/', function(req, res, next) {
