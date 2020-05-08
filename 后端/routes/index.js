@@ -3,7 +3,10 @@ var mysql = require('mysql');
 var router = express.Router();
 var dbconfig=require('../config/dbconfig.json');
 var manager = '';
-
+var login = false;
+var con = mysql.createConnection(dbconfig);
+con.connect();
+  
 /*登录页*/
 router.get('/', function(req, res, next) {
   res.render('login', { title: 'login' });
@@ -16,17 +19,31 @@ router.post('/home', function(req, res, next) {
   var code = data.code;
   var getcode = data.getcode; 
   manager = username;
-  if(username == "admin" && pwd == "123456"){
-    if(code == getcode){
-      res.end('success');
+  con.query("select * from alist",function(err,result){
+    if(err){
+      console.log(err);
     }
     else{
-      res.end('code-error');
+      for(var i=0;i<result.length;i++){
+        if(username == result[i].adminUsername && pwd == result[i].adminPwd){
+          login = true;
+          if(code == getcode){
+            res.end('success');
+          }
+          else{
+            res.end('code-error');
+          }
+          break;
+        }
+        else{
+          continue;
+        }
+      }
+      if(login == false){
+        res.end('error');
+      }
     }
-  }
-  else{
-    res.end('error');
-  }
+  });
 });
 //首页
 router.get('/home', function(req, res, next) {
@@ -238,8 +255,6 @@ router.get('/discovery/deletetest', function(req, res, next) {
 /*系统管理*/
 //显示管理员信息
 router.get('/system', function(req, res, next) {
-  var con = mysql.createConnection(dbconfig);
-  con.connect();
   con.query("select * from ainfList where adminUsername=?",[manager],function(err,result){
     if(err){
       console.log(err);
