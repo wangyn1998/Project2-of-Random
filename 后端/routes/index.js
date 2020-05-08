@@ -47,7 +47,24 @@ router.post('/home', function(req, res, next) {
 });
 //首页
 router.get('/home', function(req, res, next) {
-  res.render('home', { title: 'home' });
+  let now='';
+  var time=new Date();
+  var year = time.getFullYear();
+  var month = time.getMonth() + 1;
+  var date = time.getDate();
+  now = year + '-' + conver(month) + "-" + conver(date);
+  function conver(s) {
+      return s < 10 ? '0' + s : s;
+  }
+  con.query("select * from user;select * from user where userDay =?;select * from post",[now],function(err,result){
+      if(err){
+        console.log(err);
+      }
+      else{
+        console.log(result[1]);
+        res.render('home',{userListall:result[0],userListnew:result[1],postList:result[2]});
+      }
+    })
 });
 //用户管理
 router.get('/user', function(req, res, next) {
