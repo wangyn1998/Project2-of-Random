@@ -39,19 +39,19 @@
                         <h3 class='Taskhead1'><b>操作</b></h3>
                             </div>
                     </li>
-                    <% for(var i = 0 ; i < 6; i++) {%>
+                    <% for(var i = 0 ; i < taskList.length; i++) {%>
                         <li>
-                            <p class='Taskbody'><%= i+1%></p>  
-                            <p class='Taskbody'>xx</p>  
-                            <p class='Taskbody'><%= i+1%></p>  
+                            <p class='Taskbody'><%= taskList[i]["taskId"] %></p>  
+                            <p class='Taskbody'><%= taskList[i]["taskContent"] %></p>  
+                            <p class='Taskbody'><%= taskList[i]["taskScore"] %></p>  
                             <div class='Taskbody'>
                                 <div class='Topicoperation'>
                                     <form method="post" action="/edit1" class="operation1">
                                         <button style="color: white;border:1px solid white;width: 50px;
                                         height: 30px;">编辑
-                                            <input type='submit' style="float: right;border:1px solid #79be3b;background-color: #79be3b;" id='bianji' name="task" value=''></button>
+                                            <input type='submit' style="float: right;border:1px solid #79be3b;background-color: #79be3b;" id='bianji' name="task" value='<%=taskList[i]["taskId"]%>'></button>
                                     </form>
-                                    <a href='/score/deletetask'><button  style=" width: 50px;
+                                    <a href='/score/deletetask?taskId=<%= taskList[i]["taskId"]%>'><button  style=" width: 50px;
                                         height: 30px;
                                         background-color: #fff;
                                         border:1px solid #888;

@@ -50,18 +50,17 @@
                         <h3 class='Taskhead1'><b>分数</b></h3>
                         <h3 class='Taskhead1'><b>操作</b></h3>
                          </div>
-                    </li>
-                    <% for(var i = 0 ; i < 6; i++) {%>
-                        <li>
-                            <p class='Taskbody'><%= i+1%></p>  
-                            <p class='Taskbody'>xx</p>  
-                            <p class='Taskbody'><%= i+1%></p> 
+                         <% for(var i = 0 ; i < taskList.length; i++) {%>
+                            <li>
+                                <p class='Taskbody'><%= taskList[i]["taskId"] %></p>  
+                                <p class='Taskbody'><%= taskList[i]["taskContent"] %></p>  
+                                <p class='Taskbody'><%= taskList[i]["taskScore"] %></p> 
                             <div class='Taskbody'>
                                 <div class='Topicoperation'>
                                     <form method="post" action="/edit" class="operation1">
                                         <button style="color: white;border:1px solid white;width: 50px;
                                         height: 30px;">编辑
-                                            <input type='submit' style="float: right;border:1px solid #79be3b;background-color: #79be3b;" id='bianji' name="task" value=''></button>
+                                            <input type='submit' style="float: right;border:1px solid #79be3b;background-color: #79be3b;" id='bianji' name="task" value='<%=taskList[i]["taskId"]%>'></button>
                                     </form>
                                     <a href='/score/deletetask'><button  style=" width: 50px;
                                         height: 30px;
@@ -89,10 +88,10 @@
                     <form action="/updatetask" method="post">
                     <div style="width:380px;float:left;">
                         <h2 style="float:left;margin-left:20px;margin-top:25px;margin-bottom: 10px;">任务内容:</h2>
-                        <input type='text' id="content" style="width:340px;height:200px;"name="content"  />
+                        <input type='text' id="content" style="width:340px;height:200px;"name="content1"  />
                     </div>
                     <h2 style="float:left;margin-left:20px;margin-top:25px;" >分数:</h2>
-                    <input type='text' id="create" style="width:265px;height:30px;margin-top:25px;"name='score'/>
+                    <input type='text' id="create" style="width:265px;height:30px;margin-top:25px;"name='score1'/>
                     <br/>
                     <input value="保存" id="save" type="submit" style="float:right;border:'1px soild #61b3ed';margin-right:20px;width:55px;height:30px;background-color:#79be3b;color:'#ffffff';margin-top: 10px;"/>
                 </form>
