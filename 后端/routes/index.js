@@ -189,31 +189,92 @@ router.post('/searchuserscore', function(req, res, next) {
   })
 });
 //积分任务管理
+/**获取任务 */
 router.get('/score/task', function(req, res, next) {
-  res.render('Score/task', { title: 'task' });
+   con.query("select * from task",function(err,result){
+     if(err){
+       console.log(err);
+     }
+     else{
+       res.render('Score/task', {taskList:result});
+      }
+   })
 });
+/**删除任务 */
 router.get('/score/deletetask', function(req, res, next) {
-  res.render('Score/deleteTask', { title: 'task' });
+  var taskId=req.query.taskId;
+  con.query("delete from task where taskId=?",[taskId],function(err,result){
+    if(err){
+      console.log(err);
+    }
+    else{
+      res.render('Score/deleteTask', { title: 'task' });
+    }
+  })
 });
+/**搜索任务 */
 router.post('/searchtask', function(req, res, next) {
-  var taskId=taskId;
-  res.render('Score/searchTask', { title: 'user',taskId:taskId });
+  var taskId=req.body.taskId;
+  con.query("select * from task where taskId=?",[taskId],function(err,result){
+    if(err){
+      console.log(err);
+    }
+    else{
+      res.render("Score/searchtask",{taskList:result});
+    }
+  })
 });
+/**添加任务 */
 router.post('/addtask', function(req, res, next) {
-  var taskId=taskId;
-  res.render('Score/addTask', { title: 'user',taskId:taskId });
+  var score=req.body.score;
+  var content=req.body.content;
+  console.log(score);
+  console.log(content);
+  con.query("insert into task(taskContent,taskScore) values(?,?)",[content,score],function (err,result) {
+    if(err){
+      console.log(err);
+    }else{  
+      res.render('Score/addTask', { title: 'user'});
+    }
+  });
 });
+let taskId=0;
+/**编辑任务 */
 router.post('/edit', function(req, res, next) {
-  var taskId=taskId;
-  res.render('Score/editTask', { title: 'user',taskId:taskId });
+  taskId=req.body.task;
+  console.log(taskId);
+  con.query("select * from task",function (err,result) {
+    if(err){
+      console.log(err);
+    }else{
+      res.render("Score/editTask",{taskList:result});
+    }
+  });
 });
+/**编辑搜索任务 */
 router.post('/edit1', function(req, res, next) {
-  var taskId=taskId;
-  res.render('Score/editTask1', { title: 'user',taskId:taskId });
+  taskId=req.body.task;
+  console.log(taskId);
+  con.query("select * from task where taskId=?",[taskId],function (err,result) {
+    if(err){
+      console.log(err);
+    }else{
+      console.log(result)
+      res.render("Score/editTask1",{taskList:result});
+    }
+  });
 });
+/**更新任务 */
 router.post('/updatetask', function(req, res, next) {
-  var taskId=taskId;
-  res.render('Score/updateTask', { title: 'user',taskId:taskId });
+  var taskContent=req.body.content1;
+  var taskScore=req.body.score1;
+  con.query("update task set taskContent=?,taskScore=? where taskId=?",[taskContent,taskScore,taskId],function (err,result) {
+    if(err){
+      console.log(err);
+    }else{
+      res.render('Score/updateTask', { title: 'updatetask'});
+    }
+  });
 });
 //成就管理
 router.get('/score/achievement', function(req, res, next) {
