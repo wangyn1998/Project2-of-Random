@@ -387,19 +387,55 @@ router.get('/discovery/editgame', function(req, res, next) {
 });
 /*知识管理*/
 router.get('/discovery/knowledge', function(req, res, next) {
-  res.render('Discovery/Knowledge/knowledge', { title: 'knowledge' });
+  con.query("select * from knowledge",function(err,result){
+    if(err){
+      console.log(err);
+    }
+    else{
+      res.render('Discovery/Knowledge/knowledge', { knowledge: result });   
+    }
+  });
+});
+//添加知识
+router.post('/discovery/addknowledge', function(req, res, next) {
+  var title = req.body.title;
+  var content = req.body.content;
+  con.query("insert into knowledge(knowledgeTitle,knowledgeContent) values(?,?)",[title,content],function(err,result){
+    if(err){
+      console.log(err);
+    }
+    else{
+      res.end('success');  
+    }
+  });
 });
 //搜索知识
-router.post('/searchknowledge', function(req, res, next) {
-  res.render('Discovery/Knowledge/findknowledge', { title: 'searchknowledge' });
+router.post('/discovery/searchknowledge', function(req, res, next) {
+  var title = req.body.knowledge;
+  con.query("select * from knowledge where knowledgeTitle=?",[title],function(err,result){
+    if(err){
+      console.log(err);
+    }
+    else{
+      res.render('Discovery/Knowledge/findknowledge', { knowledge: result });   
+    }
+  });
+});
+//删除知识
+router.get('/discovery/deleteknowledge', function(req, res, next) {
+  var knowledgeId = req.query.knowledgeId;
+  con.query("delete from knowledge where knowledgeId=?",[knowledgeId],function(err,result){
+    if(err){
+      console.log(err);
+    }
+    else{
+      res.render('Discovery/Knowledge/delknowledge', { title: 'deleteknowledge' }); 
+    }
+  });
 });
 //编辑知识
 router.get('/discovery/editknowledge', function(req, res, next) {
   res.render('Discovery/Knowledge/editknowledge', { title: 'editknowledge' });
-});
-//删除知识
-router.get('/discovery/deleteknowledge', function(req, res, next) {
-  res.render('Discovery/Knowledge/delknowledge', { title: 'deleteknowledge' });
 });
 /*每日推荐管理*/
 router.get('/discovery/recommend', function(req, res, next) {
