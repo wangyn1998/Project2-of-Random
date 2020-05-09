@@ -100,13 +100,13 @@ h4{
 }
 .content{
     width: 280px;
-    height: 152px;
+    height: 212px;
     margin: 20px auto;
 }
 .content textarea{
     width: 190px;
-    height: 150px;
-    border: 1px solid #a9a9a9;
+    height: 210px;
+    border: 1.5px solid #a9a9a9;
     float: left;
     padding-left: 5px;
 }
@@ -116,6 +116,8 @@ h4{
     height:30px;
     background:#79be3b;
     color:white;
+    float:right;
+    margin-right:10px;
 }
 /* 提示框 */
 .tip{

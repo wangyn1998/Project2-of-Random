@@ -203,23 +203,56 @@ router.get('/discovery', function(req, res, next) {
 });
 /*游戏管理*/
 router.get('/discovery/game', function(req, res, next) {
-  res.render('Discovery/Game/game', { title: 'game' });
+  con.query("select * from game",function(err,result){
+    if(err){
+      console.log(err);
+    }
+    else{
+      res.render('Discovery/Game/game', { game: result });   
+    }
+  });
+});
+//添加游戏
+router.post('/discovery/addgame', function(req, res, next) {
+  var gameName= req.body.gameName;
+  var gameContent= req.body.gameContent;
+  con.query("insert into game(gameName,gameContent) values(?,?)",[gameName,gameContent],function(err,result){
+    if(err){
+      console.log(err);
+    }
+    else{
+      res.end('success'); 
+    }
+  });
 });
 //搜索游戏
 router.post('/discovery/searchgame', function(req, res, next) {
   var game = req.body.game;
-  console.log(game);
-  res.render('Discovery/Game/searchgame', { title: 'searchgame' });
-});
-//编辑游戏
-router.get('/discovery/editgame', function(req, res, next) {
-  res.render('Discovery/Game/editgame', { title: 'editgame' });
+  con.query("select * from game where gameName=?",[game],function(err,result){
+    if(err){
+      console.log(err);
+    }
+    else{
+      res.render('Discovery/Game/searchgame', { game: result });   
+    }
+  });
 });
 //删除游戏
 router.get('/discovery/deletegame', function(req, res, next) {
   var gameId = req.query.gameId;
   console.log(gameId);
-  res.render('Discovery/Game/delgame', { title: 'deletegame' });
+  con.query("delete from game where gameId=?",[gameId],function(err,result){
+    if(err){
+      console.log(err);
+    }
+    else{
+      res.render('Discovery/Game/delgame', { title: 'deletegame' });
+    }
+  });
+});
+//编辑游戏
+router.get('/discovery/editgame', function(req, res, next) {
+  res.render('Discovery/Game/editgame', { title: 'editgame' });
 });
 /*知识管理*/
 router.get('/discovery/knowledge', function(req, res, next) {
@@ -272,7 +305,7 @@ router.get('/discovery/deletetest', function(req, res, next) {
 /*系统管理*/
 //显示管理员信息
 router.get('/system', function(req, res, next) {
-  con.query("select * from ainfList where adminUsername=?",[manager],function(err,result){
+  con.query("select * from ainflist where adminUsername=?",[manager],function(err,result){
     if(err){
       console.log(err);
     }
@@ -286,9 +319,24 @@ router.post('/system', function(req, res, next) {
   var data = req.body; 
   var sex = data.sex;
   var phone = data.phone;
+  var email = data.email;
   var position = data.position;
   console.log(data);
-  res.render('System/system', { title: 'system' });
+  con.query("update ainflist set adminSex=?,adminTel=?,adminEmail=?,adminPosition=? where adminUsername=?",[sex,phone,email,position,manager],function(err,result){
+    if(err){
+      console.log(err);
+    }
+    else{
+      con.query("select * from ainflist where adminUsername=?",[manager],function(err,result){
+        if(err){
+          console.log(err);
+        }
+        else{
+          res.render('System/system', { manager: result[0] });   
+        }
+      });   
+    }
+  });
 });
 
 module.exports = router;
