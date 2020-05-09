@@ -68,16 +68,48 @@ router.get('/home', function(req, res, next) {
 });
 //用户管理
 router.get('/user', function(req, res, next) {
-  res.render('User/user', { title: 'user' });
+  con.query("select * from user order by userId asc",function(err,result){
+    if(err){
+      console.log(err);
+    }
+    else{
+      res.render("User/user",{userList:result});
+    }
+  })
+});
+router.get('/userdesc', function(req, res, next) {
+  con.query("select * from user order by userId desc",function(err,result){
+    if(err){
+      console.log(err);
+    }
+    else{
+      res.render("User/user",{userList:result});
+    }
+  })
 });
 /**删除用户 */
 router.get('/deleteuser', function(req, res, next) {
-  res.render('User/deleteUser', { title: 'user' });
+  var userId=req.query.userId;
+  con.query("delete from user where userId=?",[userId],function(err,result){
+    if(err){
+      console.log(err);
+    }
+    else{
+      res.render('User/deleteUser', { title: 'deleteuser' });
+    }
+  })
 });
 /**搜索用户 */
 router.post('/searchuser', function(req, res, next) {
   var userName=req.body.userName;
-  res.render('User/searchUser', { title: 'user',userName:userName });
+  con.query("select * from user where userName=?",[userName],function(err,result){
+    if(err){
+      console.log(err);
+    }
+    else{
+      res.render('User/searchUser', { userList:result,userName:userName });
+    }
+  })
 });
 /*盒塘管理*/
 router.get('/block', function(req, res, next) {
