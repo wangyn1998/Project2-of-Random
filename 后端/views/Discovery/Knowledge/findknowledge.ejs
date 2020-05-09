@@ -43,16 +43,16 @@
                             <h3 class='Gamehead1'>操作</h3>
                         </div>
                     </li>  -->
-                    <% for(var i =1;i<3;i++){ %>
+                    <% for(var i=0;i<knowledge.length;i++){ %>
                         <li> 
-                            <p class='Gamebody'><%= i %></p>
-                            <p class='Gamebody'>知识<%= i %></p>
-                            <p class='Gamebody'>xxxx</p>
+                            <p class='Gamebody'><%= i+1 %></p>
+                            <p class='Gamebody'><%= knowledge[i].knowledgeTitle %></p>
+                            <p class='Gamebody'><%= knowledge[i].knowledgeContent %></p>
                             <p class='Gamebody'>
                                 <a href="/editknowledge">
                                     <button class='Gamebianji' id="bianji">编辑</button>
                                 </a>
-                                <a href="deleteknowledge">
+                                <a href="deleteknowledge?knowledgeId=<%= knowledge[i].knowledgeId %>">
                                     <button class='Gamedel' id="remove">移除</button>
                                 </a>
                             </p>
