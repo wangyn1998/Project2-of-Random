@@ -141,14 +141,47 @@ router.get('/score', function(req, res, next) {
 });
 //积分表管理
 router.get('/score/list', function(req, res, next) {
-  res.render('Score/list', { title: 'list' });
+  con.query("select * from score order by sum desc",function(err,result){
+    if(err){
+      console.log(err);
+    }
+    else{
+      res.render("Score/list",{scoreList:result});
+    }
+  })
 });
 router.get('/score/slist', function(req, res, next) {
-  res.render('Score/listIn', { title: 'listIn' });
+  sum=[];
+  var sum0=0;
+  var userPhone=req.query.userPhone;
+  var userName=req.query.userName;
+  con.query("select * from slist where userPhone=?",[userPhone],function(err,result){
+    if(err){
+      console.log(err);
+    }
+    else{
+      for(var i = 0 ; i < result.length; i++) {
+        if(i==0){
+          sum[i]=parseInt(result[i].taskScore)
+        }
+        else{
+          sum[i]=parseInt(result[i].taskScore)+sum[i-1]
+        }
+      }
+      res.render("Score/listIn",{slistList:result,userName:userName,userPhone:userPhone,sum:sum});
+    }
+  })
 });
 router.post('/searchuserscore', function(req, res, next) {
   var userName=req.body.userName;
-  res.render('Score/searchUserScore', { title: 'user',userName:userName });
+  con.query("select * from score where userName=?",[userName],function(err,result){
+    if(err){
+      console.log(err);
+    }
+    else{
+      res.render('Score/searchUserScore', { scoreList:result,userName:userName,});
+    }
+  })
 });
 //积分任务管理
 router.get('/score/task', function(req, res, next) {
