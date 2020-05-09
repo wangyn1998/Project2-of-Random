@@ -67,6 +67,7 @@ router.get('/home', function(req, res, next) {
     })
 });
 //用户管理
+/**获取用户--升序（默认） */
 router.get('/user', function(req, res, next) {
   con.query("select * from user order by userId asc",function(err,result){
     if(err){
@@ -77,6 +78,7 @@ router.get('/user', function(req, res, next) {
     }
   })
 });
+/**获取用户--降序 */
 router.get('/userdesc', function(req, res, next) {
   con.query("select * from user order by userId desc",function(err,result){
     if(err){
@@ -140,6 +142,7 @@ router.get('/score', function(req, res, next) {
   res.render('Score/score', { title: 'score' });
 });
 //积分表管理
+/**获取积分总表 */
 router.get('/score/list', function(req, res, next) {
   con.query("select * from score order by sum desc",function(err,result){
     if(err){
@@ -150,6 +153,7 @@ router.get('/score/list', function(req, res, next) {
     }
   })
 });
+/**获取个人积分明细表 */
 router.get('/score/slist', function(req, res, next) {
   sum=[];
   var sum0=0;
@@ -172,6 +176,7 @@ router.get('/score/slist', function(req, res, next) {
     }
   })
 });
+/**搜索用户积分 */
 router.post('/searchuserscore', function(req, res, next) {
   var userName=req.body.userName;
   con.query("select * from score where userName=?",[userName],function(err,result){
