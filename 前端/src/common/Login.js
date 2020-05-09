@@ -26,16 +26,27 @@ export default class Login extends Component {
       })
     }
     login = () => {
-      // myFetch.get('/topics',{limit:4,user:'sss'})
-      //   .then(res=>console.log(res))
-      // this.setState({isloading:true})
-      // myFetch.post('/login',{
-      //   username:this.state.username,
-      //   pwd:this.state.pwd
-      // }).then(res=>{
-      //   Actions.boxPage();
-      // })
-      Actions.boxPage();
+      let text = {username:this.state.username,pwd:this.state.pwd} //获取数据
+      let send = JSON.stringify(text);   //重要！将对象转换成json字符串
+      fetch('http://172.17.100.2:3000/users/login',{   //Fetch方法y
+          method: 'POST',
+          headers: {'Content-Type': 'application/json; charset=utf-8'},
+          body: send
+      })
+      .then(res => res.json())
+      .then(
+        res => {
+          if(res.success){
+            AsyncStorage.setItem('user',this.state.username);
+            AsyncStorage.setItem('logif',true);
+            ToastAndroid.show('即将进入主页面...', ToastAndroid.SHORT);
+            Actions.boxPage();
+          }
+          else{
+            ToastAndroid.show('用户名或密码错误，请重新输入', ToastAndroid.SHORT);
+          }
+        }
+      )
     }
     render() {
         return (
