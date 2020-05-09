@@ -27,8 +27,11 @@
 .Gamebody{
     float: left;
     width: 25%;
+    height: 58px;
     text-align: center;
     line-height:3.7rem;
+    font-size:14px;
+    overflow: hidden;
 }
 .Gamebody button{
     width: 50px;
