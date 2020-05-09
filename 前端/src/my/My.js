@@ -13,16 +13,52 @@ const pai = [
     {name:'Coisini',img:require('../../images/my-jijun.png'),grade:89,tou:require('../../images/touxiang.png')},
 ]
 export default class My extends Component {
+    constructor(){
+        super();
+        this.state={
+            scores:[],
+            user:{}
+        }
+    }
+    componentDidMount(){
+        // 发起请求
+        fetch('http://172.17.100.2:3000/users/rank')
+        .then((res)=>res.json())
+        .then((res)=>{
+            var d0 = [];
+            for(var i = 0;i<res.length;i++){
+                var tupian = '';
+                (res[i].userImage=='-' || res[i].userImage==null)?tupian="http://img2.3png.com/eebe5ef277285d150546fd77d248786d2a9e.png":tupian=res[i].userImage
+                d0[i] = Object.assign({},res[i],{userImage:tupian},{mingci:i+1});
+            }
+            this.setState({
+                scores:d0.slice(0,3)
+            })
+        })
+        fetch('http://172.17.100.2:3000/users/my')
+        .then((res)=>res.json())
+        .then((res)=>{
+            console.log(res);
+            var d0 = [];
+            var tupian = '';
+            (res[0].userImage=='-' || res[0].userImage==null)?tupian="http://img2.3png.com/eebe5ef277285d150546fd77d248786d2a9e.png":tupian=res[0].userImage;
+            d0[0] = Object.assign({},res[0],{userImage:tupian});
+            this.setState({
+                user:d0[0]
+            })
+        })
+
+    }
     render() {
         return (
             <ScrollView style={{backgroundColor:'#fff',width:'100%',height:'100%'}}>
                 <View style={{flex:1,alignItems:'center'}}>
                     <View style={styles.introduce}>
                         <View style={styles.touxiang}>
-                            <Image source={require('../../images/touxiang.png')} style={{width:80,height:80}}/>
+                            <Image source={{uri:this.state.user.userImage}} style={{width:80,height:80}}/>
                         </View>
                         <View style={{marginLeft:'10%'}}>
-                            <Text style={styles.intxt}>用户名</Text>
+                            <Text style={styles.intxt}>{this.state.user.userName}</Text>
                             <TouchableOpacity onPress={()=>{
                                 Actions.personal()}}>
                                 <Text style={styles.intxt}>点击编辑个人资料></Text>
@@ -82,22 +118,21 @@ export default class My extends Component {
                     <View style={styles.studystu0}>
                         <Text style={{color:'#79be3b',fontSize:20,textAlign:'center',marginBottom:10}}>积分排行榜</Text>
                         <FlatList
-                            data = {pai}
+                            data = {this.state.scores}
                             numColumns = {1}
                             renderItem={({item})=>(
                                 <View style={styles.every}>
-                                    <Image style={styles.paiimg0}
-                                        resizeMode="contain"
-                                        source={item.img}
-                                    />
+                                    <View style={styles.mingci0}>
+                                        <Text style={styles.mingci}>{item.mingci}</Text>
+                                    </View>
                                     <View style={styles.toukuang}>
                                         <Image style={styles.paiimg1}
                                             resizeMode="contain"
-                                            source={item.tou}
+                                            source={{uri:item.userImage}}
                                         />
                                     </View>
-                                    <Text style={styles.username}>{item.name}</Text>
-                                    <Text style={styles.grade}>{item.grade}</Text>
+                                    <Text style={styles.username}>{item.userName}</Text>
+                                    <Text style={styles.grade}>{item.sum}</Text>
                                     <Text style={styles.gradetxt}>分</Text>
                                 </View>
                             )}
@@ -141,6 +176,18 @@ export default class My extends Component {
     }
 }
 const styles = StyleSheet.create({
+    mingci:{
+        fontSize:20,
+        color:'#fff'
+    },
+    mingci0:{
+        width:30,
+        height:30,
+        alignItems:'center',
+        justifyContent:'center',
+        borderRadius:15,
+        backgroundColor:'orange'
+    },
     studystu0:{
         width:'90%',
         height:280,
@@ -175,6 +222,7 @@ const styles = StyleSheet.create({
         borderColor:'#ccc'
     },
     username:{
+        width:'10%',
         fontSize:20,
         marginLeft:'10%',
         color:'#67e5fb'

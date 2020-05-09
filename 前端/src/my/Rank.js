@@ -1,24 +1,39 @@
 import React, { Component } from 'react'
 import {View,Text,Image,ImageBackground,TextInput,TouchableOpacity, AsyncStorage, StyleSheet,Alert,ScrollView, FlatList} from 'react-native'
-const pai = [
-    {name:'Enter',img:require('../../images/my-guanjun.png'),grade:98,tou:require('../../images/touxiang.png')},
-    {name:'Coisini',img:require('../../images/my-yajun.png'),grade:93,tou:require('../../images/touxiang.png')},
-    {name:'Coisini',img:require('../../images/my-jijun.png'),grade:89,tou:require('../../images/touxiang.png')},
-]
-const pai1 = [
-    {name:'Coisini',mingci:4,grade:80,tou:require('../../images/touxiang.png')},
-    {name:'Coisini',mingci:5,grade:80,tou:require('../../images/touxiang.png')},
-    {name:'Coisini',mingci:6,grade:80,tou:require('../../images/touxiang.png')},
-    {name:'Coisini',mingci:7,grade:80,tou:require('../../images/touxiang.png')},
-    {name:'Coisini',mingci:8,grade:80,tou:require('../../images/touxiang.png')},
-    {name:'Coisini',mingci:9,grade:80,tou:require('../../images/touxiang.png')},
-    {name:'Coisini',mingci:10,grade:80,tou:require('../../images/touxiang.png')},
-    {name:'Coisini',mingci:11,grade:80,tou:require('../../images/touxiang.png')},
-    {name:'Coisini',mingci:12,grade:80,tou:require('../../images/touxiang.png')},
-    {name:'Coisini',mingci:13,grade:80,tou:require('../../images/touxiang.png')},
-    {name:'Coisini',mingci:14,grade:80,tou:require('../../images/touxiang.png')}
-]
 export default class Rank extends Component {
+    constructor(){
+        super();
+        this.state={
+            scores:[],
+            first:{}
+        }
+    }
+    componentDidMount(){
+        // 发起请求
+        fetch('http://172.17.100.2:3000/users/rank')
+        .then((res)=>res.json())
+        .then((res)=>{
+            var d0 = [];
+            for(var i = 0;i<res.length;i++){
+                var tupian = '';
+                (res[i].userImage=='-' || res[i].userImage==null)?tupian="http://img2.3png.com/eebe5ef277285d150546fd77d248786d2a9e.png":tupian=res[i].userImage
+                d0[i] = Object.assign({},res[i],{userImage:tupian},{mingci:i+1});
+                // d0[i] = Object.assign({},res[i],{mingci:i+1});
+            }
+            this.setState({
+                scores:d0
+            })
+            this.setState({
+                first:d0[0]
+            })
+            console.log(d0);
+            console.log(this.state.scores[0]);
+            // pai = this.state.scores.slice(0,3);
+            // pai1 = this.state.scores.slice(3);
+            // console.log(fpai);
+            // console.log(fpai1);
+        })
+    }
     render() {
         return (
             <ScrollView style={{backgroundColor:'#fff',width:'100%',height:'100%'}}>
@@ -30,13 +45,13 @@ export default class Rank extends Component {
                     >
                         {/* <View style={{width:'100%',height:'100%',backgroundColor:'black',opacity:0.3,alignItems:'center'}}> */}
                             <View style={styles.touxiang}>
-                                <Image source={require('../../images/touxiang.png')} style={{width:80,height:80}}/>
+                                <Image source={{uri:this.state.first.userImage}} style={{width:80,height:80}}/>
                             </View>
-                            <Text style={{marginTop:10,fontSize:20}}>Enter</Text>
+                            <Text style={{marginTop:10,fontSize:20}}>{this.state.first.userName}</Text>
                         {/* </View> */}
                         
                     </ImageBackground>
-                    <FlatList
+                    {/* <FlatList
                         data = {pai}
                         numColumns = {1}
                         renderItem={({item})=>(
@@ -56,9 +71,9 @@ export default class Rank extends Component {
                                 <Text style={styles.gradetxt}>分</Text>
                             </View>
                         )}
-                    />
+                    /> */}
                     <FlatList
-                        data = {pai1}
+                        data = {this.state.scores}
                         numColumns = {1}
                         renderItem={({item})=>(
                             <View style={styles.every}>
@@ -68,11 +83,11 @@ export default class Rank extends Component {
                                 <View style={styles.toukuang}>
                                     <Image style={styles.paiimg1}
                                         resizeMode="contain"
-                                        source={item.tou}
+                                        source={{uri:item.userImage}}
                                     />
                                 </View>
-                                <Text style={styles.username}>{item.name}</Text>
-                                <Text style={styles.grade}>{item.grade}</Text>
+                                <Text style={styles.username}>{item.userName}</Text>
+                                <Text style={styles.grade}>{item.sum}</Text>
                                 <Text style={styles.gradetxt}>分</Text>
                             </View>
                         )}

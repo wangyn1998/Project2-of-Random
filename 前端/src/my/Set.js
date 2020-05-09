@@ -3,13 +3,18 @@ import {View,Text,Image,TextInput,TouchableOpacity, AsyncStorage, StyleSheet,Ale
 import { Actions } from 'react-native-router-flux'
 
 export default class Set extends Component {
+    tuichu=()=>{
+        AsyncStorage.removeItem('user');
+        AsyncStorage.setItem('logif',false);
+        Actions.login();
+    }
     render() {
         return (
             <ScrollView style={{backgroundColor:'#fff',width:'100%',height:'100%'}}>
                 <View style={{flex:1,alignItems:'center'}}>
                 <View style={styles.biglist}>
                         <TouchableOpacity style={styles.littlelist}
-                            onPress={()=>{Actions.login()}}
+                            onPress={()=>{this.tuichu}}
                         >
                             <Text style={styles.listtxt}>退出登录</Text>
                         </TouchableOpacity>
