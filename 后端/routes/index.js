@@ -377,21 +377,85 @@ router.get('/box', function(req, res, next) {
     }
   }); 
 });
-// 盒子
-router.get('/box/person', function(req, res, next) {
-  var userName=req.query.userName;
+// 搜索盒子用户
+router.post('/searchboxuser', function(req, res, next) {
+  var userName=req.body.userName;
   console.log(userName);
-  con.query("select * from box where userName=?",[userName],function(err,result){
+  con.query("select * from user where userName=?",[userName],function(err,result){
     if(err){
       console.log(err);
     }
     else{
-      res.render("Box/personBox",{boxList:result,userName:userName});
+      res.render('Box/boxuserSearch', { uList:result,userName:userName });
     }
   })
 });
+// 盒子
+let boxuserName;
+router.get('/box/person', function(req, res, next) {
+  boxuserName=req.query.userName;
+  con.query("select * from box where userName=?",[boxuserName],function(err,result){
+    if(err){
+      console.log(err);
+    }
+    else{
+      res.render("Box/personBox",{boxList:result,userName:boxuserName});
+    }
+  })
+});
+// 搜索盒子
+router.post('/searchbox', function(req, res, next) {
+  var boxName=req.body.boxName;
+  con.query("select * from box where boxName=? and userName=?",[boxName,boxuserName],function(err,result){
+    if(err){
+      console.log(err);
+    }
+    else{
+      res.render('Box/boxSearch', {boxList:result});
+    }
+  })
+});
+// 卡片详情
+let boxId;
 router.get('/box/card', function(req, res, next) {
-  res.render('Box/card', { title: 'card' });
+  boxId=req.query.boxId;
+  con.query("select * from card where boxId=?",[boxId],function(err,result){
+    if(err){
+      console.log(err);
+    }
+    else{
+     res.render("Box/card",{cardList:result,boxuserName:boxuserName});
+    }
+  })
+});
+// 问题详情
+router.get('/box/question', function(req, res, next) {
+  var userName=req.body.userName;
+  console.log(userName);
+  con.query("select * from user where userName=?",[userName],function(err,result){
+    if(err){
+      console.log(err);
+    }
+    else{
+      res.render('Box/question',{cardList:result,userName:userName });
+    }
+  })
+});
+// 答案详情
+router.get('/box/answer', function(req, res, next) {
+  res.render('Box/answer', { title: 'deletegame' });
+});
+// 删除卡片
+router.get('/box/deletecard', function(req, res, next) {
+  var cardId=req.query.cardId;
+  con.query("delete from card where cardId=?",[cardId],function (err,result) {
+    if(err){
+      console.log(err);
+    }else{
+      console.log("boxid"+boxId)
+      res.render("Box/deleteCard",{boxId:boxId});
+    }
+  });
 });
 // 学习记录
 router.get('/box/record', function(req, res, next) {
@@ -402,29 +466,13 @@ router.get('/box/record', function(req, res, next) {
       console.log(err);
     }
     else{
-    //   function getWeekDate() {
-    //     var now = new Date();
-    //     var day = now.getDay();
-    //     var weeks = new Array("星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六");
-    //     var week = weeks[day];
-    //     return week;
-    //  }
-    //  alert(getWeekDate());
      res.render("Box/record",{recordList:result,userName:userName});
     }
   })
 });
+// 成就
 router.get('/box/achievementdetail', function(req, res, next) {
   res.render('Box/achievementDetail', { title: 'card' });
-});
-router.get('/box/deletecard', function(req, res, next) {
-  res.render('Box/deleteCard', { title: 'deletegame' });
-});
-router.get('/box/question', function(req, res, next) {
-  res.render('Box/question', { title: 'deletegame' });
-});
-router.get('/box/answer', function(req, res, next) {
-  res.render('Box/answer', { title: 'deletegame' });
 });
 /**发现管理*/
 router.get('/discovery', function(req, res, next) {
