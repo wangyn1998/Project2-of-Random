@@ -47,16 +47,22 @@
                 </div>
             </div>
             <div class="personBoxbox2">
-                <p style="font-size:22px;font-weight:bold;padding-top:26px ;">盒子列表</p>
+                <!-- <% for(var i = 0 ; i < boxList.length; i++) {%> -->
+                <p style="font-size:22px;font-weight:bold;padding-top:26px ;">盒子列表&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;共计<%=boxList.length%>个</p>
+                <!-- <%}%> -->
             </div>
             <div class='personBoxbox3'>
                 <ul id="all" style="padding-inline-start: 0px;margin-block-start: 0;
                 margin-block-end: 0">
-                <% for(var i = 0 ; i < 8; i++) {%>
+                <% for(var i = 0 ; i < boxList.length; i++) {%>
                     <li>
-                        <a href="/box/card"><div>
-                            <img class="personBoximage" src="../images/box1.png"/>
-                            <p style="color:black">英语</p>
+                        <a href="/box/card?boxId=<%=boxList[i]["boxId"]%>""><div>
+                            <%if(boxList[i]["boxImage"]!=""){%>
+                                <img class="personBoximage" src='<%=boxList[i]["boxImg"] %>'/>
+                            <%}else{%>
+                                <img class="personBoximage" src='../images/box1.png'/>
+                            <%}%>
+                            <p style="color:black"><%=boxList[i]["boxName"]%></p>
                         </div>
                         </a>
                     </li>

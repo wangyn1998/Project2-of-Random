@@ -65,7 +65,7 @@ router.get('/home', function(req, res, next) {
         res.render('home',{userListall:result[0],userListnew:result[1],postList:result[2]});
       }
     })
-});
+}); 
 //用户管理
 /**获取用户--升序（默认） */
 router.get('/user', function(req, res, next) {
@@ -303,18 +303,53 @@ router.post('/updatestar', function(req, res, next) {
   var taskId=taskId;
   res.render('Score/updateStar', { title: 'user',taskId:taskId });
 });
-//盒子管理
+/* 盒子管理*/
+// 获取盒子用户列表
 router.get('/box', function(req, res, next) {
-  res.render('Box/box', { title: 'box' });
+  con.query("select * from user",function (err,result) {
+    if(err){
+      console.log(err);
+    }else{
+      res.render("Box/box",{uList:result});
+    }
+  }); 
 });
+// 盒子
 router.get('/box/person', function(req, res, next) {
-  res.render('Box/personBox', { title: 'personBox' });
+  var userName=req.query.userName;
+  console.log(userName);
+  con.query("select * from box where userName=?",[userName],function(err,result){
+    if(err){
+      console.log(err);
+    }
+    else{
+      res.render("Box/personBox",{boxList:result,userName:userName});
+    }
+  })
 });
 router.get('/box/card', function(req, res, next) {
   res.render('Box/card', { title: 'card' });
 });
+// 学习记录
 router.get('/box/record', function(req, res, next) {
-  res.render('Box/record', { title: 'card' });
+  var userName=req.query.userName;
+  console.log(userName);
+  con.query("select * from record where userName=?",[userName],function(err,result){
+    if(err){
+      console.log(err);
+    }
+    else{
+    //   function getWeekDate() {
+    //     var now = new Date();
+    //     var day = now.getDay();
+    //     var weeks = new Array("星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六");
+    //     var week = weeks[day];
+    //     return week;
+    //  }
+    //  alert(getWeekDate());
+     res.render("Box/record",{recordList:result,userName:userName});
+    }
+  })
 });
 router.get('/box/achievementdetail', function(req, res, next) {
   res.render('Box/achievementDetail', { title: 'card' });
