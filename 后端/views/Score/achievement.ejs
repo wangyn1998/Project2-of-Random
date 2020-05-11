@@ -25,7 +25,7 @@
             <div class="box1">
                 <div class='search'>
                     <form style="line-height: 2.5em;"  method="post" action="/searchstar">
-                        <input class='Bar' placeholder="请输入要查找的星星数" name='taskId'/>
+                        <input class='Bar' placeholder="请输入要查找的星星数" name='achieveStarNum'/>
                         <div class="iconfont icon-xiaoxi-" style="float:left;">
                             <input type="submit" value="搜索"style="height:30px;border:none;">
                         </div>
@@ -47,18 +47,18 @@
                         <h3 class='starhead1'><b>操作</b></h3>
                          </div>
                     </li>
-                    <% for(var i = 0 ; i < 6; i++) {%>
+                    <% for(var i = 0 ; i < achieveList.length; i++) {%>
                         <li>
-                            <p class='starbody'><%= i*20%>~<%= (i+1)*20-1%></p>  
-                            <p class='starbody'>成就xx</p>  
+                            <p class='starbody'><%= achieveList[i]["achieveStarNum"] %></p>  
+                            <p class='starbody'><%= achieveList[i]["achieveName"] %></p>  
                             <div class='starbody'>
                                 <div class='Topicoperation'>
                                     <form method="post" action="/editstar" class="operation1">
                                         <button style="color: white;border:1px solid white;width: 50px;
                                         height: 30px;">编辑
-                                            <input type='submit' style="float: right;border:1px solid #79be3b;background-color: #79be3b;" id='bianji' name="task" value=''></button>
+                                            <input type='submit' style="float: right;border:1px solid #79be3b;background-color: #79be3b;" id='bianji' name="achieve" value='<%= achieveList[i]["achieveId"] %>'></button>
                                     </form>
-                                    <a href='/score/deletestar'><button  style=" width: 50px;
+                                    <a href='/score/deletestar?achieveId=<%= achieveList[i]["achieveId"]%>'><button  style=" width: 50px;
                                         height: 30px;
                                         background-color: #fff;
                                         border:1px solid #888;

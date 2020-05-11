@@ -35,16 +35,16 @@
                         <h3 class='starhead1'><b>操作</b></h3>
                          </div>
                     </li>
-                    <% for(var i = 0 ; i < 6; i++) {%>
+                    <% for(var i = 0 ; i < achieveList.length; i++) {%>
                         <li>
-                            <p class='starbody'><%= i*20%>~<%= (i+1)*20-1%></p>  
-                            <p class='starbody'>成就xx</p>   
+                            <p class='starbody'><%= achieveList[i]["achieveStarNum"] %></p>  
+                            <p class='starbody'><%= achieveList[i]["achieveName"] %></p>  
                             <div class='starbody'>
                                 <div class='Topicoperation'>
                                     <form method="post" action="/editstar1" class="operation1">
                                         <button style="color: white;border:1px solid white;width: 50px;
                                         height: 30px;">编辑
-                                            <input type='submit' style="float: right;border:1px solid #79be3b;background-color: #79be3b;" id='bianji' name="task" value=''></button>
+                                            <input type='submit' style="float: right;border:1px solid #79be3b;background-color: #79be3b;" id='bianji' name="achieve" value='<%= achieveList[i]["achieveId"] %>'></button>
                                     </form>
                                     <a href='/score/deletestar'><button  style=" width: 50px;
                                         height: 30px;
