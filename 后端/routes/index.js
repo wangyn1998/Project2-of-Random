@@ -208,7 +208,7 @@ router.get('/score/deletetask', function(req, res, next) {
       console.log(err);
     }
     else{
-      res.render('Score/deleteTask', { title: 'task' });
+      res.render('Score/deleteTask', { title: 'deletetask' });
     }
   })
 });
@@ -234,7 +234,7 @@ router.post('/addtask', function(req, res, next) {
     if(err){
       console.log(err);
     }else{  
-      res.render('Score/addTask', { title: 'user'});
+      res.render('Score/addTask', { title: 'addtask'});
     }
   });
 });
@@ -298,7 +298,7 @@ router.get('/score/deletestar', function(req, res, next) {
       console.log(err);
     }
     else{
-      res.render('Score/deleteStar', { title: 'star' });
+      res.render('Score/deleteStar', { title: 'deletestar' });
     }
   })
 });
@@ -325,7 +325,7 @@ router.post('/addstar', function(req, res, next) {
     if(err){
       console.log(err);
     }else{  
-      res.render('Score/addStar', { title: 'star'});
+      res.render('Score/addStar', { title: 'addstar'});
     }
   });
 });
