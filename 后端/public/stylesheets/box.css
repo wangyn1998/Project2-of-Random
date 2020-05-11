@@ -103,6 +103,7 @@ a{
 .Boxcheck{
     width: 45%;
     height: 40px;
+    margin-left: 28%;
     background-color: #fff;
     border:1px solid #888;
     color: #79be3b;
@@ -114,11 +115,12 @@ a{
 .Boxcheck1{
     width: 45%;
     height: 40px;
+    margin-left: 28%;
     background-color: #79be3b;
     border:1px solid #888;
     color: #fff;  
     margin-top: 9px;
-    margin-left: 5%;
+    text-align: center;
     font-size: 15px;
     border-radius: 10px;
     float: left;
