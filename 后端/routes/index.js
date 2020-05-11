@@ -277,6 +277,7 @@ router.post('/updatetask', function(req, res, next) {
   });
 });
 //成就管理
+/**获取成就 */
 router.get('/score/achievement', function(req, res, next) {
   var con=mysql.createConnection(dbconfig);
   con.connect();
@@ -289,6 +290,7 @@ router.get('/score/achievement', function(req, res, next) {
      }
   })
 });
+/**删除成就 */
 router.get('/score/deletestar', function(req, res, next) {
   var achieveId=req.query.achieveId;
   con.query("delete from achieve where achieveId=?",[achieveId],function(err,result){
@@ -301,6 +303,7 @@ router.get('/score/deletestar', function(req, res, next) {
   })
 });
 let achieveStarNum='';
+/**搜索成就 */
 router.post('/searchstar', function(req, res, next) {
   achieveStarNum=req.body.achieveStarNum;
   con.query("select * from achieve where achieveStarNum=?",[achieveStarNum],function(err,result){
@@ -312,6 +315,7 @@ router.post('/searchstar', function(req, res, next) {
     }
   })
 });
+/**添加成就 */
 router.post('/addstar', function(req, res, next) {
   var score=req.body.score;
   var content=req.body.content;
@@ -326,6 +330,7 @@ router.post('/addstar', function(req, res, next) {
   });
 });
 let achieveId=0;
+/**编辑成就 */
 router.post('/editstar', function(req, res, next) {
   achieveId=req.body.achieve;
   con.query("select * from achieve",function (err,result) {
@@ -336,6 +341,7 @@ router.post('/editstar', function(req, res, next) {
     }
   });
 });
+/**编辑搜索成就 */
 router.post('/editstar1', function(req, res, next) {
   achieveId=req.body.achieve;
   con.query("select * from achieve where achieveStarNum=?",[achieveStarNum],function (err,result) {
@@ -344,7 +350,9 @@ router.post('/editstar1', function(req, res, next) {
     }else{
       res.render("Score/editStar1",{achieveList:result});
     }
-  });});
+  });
+});
+/** 更新成就*/
 router.post('/updatestar', function(req, res, next) {
   var achieveName=req.body.content1;
   var achieveStarNum=req.body.score1;
