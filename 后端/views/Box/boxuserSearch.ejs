@@ -38,12 +38,12 @@
         <div class="right">
             <div class="Boxbox1">
                 <div class='search'>
-                    <form style="line-height: 2.5em;">
-                        <input class='Bar' placeholder="请输入"/>
-                        <div class="iconfont icon-xiaoxi-" style="float:left;">
+                    <form style="line-height: 2.5em;" method="post" action="/searchboxuser">
+                        <input class='Bar' placeholder="请输入用户名" name='userName'/>
+                        <div class="iconfont icon-xiaoxi-" style="float:left;"> 
                             <input type="submit" value="搜索"style="height:30px;border:none;">
                         </div>
-                    </form>
+                    </form> 
                 </div>
             </div>
             <div class="Boxbox2">
@@ -65,10 +65,10 @@
                                 <p class="Boxname"><%=uList[i]["userName"]%></p>      
                             </div>
                             <div class='Boxhead3'>
-                                <a href="/box/person"><button class='Boxcheck'>查看盒子</button></a>
+                                <a href="/box/person?userName=<%=uList[i]["userName"]%>"><button class='Boxcheck'>查看盒子</button></a>
                             </div>
                             <div class='Boxhead3'>
-                                <a href="/box/record"><button class='Boxcheck1'>查看学习记录</button></a>
+                                <a href="/box/record?userName=<%=uList[i]["userName"]%>"><button class='Boxcheck1'>查看学习记录</button></a>
                             </div>
                         </li>
                     <%}%>
