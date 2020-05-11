@@ -43,16 +43,16 @@
                             <h3 class='Gamehead1'>操作</h3>
                         </div>
                     </li>  -->
-                    <% for(var i =1;i<3;i++){ %>
+                    <% for(var i=0;i<test.length;i++){ %>
                         <li> 
-                            <p class='Gamebody'><%= i %></p>
-                            <p class='Gamebody'>标题<%= i %></p>
-                            <p class='Gamebody'>xxxx</p>
+                            <p class='Gamebody'><%= i+1 %></p>
+                            <p class='Gamebody'><%= test[i].testTitle %></p>
+                            <p class='Gamebody'><%= test[i].testContent %></p>
                             <p class='Gamebody'>
                                 <a href='edittest'>
                                     <button class='Gamebianji'>编辑</button>
                                 </a>
-                                <a href='deletetest'>
+                                <a href='deletetest?testId=<%= test[i].testId %>'>
                                     <button class='Gamedel'>移除</button>
                                 </a>
                             </p>
