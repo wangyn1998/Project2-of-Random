@@ -474,35 +474,108 @@ router.get('/discovery/editknowledge', function(req, res, next) {
 });
 /*每日推荐管理*/
 router.get('/discovery/recommend', function(req, res, next) {
-  res.render('Discovery/Recommend/recommend', { title: 'recommend' });
+  con.query("select * from recommend",function(err,result){
+    if(err){
+      console.log(err);
+    }
+    else{
+      res.render('Discovery/Recommend/recommend', { recommend: result });   
+    }
+  });
+});
+//添加每日推荐
+router.post('/discovery/addrecommend', function(req, res, next) {
+  var time = req.body.time;
+  var content = req.body.content;
+  con.query("insert into recommend(recommendTime,recommendContent) values(?,?)",[time,content],function(err,result){
+    if(err){
+      console.log(err);
+    }
+    else{
+      res.end('success');
+    }
+  });
 });
 //搜索每日推荐
-router.post('/searchrecommend', function(req, res, next) {
-  res.render('Discovery/Recommend/findrecommend', { title: 'searchrecommend' });
+router.post('/discovery/searchrecommend', function(req, res, next) {
+  var time = req.body.recommend;
+  con.query("select * from recommend where recommendTime=?",[time],function(err,result){
+    if(err){
+      console.log(err);
+    }
+    else{
+      res.render('Discovery/Recommend/findrecommend', { recommend: result });  
+    }
+  });
+});
+//删除每日推荐
+router.get('/discovery/deleterecommend', function(req, res, next) {
+  var recommendId = req.query.recommendId;
+  con.query("delete from recommend where recommendId=?",[recommendId],function(err,result){
+    if(err){
+      console.log(err);
+    }
+    else{
+      res.render('Discovery/Recommend/delrecommend', { title: 'deleterecommend' });  
+    }
+  });
+  
 });
 //编辑每日推荐
 router.get('/discovery/editrecommend', function(req, res, next) {
   res.render('Discovery/Recommend/editrecommend', { title: 'editrecommend' });
 });
-//删除每日推荐
-router.get('/discovery/deleterecommend', function(req, res, next) {
-  res.render('Discovery/Recommend/delrecommend', { title: 'deleterecommend' });
-});
 /*考试信息管理*/
 router.get('/discovery/test', function(req, res, next) {
-  res.render('Discovery/Test/test', { title: 'test' });
+  con.query("select * from test",function(err,result){
+    if(err){
+      console.log(err);
+    }
+    else{
+      res.render('Discovery/Test/test', { test: result });  
+    }
+  });
+});
+//添加考试信息
+router.post('/discovery/addtest', function(req, res, next) {
+  var title = req.body.title;
+  var content = req.body.content;
+  con.query("insert into test(testTitle,testContent) values(?,?)",[title,content],function(err,result){
+    if(err){
+      console.log(err);
+    }
+    else{
+      res.end('success');  
+    }
+  });
 });
 //搜索考试信息
-router.post('/searchtest', function(req, res, next) {
-  res.render('Discovery/Test/searchtest', { title: 'searchtest' });
+router.post('/discovery/searchtest', function(req, res, next) {
+  var title = req.body.test;
+  con.query("select * from test where testTitle=?",[title],function(err,result){
+    if(err){
+      console.log(err);
+    }
+    else{
+      res.render('Discovery/Test/searchtest', { test: result });  
+    }
+  });
+});
+// 删除考试信息
+router.get('/discovery/deletetest', function(req, res, next) {
+  var testId = req.query.testId;
+  con.query("delete from test where testId=?",[testId],function(err,result){
+    if(err){
+      console.log(err);
+    }
+    else{
+      res.render('Discovery/Test/deltest', { title: 'deletetest' });   
+    }
+  });
 });
 //编辑考试信息
 router.get('/discovery/edittest', function(req, res, next) {
   res.render('Discovery/Test/edittest', { title: 'edittest' });
-});
-// 删除考试信息
-router.get('/discovery/deletetest', function(req, res, next) {
-  res.render('Discovery/Test/deltest', { title: 'deletetest' });
 });
 /*系统管理*/
 //显示管理员信息
