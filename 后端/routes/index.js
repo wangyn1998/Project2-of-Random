@@ -278,30 +278,85 @@ router.post('/updatetask', function(req, res, next) {
 });
 //成就管理
 router.get('/score/achievement', function(req, res, next) {
-  res.render('Score/achievement', { title: 'task' });
+  var con=mysql.createConnection(dbconfig);
+  con.connect();
+  con.query("select * from achieve",function(err,result){
+    if(err){
+      console.log(err);
+    }
+    else{
+      res.render('Score/achievement', { achieveList:result });
+     }
+  })
 });
 router.get('/score/deletestar', function(req, res, next) {
-  res.render('Score/deleteStar', { title: 'task' });
+  var achieveId=req.query.achieveId;
+  con.query("delete from achieve where achieveId=?",[achieveId],function(err,result){
+    if(err){
+      console.log(err);
+    }
+    else{
+      res.render('Score/deleteStar', { title: 'star' });
+    }
+  })
 });
+let achieveStarNum='';
 router.post('/searchstar', function(req, res, next) {
-  var taskId=taskId;
-  res.render('Score/searchStar', { title: 'user',taskId:taskId });
+  achieveStarNum=req.body.achieveStarNum;
+  con.query("select * from achieve where achieveStarNum=?",[achieveStarNum],function(err,result){
+    if(err){
+      console.log(err);
+    }
+    else{
+      res.render("Score/searchStar",{achieveList:result});
+    }
+  })
 });
 router.post('/addstar', function(req, res, next) {
-  var taskId=taskId;
-  res.render('Score/addStar', { title: 'user',taskId:taskId });
+  var score=req.body.score;
+  var content=req.body.content;
+  console.log(score);
+  console.log(content);
+  con.query("insert into achieve(achieveName,achieveStarNum) values(?,?)",[content,score],function (err,result) {
+    if(err){
+      console.log(err);
+    }else{  
+      res.render('Score/addStar', { title: 'star'});
+    }
+  });
 });
+let achieveId=0;
 router.post('/editstar', function(req, res, next) {
-  var taskId=taskId;
-  res.render('Score/editStar', { title: 'user',taskId:taskId });
+  achieveId=req.body.achieve;
+  con.query("select * from achieve",function (err,result) {
+    if(err){
+      console.log(err);
+    }else{
+      res.render("Score/editStar",{achieveList:result});
+    }
+  });
 });
 router.post('/editstar1', function(req, res, next) {
-  var taskId=taskId;
-  res.render('Score/editStar1', { title: 'user',taskId:taskId });
-});
+  achieveId=req.body.achieve;
+  con.query("select * from achieve where achieveStarNum=?",[achieveStarNum],function (err,result) {
+    if(err){
+      console.log(err);
+    }else{
+      res.render("Score/editStar1",{achieveList:result});
+    }
+  });});
 router.post('/updatestar', function(req, res, next) {
-  var taskId=taskId;
-  res.render('Score/updateStar', { title: 'user',taskId:taskId });
+  var achieveName=req.body.content1;
+  var achieveStarNum=req.body.score1;
+  console.log(achieveName);
+  console.log(achieveStarNum)
+  con.query("update achieve set achieveName=?,achieveStarNum=? where achieveId=?",[achieveName,achieveStarNum, achieveId],function (err,result) {
+    if(err){
+      console.log(err);
+    }else{
+      res.render('Score/updateStar', { title: 'updatestar'});
+    }
+  });
 });
 /* 盒子管理*/
 // 获取盒子用户列表
