@@ -12,7 +12,6 @@ router.get('/', function(req, res, next) {
 
 //范开始
 //注册
-var phonenum='';
 router.post('/register',(req,res)=>{
   /**获取请求体数据 */
   let data = req.body;
@@ -98,7 +97,7 @@ router.get('/my',function(req,res,next){
 router.get('/rank',function(req,res,next){
   var con = mysql.createConnection(dbconfig);
   con.connect();
-  con.query('select * from score order by sum DESC',[phonenum],(err,result)=>{
+  con.query('select * from score order by sum DESC',[username1],(err,result)=>{
       if(err){
           console.log(err);
       }
@@ -109,8 +108,163 @@ router.get('/rank',function(req,res,next){
       }
   })
 })
+/**编辑资料 */
+router.post('/updateuser',(req,res)=>{
+  /**获取请求体数据 */
+  let data = req.body;
+  let message1 = {success:true};
+  let message2 = {success:false};
+  con.query("update user set userName=?,userImage=?,userSex=?,userBir=?,userSign=?,userStudy=? where userName = ?",[data.username,data.userImage,data.sex,data.birthday,data.sign,data.class,username1],(err,result)=>{
+      if(err){
+          throw err;
+      }
+      else{
+          if(result == false){
+            res.send(message2);
+          }else{
+            res.send(message1);
+          }
+          
+      }
+  })
+  con.query("update score set userImage=? where userName = ?",[data.userImage,username1],(err,result)=>{
+      if(err){
+          throw err;
+      }
+      else{
+          if(result == false){
+              console.log(message2);
+          }else{
+              console.log(message1);
+          }
+          
+      }
+  })
+})
+//获取积分sum
+router.get('/fen',function(req,res,next){
+  con.query('select * from score where userName = ?',[username1],(err,result)=>{
+      if(err){
+          console.log(err);
+      }
+      else{
+          console.log('user');
+          console.log(result);
+          // aa = result;
+          res.send(result);
+      }
+  })
+})
+//获取盒子数
+router.get('/hezi',function(req,res,next){
+  let message1 = {success:true};
+  let message2 = {success:false};
+  con.query('select * from box where userName = ?',[username1],(err,result)=>{
+      if(err){
+        console.log(err);
+        res.send(message2)
+      }
+      else{
+        if(result.length == 0){
+          res.send(message2)
+        }else{
+          console.log('user');
+          console.log(result);
+          res.send(result);
+        }
+        
+      }
+  })
+})
+//积分增加
+router.post('/getscore', function (req, res) {  //接收POST请求
+  /**获取请求体数据 */
+  let data = req.body;   //解析body中的信息
+  console.log(data);
+  let message1 = {success:true}
+  let message2 = {success:false}
+  con.query("insert into sList(taskScore,updateTime,taskId,taskContent,userName,userPhone) values(?,?,?,?,?,?)",[data.taskScore,data.updateTime,data.taskId,data.taskContent,data.userName,data.hone],function(err,result){
+    if(err){
+        console.log(err);
+    }
+    else{
+        if(result == false){
+            res.send(message2);
+        }
+        else{           
+            res.send(message1);
+        }
+    }
+  })
+  con.query("select SUM(taskScore) sumsum,userName from slist where userName=?",[data.userName],function(err,result){
+      if(err){
+        console.log(err);
+      }
+      else{
+        //显示到页面--渲染方法--render,
+        console.log(result);
+          con.query("update score set sum=?,updateTime=? where userName=?",[result[0].sumsum,new Date(),data.userName],function(err,result){
+          if(err){
+            console.log(err);
+          }
+          else{
+            console.log("success");
+          }
+        });      
+      }
+    })
+})
+//修改密码
+router.post('/alterpwd', function (req, res) {  //接收POST请求
+  /**获取请求体数据 */
+  let data = req.body;   //解析body中的信息
+  console.log(data);
+  let message1 = {success:true}
+  let message2 = {success:false}
+  con.query('select * from user where userName = ?',[username1],(err,result)=>{
+    if(err){
+        console.log(err);
+    }
+    else{
+      console.log(result[0].userPwd);
+      console.log(data.oldpwd);
+      var rb = /(?!.*\s)(?!^[\u4e00-\u9fa5]+$)(?!^[0-9]+$)(?!^[A-z]+$)(?!^[^A-z0-9]+$)^.{8,14}$/g;
+      if(result[0].userPwd == data.oldpwd && rb.test(data.newpwd)){
+        con.query("update user set userPwd=? where userName=?",[data.newpwd,username1],function(err,result){
+          if(err){
+            console.log(err);
+            res.send(message2);
+          }
+          else{
+            res.send(message1);
+          }
+        })
+      }
+      else{           
+          res.send(message2);
+      }
+    }
+  })
+})
+//退出登录
+router.post('/logout', function (req, res) {  //接收POST请求
+  /**获取请求体数据 */
+  let data = req.body;   //解析body中的信息
+  console.log(data);
+  let message1 = {success:true};
+  let message2 = {success:false};
+  console.log(data.logout);
+  console.log(typeof(data.logout));
+  if(data.logout){
+    username1='';
+    console.log(username1);
+    res.send(message1);
+  }
+  else{
+    res.send(message2);
+  }
+})
 //范结束
-
 
 /*box*/
 router.get('/record', function(req, res, next) {
