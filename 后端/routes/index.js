@@ -115,27 +115,96 @@ router.post('/searchuser', function(req, res, next) {
 });
 /*盒塘管理*/
 router.get('/block', function(req, res, next) {
-  res.render('Block/block', { title: 'block' });
+  con.query("select * from post",function (err,result) {
+    if(err){
+      console.log(err);
+    }else{
+      res.render("Block/block",{postList:result});
+    }
+  }); 
 });
 //搜索帖子
 router.post('/searchpost', function(req, res, next) {
-  res.render('Block/searchpost', { title: 'searchpost' });
+  var userName=req.body.userName;
+  con.query("select * from post where userName=?",[userName],function(err,result){
+    if(err){
+      console.log(err);
+    }
+    else{
+      console.log(typeof(result))
+      res.render("Block/searchpost",{postList:result});
+    }
+  })
 });
+// 时间搜索帖子
+router.post("/timesearchpost",function (req,res,next) {
+  var postTime=req.body.postTime;
+  con.query("select * from post where postTime=?",[postTime],function(err,result){
+    if(err){
+      console.log(err);
+    }
+    else{
+      res.render("Block/timeSearch",{postList:result,postTime:postTime});
+    }
+  })
+})
 //删除帖子
 router.get('/deletepost', function(req, res, next) {
-  res.render('Block/delpost', { title: 'deletepost' });
+  var postId=req.query.id;
+  con.query("delete from post where postId=?",[postId],function (err,result) {
+    if(err){
+      console.log(err);
+    }else{
+      res.render("Block/delpost",{topicList:result});
+    }
+  });
 });
 //帖子回复
 router.get('/block/reply', function(req, res, next) {
-  res.render('Block/reply', { title: 'reply' });
+  var postId=req.query.id;
+  con.query("select * from reply where postId=?",[postId],function(err,result){
+    if(err){
+      console.log(err);
+    }else{
+      res.render("Block/reply",{replyList:result});
+    }
+  });
 });
 // 帖子详情
 router.get('/block/detail', function(req, res, next) {
-  res.render('Block/postDetail', { title: 'postDetail' });
+  var postId=req.query.id;
+  var con=mysql.createConnection(dbconfig);
+  con.connect();
+  con.query("select * from post where postId=?",[postId],function (err,result) {
+    if(err){
+      console.log(err);
+    }else{
+      res.render("Block/postDetail",{postList:result,postId:postId});
+    }
+  });
 });
 // 删除回复
 router.get('/delreply', function(req, res, next) {
-  res.render('Block/delreply', { title: 'delReply' });
+  var replyId=req.query.id;
+  con.query("delete from reply where replyId=?",[replyId],function (err,result) {
+    if(err){
+      console.log(err);
+    }else{
+      res.render("Block/delreply",{replyList:result});
+    }
+  });
+});
+// 回复搜索
+router.post('/searchreply', function(req, res, next) {
+  var userName=req.body.userName;
+  con.query("select * from reply where userName=?",[userName],function(err,result){
+    if(err){
+      console.log(err);
+    }
+    else{
+      res.render("Block/replySearch",{replyList:result});
+    }
+  })
 });
 //积分管理
 router.get('/score', function(req, res, next) {
@@ -430,20 +499,40 @@ router.get('/box/card', function(req, res, next) {
 });
 // 问题详情
 router.get('/box/question', function(req, res, next) {
-  var userName=req.body.userName;
-  console.log(userName);
-  con.query("select * from user where userName=?",[userName],function(err,result){
+  console.log(boxId);
+  var cardId=req.query.cardId;
+  con.query("select * from card where cardId=?",[cardId],function(err,result){
     if(err){
       console.log(err);
     }
     else{
-      res.render('Box/question',{cardList:result,userName:userName });
+      res.render('Box/question',{cardList:result,boxId:boxId});
     }
   })
 });
 // 答案详情
 router.get('/box/answer', function(req, res, next) {
-  res.render('Box/answer', { title: 'deletegame' });
+  var cardId=req.query.cardId;
+  con.query("select * from card where cardId=?",[cardId],function(err,result){
+    if(err){
+      console.log(err);
+    }
+    else{
+      res.render('Box/answer',{cardList:result,boxId:boxId});
+    }
+  })
+});
+// 搜索卡片
+router.post('/searchcard', function(req, res, next) {
+  var cardname=req.body.cardname;
+  con.query("select * from card where cardQues=?",[cardname],function(err,result){
+    if(err){
+      console.log(err);
+    }
+    else{
+      res.render('Box/cardSearch',{cardList:result,boxuserName:boxuserName});
+    }
+  })
 });
 // 删除卡片
 router.get('/box/deletecard', function(req, res, next) {
