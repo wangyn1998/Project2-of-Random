@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Actions } from 'react-native-router-flux';
 import {
     StyleSheet,
     Text,
@@ -64,19 +65,19 @@ export default class Game extends Component {
                 </View>
                 <View style={styles.body}>
                         <View style={styles.word}>
-                            <TouchableOpacity>
+                            <TouchableOpacity  onPress={()=>Actions.word()}>
                                 <Image source={require('../../images/word.png')} style={{width:"60%",height:"60%",marginLeft:"20%"}} />
                                 <Text style={styles.txt1}>我爱记单词</Text>
                             </TouchableOpacity>
                         </View>
                         <View style={styles.phrase}>
-                            <TouchableOpacity>
+                            <TouchableOpacity  onPress={()=>Actions.phrase()}>
                                 <Image source={require('../../images/phrase.png')} style={{width:"60%",height:"60%",marginLeft:"20%"}} />
                                 <Text style={styles.txt1}>成语大闯关</Text>
                             </TouchableOpacity>
                         </View>
                         <View style={styles.answer}>
-                            <TouchableOpacity>
+                            <TouchableOpacity  onPress={()=>Actions.answer()}>
                                 <Image source={require('../../images/answer.jpg')} style={{width:"100%",height:"80%"}} />
                                 <Text style={styles.txt2}>闯关答题</Text>
                             </TouchableOpacity>
