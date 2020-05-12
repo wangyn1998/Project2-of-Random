@@ -54,11 +54,11 @@
                 <p style="font-size:22px;font-weight:bold">盒我学用户管理
                     <a href='/user' style="color: black;">
                     <span style="margin-left:30px;font-size: 35px;line-height:1.8em" class="iconfont iconpaixu-shengxu" id="btn"></span>
-                    <span style="font-size:20px;margin-left:5px;font-weight:lighter">升序</span>
+                    <span style="font-size:20px;margin-left:5px;font-weight:lighter">ID升序</span>
                     </a>
                     <a href="/userdesc"  style="color: black;">
                     <span style="margin-left:30px;font-size: 35px;line-height:1.8em" class="iconfont iconpaixu-jiangxu" id="btn"></span>
-                    <span style="font-size:20px;margin-left:5px;font-weight:lighter">降序</span>
+                    <span style="font-size:20px;margin-left:5px;font-weight:lighter">ID降序</span>
                     </a>
                 </p>
             </div>
@@ -89,7 +89,7 @@
                         <p class='Userbody'><%= userList[i]["userName"] %></p>
                         <p class='Userbody'><%= userList[i]["userPhone"] %></p>
                         <p class='Userbody'><%= userList[i]["userSex"] %></p>
-                        <p class='Userbody'><%= userList[i]["userBir"] %></p>
+                        <p class='Userbody'><%= userList[i]["userBir"].slice(0,10)%></p>
                         <p class='Userbody'><%= userList[i]["userStudy"] %></p>
                         <p class='Userbody'><a href='/deleteuser?userId=<%= userList[i]["userId"]%>'><button class='Userdel' >移除</button></a></p>
                     </li>
