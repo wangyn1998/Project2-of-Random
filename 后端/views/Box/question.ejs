@@ -55,13 +55,7 @@
             <div class='cardbox3'>
                 <ul id="all" style="padding-inline-start: 0px;margin-block-start: 0;
                 margin-block-end: 0">
-                    <% for(var i = 0 ; i < 7; i++) {%>
-                        <li>
-                        <p class="cardQues"style="margin-block-start: 0;margin-top:15px;margin-block-end:0;overflow:hidden;">1111111111</p>      
-                        <p class="cardAns"style="float:left;margin-top:15px;font-size:20px" id="time">2222222</p>
-                        <a href="/box/deletecard"><button class='cardcheck'>移除</button></a> 
-                    </li>
-                    <%}%>
+                    
                 </ul>
             </div>
             <div style=" width: 945px;height:30px;text-align: center;margin:0px auto;"> 
@@ -78,7 +72,7 @@
                         <div>
                             <h2>卡片题目</h2>
                             <div style="margin:30px 0 0 30px;width: 320px;height: 300px;border: 1px solid #427911;">
-                                111111111
+                                <%=cardList[0]["cardQues"]%>
                             </div>
                         </div>
                     </div>
@@ -92,7 +86,7 @@
         }
         temp('close-pop1').onclick = function() {
             temp('pop-container1').style.display = 'none';
-            window.location.href="/box/card"
+            window.location.href="/box/card?boxId=<%=boxId%>"
         } 
         function getzz() {
         var a = $("ul#all li");
