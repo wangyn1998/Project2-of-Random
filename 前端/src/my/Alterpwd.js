@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {View,Text,Image,TextInput,TouchableOpacity, AsyncStorage, StyleSheet,Alert,ScrollView, FlatList} from 'react-native'
+import {View,Text,Image,TextInput,TouchableOpacity, AsyncStorage, StyleSheet,Alert,ScrollView, FlatList,ToastAndroid} from 'react-native'
 import { Actions } from 'react-native-router-flux'
 import { Icon } from '@ant-design/react-native'
 
@@ -9,12 +9,12 @@ export default class Alterpwd extends Component {
         this.state={
           oldpwd:'',
           newpwd:'',
-          oldeye:require('../../images/my-see.png'),
-          oldeye1:'see',
-          oldsecure:false,
+          oldeye:require('../../images/my-notsee.png'),
+          oldeye1:'notsee',
+          oldsecure:true,
           newsecure:true,
-          neweye:require('../../images/my-see.png'),
-          neweye1:'see',
+          neweye:require('../../images/my-notsee.png'),
+          neweye1:'notsee',
         }
       }
     oldpwdhandle=(text)=>{
@@ -65,6 +65,26 @@ export default class Alterpwd extends Component {
             })
         }
     }
+    alterpwd=()=>{
+        let text = {oldpwd:this.state.oldpwd,newpwd:this.state.newpwd} //获取数据
+        let send = JSON.stringify(text);   //重要！将对象转换成json字符串
+        fetch('http://172.17.100.2:3000/users/alterpwd',{   //Fetch方法y
+            method: 'POST',
+            headers: {'Content-Type': 'application/json; charset=utf-8'},
+            body: send
+        })
+        .then(res => res.json())
+        .then(
+            res => {
+                if(res.success){
+                    ToastAndroid.show('密码修改成功！', ToastAndroid.SHORT);
+                }
+                else{
+                    ToastAndroid.show('旧密码输入错误，或新密码输入不符合要求', ToastAndroid.SHORT);
+                }
+            }
+        )
+    }
     render() {
         return (
             <ScrollView style={{backgroundColor:'#fff',width:'100%',height:'100%'}}>
@@ -87,8 +107,8 @@ export default class Alterpwd extends Component {
                     <View style={{alignItems:'center'}}>
                         <View style={styles.up}>
                             <TextInput 
-                                placeholder='8-16位，至少包含数字/字母/字符2种组合'
-                                onChangeText={this.oldpwdhandle}
+                                placeholder='8-14位，至少包含数字/字母/字符2种组合'
+                                onChangeText={this.newpwdhandle}
                                 secureTextEntry={this.state.newsecure} 
                                 style={{width:'80%'}}
                             />
@@ -101,7 +121,7 @@ export default class Alterpwd extends Component {
                        <TouchableOpacity 
                             style={styles.login}
                         >
-                            <Text style={styles.logintxt}>确定</Text>
+                            <Text style={styles.logintxt} onPress={this.alterpwd}>确定</Text>
                         </TouchableOpacity>  
                     </View>
                     

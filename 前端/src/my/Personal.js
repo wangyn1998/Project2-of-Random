@@ -1,5 +1,16 @@
 import React, { Component } from 'react'
 import {View,Text,Image,TextInput,TouchableOpacity, AsyncStorage, StyleSheet,Alert,ScrollView, FlatList} from 'react-native'
+import ImagePicker from 'react-native-image-picker';
+const options = {
+    title: '设置头像',
+    cancelButtonTitle:'取消',
+    takePhotoButtonTitle:'拍照',
+    chooseFromLibraryButtonTitle:'从相册里选择',
+    storageOptions: {
+      skipBackup: true,
+      path: 'images',
+    },
+};
 export default class Personal extends Component {
     constructor(){
         super();
@@ -9,7 +20,7 @@ export default class Personal extends Component {
             birthday:'',
             class:'',
             sign:'',
-            userImage:''
+            userImage:'',
         }
     }
     usernamehandle=(text)=>{
@@ -42,6 +53,51 @@ export default class Personal extends Component {
             sign:text
         })
     }
+    takephoto = ()=>{
+        ImagePicker.showImagePicker(options, (response) => {
+            if (response.didCancel) {
+              return;
+            } else if (response.error) {
+              console.log('Error:', response.error);
+            } else if (response.customButton) {
+              console.log('custom:', response.customButton);
+            } else {    
+                const source = {uri:response.uri};
+                this.setState({
+                    userImage: response.uri,
+                });
+                console.log(response.uri);
+                AsyncStorage.setItem('img',response.uri);
+                AsyncStorage.getItem('img')
+                .then((res)=>{
+                    console.log({"uri":res});
+                    console.log(typeof({"uri":res}));
+                    console.log('存的是'+res);
+                });
+                console.log('存好了')
+            }
+        });
+    }
+    sure = ()=>{
+        let text = this.state;
+        let send = JSON.stringify(text);
+        fetch('http://172.17.100.2:3000/users/updateuser',{   //Fetch方法y
+            method: 'POST',
+            headers: {'Content-Type': 'application/json; charset=utf-8'},
+            body: send
+        })
+        .then(res => res.json())
+        .then(
+            res => {
+                if(res.success){
+                    console.log('修改成功');
+                }
+                else{
+                    console.log('验证失败，用户名或密码错误')
+                }
+            }
+        )
+    }
     componentDidMount(){
         fetch('http://172.17.100.2:3000/users/my')
         .then((res)=>res.json())
@@ -67,7 +123,7 @@ export default class Personal extends Component {
                     <View style={styles.touxiang}>
                         <Image source={{uri:this.state.userImage}} style={{width:100,height:100}}/>
                     </View>
-                    <TouchableOpacity style={styles.huan}>
+                    <TouchableOpacity style={styles.huan} onPress={()=>this.takephoto()}>
                         <Text>更换头像</Text>
                     </TouchableOpacity>
                     <View style={{width:'80%',marginTop:40}}>
@@ -123,7 +179,7 @@ export default class Personal extends Component {
                         </View>
                     </View>
                     <TouchableOpacity style={styles.sure}>
-                        <Text style={{color:'#fff',fontSize:20}}>确认</Text>
+                        <Text style={{color:'#fff',fontSize:20}} onPress={()=>this.sure()}>确认</Text>
                     </TouchableOpacity>
                 </View>
             </ScrollView>

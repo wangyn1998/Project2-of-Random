@@ -1,23 +1,22 @@
 import React, { Component } from 'react'
-import {View,Text,Image,TextInput,TouchableOpacity, AsyncStorage, StyleSheet,Alert,ScrollView, FlatList} from 'react-native'
+import {View,Text,Image,TextInput,TouchableOpacity, AsyncStorage, StyleSheet,Alert,ScrollView, FlatList,ToastAndroid} from 'react-native'
 import { Icon } from '@ant-design/react-native'
 import { Actions } from 'react-native-router-flux'
-const boxes = [
-    {name:'盒子',num:6,img:require('../../images/my-box1.png'),unit:'个',txtcolor:'#ff8e14'},
-    {name:'卡片',num:6,img:require('../../images/my-box2.png'),unit:'个',txtcolor:'#67e5fb'},
-    {name:'积分',num:6,img:require('../../images/my-box3.png'),unit:'分',txtcolor:'#fed2df'},
-]
-const pai = [
-    {name:'Coisini',img:require('../../images/my-guanjun.png'),grade:95,tou:require('../../images/touxiang.png')},
-    {name:'Coisini',img:require('../../images/my-yajun.png'),grade:93,tou:require('../../images/touxiang.png')},
-    {name:'Coisini',img:require('../../images/my-jijun.png'),grade:89,tou:require('../../images/touxiang.png')},
-]
 export default class My extends Component {
     constructor(){
         super();
         this.state={
             scores:[],
-            user:{}
+            user:{},
+            boxes:[
+                {name:'盒子',num:0,img:require('../../images/my-box1.png'),unit:'个',txtcolor:'#ff8e14'},
+                {name:'卡片',num:0,img:require('../../images/my-box2.png'),unit:'个',txtcolor:'#67e5fb'},
+                {name:'积分',num:0,img:require('../../images/my-box3.png'),unit:'分',txtcolor:'#fed2df'},
+            ],
+            taskId:'',
+            taskContent:'',
+            score:0,
+            isClick:true,
         }
     }
     componentDidMount(){
@@ -32,7 +31,7 @@ export default class My extends Component {
                 d0[i] = Object.assign({},res[i],{userImage:tupian},{mingci:i+1});
             }
             this.setState({
-                scores:d0.slice(0,3)
+                scores:d0.slice(0,3),
             })
         })
         fetch('http://172.17.100.2:3000/users/my')
@@ -44,10 +43,118 @@ export default class My extends Component {
             (res[0].userImage=='-' || res[0].userImage==null)?tupian="http://img2.3png.com/eebe5ef277285d150546fd77d248786d2a9e.png":tupian=res[0].userImage;
             d0[0] = Object.assign({},res[0],{userImage:tupian});
             this.setState({
-                user:d0[0]
+                user:d0[0],
+                // username:res[0].userName,
+                // phone:res[0].userPhone,
             })
         })
-
+        fetch('http://172.17.100.2:3000/users/fen')
+        .then((res)=>res.json())
+        .then((res)=>{
+            var box = this.state.boxes;
+            box[2].num = res[0].sum;
+            this.setState({
+                boxes:box,
+                score:res[0].sum
+            })
+        })
+        fetch('http://172.17.100.2:3000/users/hezi')
+        .then((res)=>res.json())
+        .then((res)=>{
+            if(res.success == false){
+                console.log('没有该用户')
+            }
+            else{
+                console.log('有该用户')
+                var box = this.state.boxes;
+                box[0].num = res.length;
+                this.setState({
+                    boxes:box
+                })
+            }
+        })
+    }
+    successToast=()=> {
+        if (this.state.isClick==true) {   //如果为true 开始执行
+            ToastAndroid.show('签到成功，积分+10', ToastAndroid.SHORT);
+            let s = this.state.score;
+            s=s+10;
+            this.setState({
+                score:s,
+                taskId:1,
+                taskContent:'签到',
+                isClick: false
+            })
+            const that = this   // 为定时器中的setState绑定this
+            const now = new Date().getHours();
+            const now1 = new Date().getMinutes();
+            const now2 = new Date().getSeconds();
+            const hour = (23-now)*60*60*1000;
+            const minutes = (59-now1)*60*1000;
+            const seconds = (60-now2)*1000;
+            const time = hour+minutes+seconds;
+            let text = {userName:this.state.user.userName,updateTime:new Date(),taskId:1,taskContent:'签到',taskScore:10,phone:this.state.user.userPhone} //获取数据
+            let send = JSON.stringify(text);   //重要！将对象转换成json字符串
+            fetch('http://172.17.100.2:3000/users/getscore',{   //Fetch方法y
+                method: 'POST',
+                headers: {'Content-Type': 'application/json; charset=utf-8'},
+                body: send
+            })
+            .then(res => res.json())
+            .then(
+                res => {
+                    if(res.success){
+                        fetch('http://172.17.100.2:3000/users/rank')
+                        .then((res)=>res.json())
+                        .then((res)=>{
+                            var d0 = [];
+                            for(var i = 0;i<res.length;i++){
+                                var tupian = '';
+                                (res[i].userImage=='-' || res[i].userImage==null)?tupian="http://img2.3png.com/eebe5ef277285d150546fd77d248786d2a9e.png":tupian=res[i].userImage
+                                d0[i] = Object.assign({},res[i],{userImage:tupian},{mingci:i+1});
+                            }
+                            this.setState({
+                                scores:d0.slice(0,3),
+                            })
+                        })
+                        fetch('http://172.17.100.2:3000/users/my')
+                        .then((res)=>res.json())
+                        .then((res)=>{
+                            console.log(res);
+                            var d0 = [];
+                            var tupian = '';
+                            (res[0].userImage=='-' || res[0].userImage==null)?tupian="http://img2.3png.com/eebe5ef277285d150546fd77d248786d2a9e.png":tupian=res[0].userImage;
+                            d0[0] = Object.assign({},res[0],{userImage:tupian});
+                            this.setState({
+                                user:d0[0],
+                                // username:res[0].userName,
+                                // phone:res[0].userPhone,
+                            })
+                        })
+                        fetch('http://172.17.100.2:3000/users/fen')
+                        .then((res)=>res.json())
+                        .then((res)=>{
+                            var box = this.state.boxes;
+                            box[2].num = res[0].sum;
+                            this.setState({
+                                boxes:box,
+                                score:res[0].sum
+                            })
+                        })
+                    }
+                    else{
+                        console.log('失败')
+                    }
+                }
+            )
+            setTimeout(function () {       // 设置延迟事件，1秒后将执行
+                that.setState({ isClick: true })   // 将isClick设置为true
+            }, time);
+        }
+        else{
+            ToastAndroid.show('今日已签到，明日再来叭',ToastAndroid.SHORT);
+            // Toast.success('今日已签到，明日再来叭', 1);
+        }
     }
     render() {
         return (
@@ -67,7 +174,7 @@ export default class My extends Component {
                     </View>
                     <View style={styles.bigbox}>
                         <FlatList
-                            data = {boxes}
+                            data = {this.state.boxes}
                             numColumns = {3}
                             renderItem={({item})=>(
                                 <View style={styles.boxes}>
@@ -80,11 +187,10 @@ export default class My extends Component {
                                 </View>
                             )}
                         />
-                        <TouchableOpacity onPress={()=>{
-                                Actions.signin()}}
+                        <TouchableOpacity onPress={()=>this.successToast()}
                                 style={styles.sign}
                         >
-                            <Text style={{color:'#79be3b'}}>签到领积分></Text>
+                            <Text style={{color:'#79be3b'}}>点击签到领积分</Text>
                         </TouchableOpacity>
                     </View>
                     <View style={styles.studystu}>
@@ -148,6 +254,18 @@ export default class My extends Component {
                         {/* <TouchableOpacity style={styles.littlelist}>
                             <Text style={styles.listtxt}>夜间模式</Text>
                         </TouchableOpacity> */}
+                        <TouchableOpacity 
+                            style={styles.littlelist}
+                            onPress={()=>{Actions.box()}}
+                        >
+                            <Text style={styles.listtxt}>去添加盒子</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity 
+                            style={styles.littlelist}
+                            onPress={()=>{Actions.send()}}
+                        >
+                            <Text style={styles.listtxt}>去发帖</Text>
+                        </TouchableOpacity>
                         <TouchableOpacity 
                             style={styles.littlelist}
                             onPress={()=>{Actions.set()}}
@@ -291,11 +409,11 @@ const styles = StyleSheet.create({
     sign:{
         borderWidth:1,
         borderColor:'#79be3b',
-        width:'25%',
+        width:'30%',
         borderRadius:5,
         alignItems:'center',
         marginBottom:10,
-        marginLeft:'70%'
+        marginLeft:'65%'
     },
     studystu:{
         width:'90%',

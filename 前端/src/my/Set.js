@@ -4,9 +4,26 @@ import { Actions } from 'react-native-router-flux'
 
 export default class Set extends Component {
     tuichu=()=>{
-        AsyncStorage.removeItem('user');
-        AsyncStorage.setItem('logif',false);
-        Actions.login();
+        console.log('111');
+        let text = {logout:true} //获取数据
+        let send = JSON.stringify(text);   //重要！将对象转换成json字符串
+        fetch('http://172.17.100.2:3000/users/logout',{   //Fetch方法y
+            method: 'POST',
+            headers: {'Content-Type': 'application/json; charset=utf-8'},
+            body: send
+        })
+        .then(res => res.json())
+        .then(
+            res => {
+                if(res.success){
+                    Actions.login();
+                }
+                else{
+                    ToastAndroid.show('出现错误，请重新退出登录', ToastAndroid.SHORT);
+                }
+            }
+        )
+        
     }
     render() {
         return (
@@ -14,17 +31,13 @@ export default class Set extends Component {
                 <View style={{flex:1,alignItems:'center'}}>
                 <View style={styles.biglist}>
                         <TouchableOpacity style={styles.littlelist}
-                            onPress={()=>{this.tuichu}}
+                            onPress={this.tuichu}
                         >
                             <Text style={styles.listtxt}>退出登录</Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={styles.littlelist}
                             onPress={()=>{Actions.alterpwd()}}>
                             <Text style={styles.listtxt}>修改密码</Text>
-                            <Text style={styles.listtxt1}>详细信息 ></Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity style={styles.littlelist}>
-                            <Text style={styles.listtxt}>注销账号</Text>
                             <Text style={styles.listtxt1}>详细信息 ></Text>
                         </TouchableOpacity>
                     </View>

@@ -10,6 +10,15 @@ import Echarts from 'native-echarts';
 import { WebView } from 'react-native-webview';
 
 export default class Xian extends Component {
+  constructor(){
+    super();
+    this.state={
+      xaxis:[],
+    }
+  }
+  componentDidMount(){
+
+  }
   render() {
     const option = {
       color: ['#003366', '#006699', '#4cabce'],
@@ -18,10 +27,10 @@ export default class Xian extends Component {
       },
       tooltip: {},
       legend: {
-          data:['语文','数学','英语']
+        data:['语文','数学','英语']
       },
       xAxis: {
-          data: ["星期一","星期二","星期三","星期四","星期五","星期六",'星期日']
+        data: ["星期一","星期二","星期三","星期四","星期五","星期六",'星期日']
       },
       yAxis: {},
       series: [
@@ -43,12 +52,12 @@ export default class Xian extends Component {
     ]
     };
     return (
-        <View style={{backgroundColor:'#fff'}}>
-            <Text style={{fontSize:20,textAlign:'center',marginBottom:20,marginTop:10}}>盒子柱状图</Text>
-            <Echarts option={option} height={300}/>
-            <Text style={{fontSize:20,textAlign:'center',marginBottom:20,marginTop:10}}>卡片柱状图</Text>
-            <Echarts option={option} height={300}/>
+      <View style={{backgroundColor:'#fff',width:'100%',height:'100%'}}>
+        <View style={{backgroundColor:'#fff',marginTop:20}}>
+            <Echarts option={option} height={400}/>
         </View>
+      </View>
+        
     );
   }
 }
