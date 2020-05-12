@@ -61,8 +61,8 @@
                             <p class='Gamebody'><%= game[i].gameName %></p>
                             <p class='Gamebody'><%= game[i].gameContent %></p>
                             <p class='Gamebody'>
-                                <a href="editgame">
-                                    <button class='Gamebianji' id="bianji">编辑</button>
+                                <a href="editgame?gameId=<%= game[i].gameId %>">    
+                                    <button type="submit" class='Gamebianji' id="bianji">编辑</button>
                                 </a>
                                 <a href="deletegame?gameId=<%= game[i].gameId %>">
                                     <button class='Gamedel' id="remove">移除</button>
@@ -84,7 +84,7 @@
                 <div id="cover-tier" class="popPosition"></div>
                 <div id="pop-tier" class="popPosition">
                     <i id="close-pop">&#10006;</i>
-                    <form style="margin-top:50px;">
+                    <div style="margin-top:50px;">
                         <div class='text'>
                             <h4>游戏名：</h4>
                             <input type="text" id="gameName"/>
@@ -94,7 +94,7 @@
                             <textarea id="gameContent"></textarea>
                         </div>
                         <button type="submit" id="save" class="systemSave">保存</button> 
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>

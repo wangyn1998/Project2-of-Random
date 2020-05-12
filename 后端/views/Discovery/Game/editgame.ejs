@@ -55,16 +55,16 @@
                             <h3 class='Gamehead1'>操作</h3>
                         </div>
                     </li>  -->
-                    <% for(var i =1;i<7;i++){ %>
+                    <% for(var i=0;i<game.length;i++){ %>
                         <li> 
-                            <p class='Gamebody'><%= i %></p>
-                            <p class='Gamebody'>我爱记单词</p>
-                            <p class='Gamebody'>xxxx</p>
+                            <p class='Gamebody'><%= i+1 %></p>
+                            <p class='Gamebody'><%= game[i].gameName %></p>
+                            <p class='Gamebody'><%= game[i].gameContent %></p>
                             <p class='Gamebody'>
-                                <a href="editgame">
-                                    <button class='Gamebianji' id="bianji">编辑</button>
+                                <a href="editgame?gameId=<%= game[i].gameId %>">    
+                                    <button type="submit" class='Gamebianji' id="bianji">编辑</button>
                                 </a>
-                                <a href="deletegame">
+                                <a href="deletegame?gameId=<%= game[i].gameId %>">
                                     <button class='Gamedel' id="remove">移除</button>
                                 </a>
                             </p>
@@ -84,21 +84,17 @@
                 <div id="cover-tier" class="popPosition"></div>
                 <div id="pop-tier" class="popPosition">
                     <i id="close-pop">&#10006;</i>
-                    <form style="margin-top:50px;">
-                        <div class='text'>
-                            <h4>编号：</h4>
-                            <input type="text" name="gameId"/>
-                        </div>
+                    <div style="margin-top:50px;">
                         <div class='text'>
                             <h4>游戏名：</h4>
-                            <input type="text" name="gameName"/>
+                            <input type="text" id="gameName" value="<%= editdata.gameName %>"/>
                         </div>
                         <div class='content'>
                             <h4>资料：</h4>
-                            <textarea name="gameContent"></textarea>
+                            <textarea id="gameContent"><%= editdata.gameContent %></textarea>
                         </div>
                         <button type="submit" id="save" class="systemSave">保存</button> 
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>
@@ -116,6 +112,24 @@
             temp('pop-container').style.display = 'none';
             window.location.href="/discovery/game";
         }
+        
+        //编辑数据
+        $('#save').click(function(){
+            $.ajax({
+                url: 'editgame',
+                method: 'post',
+                data:{
+                    gameName: $('#gameName').val(),
+                    gameContent: $('#gameContent').val()
+                },
+                success:function(data){
+                    if(data == "success"){
+                        window.location.href="/discovery/game";
+                    }
+                }
+            });
+        })
+  
         // 分页
         function getzz() {
             var a = $("ul#all li");

@@ -61,7 +61,7 @@
                             <p class='Gamebody'><%= recommend[i].recommendTime %></p>
                             <p class='Gamebody'><%= recommend[i].recommendContent %></p>
                             <p class='Gamebody'>
-                                <a href='editrecommend'>
+                                <a href='editrecommend?recommendId=<%= recommend[i].recommendId %>'>
                                     <button class='Gamebianji'>编辑</button>
                                 </a>
                                 <a href='deleterecommend?recommendId=<%= recommend[i].recommendId %>'>
@@ -84,7 +84,7 @@
                 <div id="cover-tier" class="popPosition"></div>
                 <div id="pop-tier" class="popPosition">
                     <i id="close-pop">&#10006;</i>
-                    <form style="margin-top:50px;">
+                    <div style="margin-top:50px;">
                         <div class='text'>
                             <h4>推荐日期：</h4>
                             <input type="date" id="time"/>
@@ -94,7 +94,7 @@
                             <textarea id="content"></textarea>
                         </div>
                         <button type="submit" id="save" class="systemSave">保存</button> 
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>

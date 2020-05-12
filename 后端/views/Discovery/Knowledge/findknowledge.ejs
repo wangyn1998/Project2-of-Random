@@ -49,7 +49,7 @@
                             <p class='Gamebody'><%= knowledge[i].knowledgeTitle %></p>
                             <p class='Gamebody'><%= knowledge[i].knowledgeContent %></p>
                             <p class='Gamebody'>
-                                <a href="/editknowledge">
+                                <a href="editknowledge1?knowledgeId=<%= knowledge[i].knowledgeId %>">
                                     <button class='Gamebianji' id="bianji">编辑</button>
                                 </a>
                                 <a href="deleteknowledge?knowledgeId=<%= knowledge[i].knowledgeId %>">

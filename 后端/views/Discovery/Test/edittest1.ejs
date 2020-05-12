@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>游戏管理</title>
+        <title>考试信息管理</title>
         <link rel='stylesheet' href='/stylesheets/style.css'/>
         <link rel='stylesheet' href='/stylesheets/discovery.css'/>
         <!-- 后端登录 --><link rel="stylesheet" href="https://at.alicdn.com/t/font_1506624_oswwuan5y68.css">
@@ -12,7 +12,7 @@
             <p style="float:left;color:white;font-size:35px;line-height:70px;margin-left:40px;">盒我学后台管理系统</p>
         </header>
         <div class="left">
-            <div class="nav" style="background: #427911;">
+            <div class="nav">
                 <a href="/discovery/game">游戏管理</a>
             </div>
             <div class="nav">
@@ -21,7 +21,7 @@
             <div class="nav">
                 <a href="/discovery/recommend">每日推荐管理</a>
             </div>
-            <div class="nav">
+            <div class="nav" style="background: #427911;">
                 <a href="/discovery/test">考试信息管理</a>
             </div>
             <div class="nav">
@@ -30,52 +30,106 @@
         </div>
         <div class="right">
             <div class="box1">
-                <h2>您搜索的结果是:</h2>
+                <div class='search'>
+                    <form style="line-height: 2.5em;">
+                        <input class='Bar' placeholder="请输入要查找的标题"/>
+                        <div class="iconfont icon-xiaoxi-" style="float:left;">
+                            <input type="submit" value="搜索"style="height:30px;border:none;">
+                        </div>
+                    </form>
+                </div>
             </div>
-            <br/>
+            <div class="box2">
+                <p style="font-size:22px;font-weight:bold">盒我学考试信息管理
+                    <span style="margin-left:30px" class="iconfont icon-wuuiconxiangjifangda" id="add"></span>
+                    <span style="font-size:20px;margin-left:5px;font-weight:lighter">添加</span>
+                </p>
+            </div>
             <div class='Gamebox3'>
                 <ul id="all">
                     <!-- <li>
                         <div class="Gamehead">
                             <h3 class='Gamehead1'>编号</h3>
-                            <h3 class='Gamehead1'>游戏名</h3>
-                            <h3 class='Gamehead1'>资料</h3>
+                            <h3 class='Gamehead1'>标题</h3>
+                            <h3 class='Gamehead1'>详细信息</h3>
                             <h3 class='Gamehead1'>操作</h3>
                         </div>
                     </li>  -->
-                    <% for(var i=0;i<game.length;i++){ %>
+                    <% for(var i=0;i<test.length;i++){ %>
                         <li> 
                             <p class='Gamebody'><%= i+1 %></p>
-                            <p class='Gamebody'><%= game[i].gameName %></p>
-                            <p class='Gamebody'><%= game[i].gameContent %></p>
+                            <p class='Gamebody'><%= test[i].testTitle %></p>
+                            <p class='Gamebody'><%= test[i].testContent %></p>
                             <p class='Gamebody'>
-                                <a href="editgame1?gameId=<%= game[i].gameId %>">    
-                                    <button type="submit" class='Gamebianji' id="bianji">编辑</button>
+                                <a href='edittest1?testId=<%= test[i].testId %>'>
+                                    <button class='Gamebianji'>编辑</button>
                                 </a>
-                                <a href="deletegame?gameId=<%= game[i].gameId %>">
-                                    <button class='Gamedel' id="remove">移除</button>
+                                <a href='deletetest?testId=<%= test[i].testId %>'>
+                                    <button class='Gamedel'>移除</button>
                                 </a>
                             </p>
                         </li>
                     <% } %>
                 </ul>
             </div>
-            <div style="width:945px;height:30px;text-align:center;margin:20px auto;"> 
+            <div style="width:945px;height:30px;text-align:center;margin:0 auto;"> 
                 <div class="page">
                     <div id="page">
                     </div>
                 </div>
             </div>
-            <div style="margin-right:10%;float:right">
-                <a href='/discovery/game'>
-                    <button class="return">返回</button>
-                </a>
+        </div>
+        <div>
+            <div id="pop-container">
+                <div id="cover-tier" class="popPosition"></div>
+                <div id="pop-tier" class="popPosition">
+                    <i id="close-pop">&#10006;</i>
+                    <div style="margin-top:50px;">
+                        <div class='text'>
+                            <h4>标题：</h4>
+                            <input type="text" id="title" value="<%= editdata.testTitle %>"/>
+                        </div>
+                        <div class='content'>
+                            <h4>详细信息：</h4>
+                            <textarea id="content"><%= editdata.testContent %></textarea>
+                        </div>
+                        <button type="submit" id="save" class="systemSave">保存</button> 
+                    </div>
+                </div>
             </div>
         </div>
     </body>
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script type="text/javascript"></script>
     <script>
+        function temp(id) {
+            return document.getElementById(id);
+        }
+        temp('pop-container').style.display = 'block';
+
+        // 点击右上角X弹出层隐藏
+        temp('close-pop').onclick = function() {
+            temp('pop-container').style.display = 'none';
+            window.location.href="/discovery/test";
+        }
+
+        //编辑数据
+        $('#save').click(function(){
+            $.ajax({
+                url: 'edittest',
+                method: 'post',
+                data:{
+                    title: $('#title').val(),
+                    content: $('#content').val()
+                },
+                success:function(data){
+                    if(data == "success"){
+                        window.location.href="/discovery/test";
+                    }
+                }
+            });
+        })
+
         // 分页
         function getzz() {
             var a = $("ul#all li");
@@ -98,8 +152,8 @@
                 var html='<li>'
                             +'<div class="Gamehead">'
                                 +'<h3 class="Gamehead1">编号</h3>'
-                                +'<h3 class="Gamehead1">游戏名</h3>'
-                                +'<h3 class="Gamehead1">资料</h3>'
+                                +'<h3 class="Gamehead1">标题</h3>'
+                                +'<h3 class="Gamehead1">详细信息</h3>'
                                 +'<h3 class="Gamehead1">操作</h3>'
                             +'</div>'
                         +'</li>';
@@ -108,8 +162,8 @@
                 var html='<li>'
                             +'<div class="Gamehead">'
                                 +'<h3 class="Gamehead1">编号</h3>'
-                                +'<h3 class="Gamehead1">游戏名</h3>'
-                                +'<h3 class="Gamehead1">资料</h3>'
+                                +'<h3 class="Gamehead1">标题</h3>'
+                                +'<h3 class="Gamehead1">详细信息</h3>'
                                 +'<h3 class="Gamehead1">操作</h3>'
                             +'</div>'
                         +'</li>';

@@ -61,7 +61,7 @@
                             <p class='Gamebody'><%= knowledge[i].knowledgeTitle %></p>
                             <p class='Gamebody'><%= knowledge[i].knowledgeContent %></p>
                             <p class='Gamebody'>
-                                <a href="editknowledge">
+                                <a href="editknowledge?knowledgeId=<%= knowledge[i].knowledgeId %>">
                                     <button class='Gamebianji' id="bianji">编辑</button>
                                 </a>
                                 <a href="deleteknowledge?knowledgeId=<%= knowledge[i].knowledgeId %>">
@@ -84,7 +84,7 @@
                 <div id="cover-tier" class="popPosition"></div>
                 <div id="pop-tier" class="popPosition">
                     <i id="close-pop">&#10006;</i>
-                    <form style="margin-top:50px;">
+                    <div style="margin-top:50px;">
                         <div class='text'>
                             <h4>知识标题：</h4>
                             <input type="text" id="title"/>
@@ -94,7 +94,7 @@
                             <textarea id="content"></textarea>
                         </div>
                         <button type="submit" id="save" class="systemSave">保存</button> 
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>  

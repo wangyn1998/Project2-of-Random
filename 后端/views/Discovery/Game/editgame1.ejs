@@ -30,9 +30,21 @@
         </div>
         <div class="right">
             <div class="box1">
-                <h2>您搜索的结果是:</h2>
+                <div class='search'>
+                    <form style="line-height: 2.5em;">
+                        <input class='Bar' placeholder="请输入要搜索的游戏名"/>
+                        <div class="iconfont icon-xiaoxi-" style="float:left;">
+                            <input type="submit" value="搜索"style="height:30px;border:none;">
+                        </div>
+                    </form>
+                </div>
             </div>
-            <br/>
+            <div class="box2">
+                <p style="font-size:22px;font-weight:bold">盒我学游戏管理
+                    <span style="margin-left:30px" class="iconfont icon-wuuiconxiangjifangda" id="add"></span>
+                    <span style="font-size:20px;margin-left:5px;font-weight:lighter">添加</span>
+                </p>
+            </div>
             <div class='Gamebox3'>
                 <ul id="all">
                     <!-- <li>
@@ -60,22 +72,64 @@
                     <% } %>
                 </ul>
             </div>
-            <div style="width:945px;height:30px;text-align:center;margin:20px auto;"> 
+            <div style="width:945px;height:30px;text-align:center;margin:0 auto;"> 
                 <div class="page">
                     <div id="page">
                     </div>
                 </div>
             </div>
-            <div style="margin-right:10%;float:right">
-                <a href='/discovery/game'>
-                    <button class="return">返回</button>
-                </a>
+        </div>
+        <div>
+            <div id="pop-container">
+                <div id="cover-tier" class="popPosition"></div>
+                <div id="pop-tier" class="popPosition">
+                    <i id="close-pop">&#10006;</i>
+                    <div style="margin-top:50px;">
+                        <div class='text'>
+                            <h4>游戏名：</h4>
+                            <input type="text" id="gameName" value="<%= editdata.gameName %>"/>
+                        </div>
+                        <div class='content'>
+                            <h4>资料：</h4>
+                            <textarea id="gameContent"><%= editdata.gameContent %></textarea>
+                        </div>
+                        <button type="submit" id="save" class="systemSave">保存</button> 
+                    </div>
+                </div>
             </div>
         </div>
     </body>
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script type="text/javascript"></script>
     <script>
+        function temp(id) {
+            return document.getElementById(id);
+        }
+        temp('pop-container').style.display = 'block';
+        
+        // 点击右上角X弹出层隐藏
+        temp('close-pop').onclick = function() {
+            temp('pop-container').style.display = 'none';
+            window.location.href="/discovery/game";
+        }
+        
+        //编辑数据
+        $('#save').click(function(){
+            $.ajax({
+                url:'editgame',
+                method:'post',
+                data:{
+                    gameName: $('#gameName').val(),
+                    gameContent: $('#gameContent').val()
+                },
+                success:function(data){
+                    if(data == 'success'){
+                        window.location.href="/discovery/game";
+                    }
+                }
+            })
+        })
+
         // 分页
         function getzz() {
             var a = $("ul#all li");
