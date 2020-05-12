@@ -27,7 +27,7 @@
         <div class="right">
             <div class="box1">
                 <div class='search'>
-                    <form style="line-height: 2.5em;"  method="post" action="/searchtask">
+                    <form style="line-height: 2.5em;"  method="post" action="/score/searchtask">
                         <input class='Bar' placeholder="请输入要查找的任务编号" name='taskId'/>
                         <div class="iconfont icon-xiaoxi-" style="float:left;">
                             <input type="submit" value="搜索"style="height:30px;border:none;">
@@ -85,7 +85,7 @@
                 <div id="cover-tier" class="popPosition"></div>
                 <div id="pop-tier" class="popPosition">
                     <i id="close-pop">&#10006;</i>
-                    <form action="/addtask" method="post">
+                    <form action="/score/addtask" method="post">
                     <div style="width:380px;float:left;">
                         <h2 style="float:left;margin-left:20px;margin-top:25px;margin-bottom: 10px;">任务内容:</h2>
                         <input type='text' id="content" style="width:340px;height:200px;"name="content"  />
