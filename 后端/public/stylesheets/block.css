@@ -88,6 +88,22 @@
     background-color: #fff;
     color: #79be3b;
 }
+.Postdate{
+    width: 70%;
+    float: left;
+    height: 30px;
+    margin-top: 8px;
+    border-radius: 10px;
+    border: 1px solid #eee;
+}
+.Postdate input{
+    width: 100%;
+    height: 26px;
+    font-size:15px;
+    float: left;
+    border-style: none;
+    
+}
 /* 提示框 */
 .tip{
     width: 250px;
