@@ -103,13 +103,13 @@ router.get('/deleteuser', function(req, res, next) {
 });
 /**搜索用户 */
 router.post('/searchuser', function(req, res, next) {
-  var userName=req.body.userName;
-  con.query("select * from user where userName=?",[userName],function(err,result){
+  var userPhone=req.body.userPhone;
+  con.query("select * from user where userPhone=?",[userPhone],function(err,result){
     if(err){
       console.log(err);
     }
     else{
-      res.render('User/searchUser', { userList:result,userName:userName });
+      res.render('User/searchUser', { userList:result,userPhone:userPhone });
     }
   })
 });
