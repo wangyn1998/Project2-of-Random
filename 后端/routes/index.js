@@ -282,7 +282,7 @@ router.get('/score/deletetask', function(req, res, next) {
   })
 });
 /**搜索任务 */
-router.post('/searchtask', function(req, res, next) {
+router.post('/score/searchtask', function(req, res, next) {
   var taskId=req.body.taskId;
   con.query("select * from task where taskId=?",[taskId],function(err,result){
     if(err){
@@ -294,7 +294,7 @@ router.post('/searchtask', function(req, res, next) {
   })
 });
 /**添加任务 */
-router.post('/addtask', function(req, res, next) {
+router.post('/score/addtask', function(req, res, next) {
   var score=req.body.score;
   var content=req.body.content;
   console.log(score);
