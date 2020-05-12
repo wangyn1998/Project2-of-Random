@@ -160,4 +160,35 @@ router.post('/addbox', function(req, res, next) {
 //张结束
 
 
+//wang
+router.get('/knowledge', function(req, res, next) {
+  var con = mysql.createConnection(dbconfig);
+  con.connect();
+  con.query("select * from knowledge ",function(err,result){
+    if(err){
+      console.log(err);
+    }
+    else{
+      res.send(result);
+    }
+  });
+});
+
+router.get('/test', function(req, res, next) {
+  var con = mysql.createConnection(dbconfig);
+  con.connect();
+  con.query("select * from test ",function(err,result){
+    if(err){
+      console.log(err);
+    }
+    else{
+      res.send(result);
+    }
+  });
+});
+
+//wang
+
+
+
 module.exports = router;
