@@ -46,12 +46,12 @@
                             <p class='Taskbody'><%= taskList[i]["taskScore"] %></p> 
                             <div class='Taskbody'>
                                 <div class='Topicoperation'>
-                                    <form method="post" action="/edit1" class="operation1">
+                                    <a href='/score/editstar1?taskId=<%= taskList[i].taskId%>'class='operation1'>
                                         <button style="color: white;border:1px solid white;width: 50px;
                                         height: 30px;">编辑
                                             <input type='submit' style="float: right;border:1px solid #79be3b;background-color: #79be3b;" id='bianji' name="task" value=''></button>
-                                    </form>
-                                    <a href='/score/deletemanage?taskId=<%= taskList[i]["taskId"]%>'><button  style=" width: 50px;
+                                    </a>
+                                    <a href='/score/deletetask?taskId=<%= taskList[i]["taskId"]%>'><button  style=" width: 50px;
                                         height: 30px;
                                         background-color: #fff;
                                         border:1px solid #888;
