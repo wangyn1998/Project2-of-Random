@@ -43,8 +43,8 @@
                     </a>
                 </p>
                 <div class='block-search'>
-                    <form style="line-height: 2.5em;">
-                        <input class='Bar' placeholder="请输入"/>
+                    <form style="line-height: 2.5em;" method="post" action="/searchreply">
+                        <input class='Bar' placeholder="请输入"  name='userName'/>
                         <div class="iconfont icon-xiaoxi-" style="float:left;">
                             <input type="submit" value="搜索" style="height:30px;border:none;">
                         </div>
@@ -54,24 +54,29 @@
             
             <div class='Blockbox3' style="margin-top: 70px;">
                 <ul id="all">
-                    <% for(var i =1;i<2;i++){ %>
-                        <li> 
-                            <div class='Blockbody'>
-                                <img class="Blockimg"
-                                    src="https://dss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3744215463,383557679&fm=26&gp=0.jpg"
-                                >
-                                <p class="post-text" style="font-weight: bold;">一朵风中摇曳的向日葵</p>
-                                <p class="post-text">857 857</p>
-                            </div>
-                            <p class='Blockbody'>
-                                <a href="/delreply">
-                                    <button class='Blockdel' id="remove">移除</button>
-                                </a>
-                            </p>
-                            <p class='Blockbody'>xxx</p>
-                            <p class='Blockbody'>2020.01.01</p>
-                        </li>
-                    <% } %>
+                    <%if(replyList.length==0){%>
+                        <li>&nbsp;</li>
+                        <%}else{%>
+                            <% for(var i=0;i<replyList.length;i++){%>
+                                <li> 
+                                    <div class='Blockbody'>
+                                        <img class="Blockimg"
+                                            src="<%=replyList[i]["userImage"]%>"
+                                        >
+                                        <p class="post-text" style="font-weight: bold;"><%=replyList[i]["userName"]%></p>
+                                        <p class="post-text"><%=replyList[i]["replyContent"]%></p>
+                                    </div>
+                                    <p class='Blockbody'>
+                                        <a href="/delreply?id=<%=replyList[i]["replyId"]%>">
+                                            <button class='Blockdel' id="remove">移除</button>
+                                        </a>
+                                    </p>
+                                    <p class='Blockbody'><%=replyList[i]["adminUsername"]%></p>
+                                    <p class='Blockbody'>2020.01.01</p>
+                                </li>
+                            <% } %>
+                        <%}%>
+                    
                 </ul>
             </div>
             <div style="width:945px;height:30px;text-align:center;margin:0 auto;"> 
