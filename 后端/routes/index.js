@@ -309,39 +309,39 @@ router.post('/addtask', function(req, res, next) {
 });
 let taskId=0;
 /**编辑任务 */
-router.post('/edit', function(req, res, next) {
-  taskId=req.body.task;
+router.get('/score/edit', function(req, res, next) {
+  taskId=req.query.taskId;
   console.log(taskId);
-  con.query("select * from task",function (err,result) {
+  con.query("select * from task;select * from task where taskId=?",[taskId],function (err,result) {
     if(err){
       console.log(err);
     }else{
-      res.render("Score/editTask",{taskList:result});
+      res.render("Score/editTask",{taskList:result[0],editdata:result[1][0]})
+    }
+  });
+});
+router.post('/score/edit', function(req, res, next) {
+  var taskContent=req.body.taskContent;
+  var taskScore=req.body.taskScore;
+  console.log(taskScore)
+  con.query("update task set taskContent=?,taskScore=? where taskId=?",[taskContent,taskScore,taskId],function (err,result) {
+    if(err){
+      console.log(err);
+    }else{
+      res.end('success');
     }
   });
 });
 /**编辑搜索任务 */
-router.post('/edit1', function(req, res, next) {
-  taskId=req.body.task;
+router.get('/score/edit1', function(req, res, next) {
+  taskId=req.query.taskId;
   console.log(taskId);
   con.query("select * from task where taskId=?",[taskId],function (err,result) {
     if(err){
       console.log(err);
     }else{
-      console.log(result)
-      res.render("Score/editTask1",{taskList:result});
-    }
-  });
-});
-/**更新任务 */
-router.post('/updatetask', function(req, res, next) {
-  var taskContent=req.body.content1;
-  var taskScore=req.body.score1;
-  con.query("update task set taskContent=?,taskScore=? where taskId=?",[taskContent,taskScore,taskId],function (err,result) {
-    if(err){
-      console.log(err);
-    }else{
-      res.render('Score/updateTask', { title: 'updatetask'});
+      res.render("Score/editTask1",{taskList:result,editdata:result[0]});
+
     }
   });
 });
