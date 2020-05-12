@@ -592,8 +592,9 @@ router.post('/discovery/addgame', function(req, res, next) {
   });
 });
 //搜索游戏
+var game = '';
 router.post('/discovery/searchgame', function(req, res, next) {
-  var game = req.body.game;
+  game = req.body.game;
   con.query("select * from game where gameName=?",[game],function(err,result){
     if(err){
       console.log(err);
@@ -617,8 +618,40 @@ router.get('/discovery/deletegame', function(req, res, next) {
   });
 });
 //编辑游戏
+var gameId = 0;
 router.get('/discovery/editgame', function(req, res, next) {
-  res.render('Discovery/Game/editgame', { title: 'editgame' });
+  gameId = req.query.gameId;
+  con.query("select * from game;select * from game where gameId=?",[gameId],function(err,result){
+    if(err){
+      console.log(err);
+    }
+    else{
+      res.render('Discovery/Game/editgame', { game:result[0],editdata:result[1][0] }); 
+    }
+  });
+});
+router.post('/discovery/editgame', function(req, res, next) {
+  var name = req.body.gameName;
+  var content = req.body.gameContent; 
+  con.query("update game set gameName=?,gameContent=? where gameId=?",[name,content,gameId],function(err,result){
+    if(err){
+      console.log(err);
+    }
+    else{
+      res.end('success');
+    }
+  });
+});
+router.get('/discovery/editgame1', function(req, res, next) {
+  gameId = req.query.gameId;
+  con.query("select * from game where gameName=?;select * from game where gameId=?",[game,gameId],function(err,result){
+    if(err){
+      console.log(err);
+    }
+    else{
+      res.render('Discovery/Game/editgame1', { game:result[0],editdata:result[1][0] }); 
+    }
+  });
 });
 /*知识管理*/
 router.get('/discovery/knowledge', function(req, res, next) {
@@ -645,9 +678,10 @@ router.post('/discovery/addknowledge', function(req, res, next) {
   });
 });
 //搜索知识
+var knowledge = '';
 router.post('/discovery/searchknowledge', function(req, res, next) {
-  var title = req.body.knowledge;
-  con.query("select * from knowledge where knowledgeTitle=?",[title],function(err,result){
+  knowledge = req.body.knowledge;
+  con.query("select * from knowledge where knowledgeTitle=?",[knowledge],function(err,result){
     if(err){
       console.log(err);
     }
@@ -669,8 +703,40 @@ router.get('/discovery/deleteknowledge', function(req, res, next) {
   });
 });
 //编辑知识
+var knowledgeId = 0; 
 router.get('/discovery/editknowledge', function(req, res, next) {
-  res.render('Discovery/Knowledge/editknowledge', { title: 'editknowledge' });
+  knowledgeId = req.query.knowledgeId;
+  con.query("select * from knowledge;select * from knowledge where knowledgeId=?",[knowledgeId],function(err,result){
+    if(err){
+      console.log(err);
+    }
+    else{
+      res.render('Discovery/Knowledge/editknowledge', { knowledge:result[0],editdata:result[1][0] }); 
+    }
+  });
+});
+router.post('/discovery/editknowledge', function(req, res, next) {
+  var title = req.body.title;
+  var content = req.body.content; 
+  con.query("update knowledge set knowledgeTitle=?,knowledgeContent=? where knowledgeId=?",[title,content,knowledgeId],function(err,result){
+    if(err){
+      console.log(err);
+    }
+    else{
+      res.end('success');
+    }
+  });
+});
+router.get('/discovery/editknowledge1', function(req, res, next) {
+  knowledgeId = req.query.knowledgeId;
+  con.query("select * from knowledge where knowledgeTitle=?;select * from knowledge where knowledgeId=?",[knowledge,knowledgeId],function(err,result){
+    if(err){
+      console.log(err);
+    }
+    else{
+      res.render('Discovery/Knowledge/editknowledge1', { knowledge:result[0],editdata:result[1][0] }); 
+    }
+  });
 });
 /*每日推荐管理*/
 router.get('/discovery/recommend', function(req, res, next) {
@@ -697,9 +763,10 @@ router.post('/discovery/addrecommend', function(req, res, next) {
   });
 });
 //搜索每日推荐
+var recommend = '';
 router.post('/discovery/searchrecommend', function(req, res, next) {
-  var time = req.body.recommend;
-  con.query("select * from recommend where recommendTime=?",[time],function(err,result){
+  recommend = req.body.recommend;
+  con.query("select * from recommend where recommendTime=?",[recommend],function(err,result){
     if(err){
       console.log(err);
     }
@@ -722,8 +789,40 @@ router.get('/discovery/deleterecommend', function(req, res, next) {
   
 });
 //编辑每日推荐
+var recommendId = 0; 
 router.get('/discovery/editrecommend', function(req, res, next) {
-  res.render('Discovery/Recommend/editrecommend', { title: 'editrecommend' });
+  recommendId = req.query.recommendId;
+  con.query("select * from recommend;select * from recommend where recommendId=?",[recommendId],function(err,result){
+    if(err){
+      console.log(err);
+    }
+    else{
+      res.render('Discovery/Recommend/editrecommend', { recommend:result[0],editdata:result[1][0] }); 
+    }
+  });
+});
+router.post('/discovery/editrecommend', function(req, res, next) {
+  var time = req.body.time;
+  var content = req.body.content; 
+  con.query("update recommend set recommendTime=?,recommendContent=? where recommendId=?",[time,content,recommendId],function(err,result){
+    if(err){
+      console.log(err);
+    }
+    else{
+      res.end('success');
+    }
+  });
+});
+router.get('/discovery/editrecommend1', function(req, res, next) {
+  recommendId = req.query.recommendId;
+  con.query("select * from recommend where recommendTime=?;select * from recommend where recommendId=?",[recommend,recommendId],function(err,result){
+    if(err){
+      console.log(err);
+    }
+    else{
+      res.render('Discovery/Recommend/editrecommend1', { recommend:result[0],editdata:result[1][0] }); 
+    }
+  });
 });
 /*考试信息管理*/
 router.get('/discovery/test', function(req, res, next) {
@@ -750,9 +849,10 @@ router.post('/discovery/addtest', function(req, res, next) {
   });
 });
 //搜索考试信息
+var test = '';
 router.post('/discovery/searchtest', function(req, res, next) {
-  var title = req.body.test;
-  con.query("select * from test where testTitle=?",[title],function(err,result){
+  test = req.body.test;
+  con.query("select * from test where testTitle=?",[test],function(err,result){
     if(err){
       console.log(err);
     }
@@ -774,8 +874,40 @@ router.get('/discovery/deletetest', function(req, res, next) {
   });
 });
 //编辑考试信息
+var testId = 0; 
 router.get('/discovery/edittest', function(req, res, next) {
-  res.render('Discovery/Test/edittest', { title: 'edittest' });
+  testId = req.query.testId;
+  con.query("select * from test;select * from test where testId=?",[testId],function(err,result){
+    if(err){
+      console.log(err);
+    }
+    else{
+      res.render('Discovery/Test/edittest', { test:result[0],editdata:result[1][0] }); 
+    }
+  });
+});
+router.post('/discovery/edittest', function(req, res, next) {
+  var title = req.body.title;
+  var content = req.body.content; 
+  con.query("update test set testTitle=?,testContent=? where testId=?",[title,content,testId],function(err,result){
+    if(err){
+      console.log(err);
+    }
+    else{
+      res.end('success');
+    }
+  });
+});
+router.get('/discovery/edittest1', function(req, res, next) {
+  testId = req.query.testId;
+  con.query("select * from test where testTitle=?;select * from test where testId=?",[test,testId],function(err,result){
+    if(err){
+      console.log(err);
+    }
+    else{
+      res.render('Discovery/Test/edittest1', { test:result[0],editdata:result[1][0] }); 
+    }
+  });
 });
 /*系统管理*/
 //显示管理员信息
