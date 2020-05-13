@@ -41,12 +41,12 @@
                             <p class='starbody'><%= achieveList[i]["achieveName"] %></p>  
                             <div class='starbody'>
                                 <div class='Topicoperation'>
-                                    <form method="post" action="/editstar1" class="operation1">
+                                    <a href='/score/editstar1?achieveId=<%= achieveList[i].achieveId%>'class='operation1'>
                                         <button style="color: white;border:1px solid white;width: 50px;
                                         height: 30px;">编辑
-                                            <input type='submit' style="float: right;border:1px solid #79be3b;background-color: #79be3b;" id='bianji' name="achieve" value='<%= achieveList[i]["achieveId"] %>''></button>
-                                    </form>
-                                    <a href='/score/deletestar'><button  style=" width: 50px;
+                                            <input type='submit' style="float: right;border:1px solid #79be3b;background-color: #79be3b;" id='bianji' name="task" value=''></button>
+                                    </a>
+                                    <a href='/score/deletestar?achieveId=<%= achieveList[i]["achieveId"]%>'><button  style=" width: 50px;
                                         height: 30px;
                                         background-color: #fff;
                                         border:1px solid #888;
@@ -74,16 +74,14 @@
                 <div id="cover-tier1" class="popPosition1"></div>
                 <div id="pop-tier1" class="popPosition1">
                     <i id="close-pop1">&#10006;</i>
-                    <form action="/updatestar" method="post">
                     <div style="width:380px;float:left;">
                         <h2 style="float:left;margin-left:20px;margin-top:25px;margin-bottom: 10px;">星星数:</h2>
-                        <input type='text' id="content" style="width:340px;height:200px;"name="content1"  />
+                        <input type='text' id="achieveStarNum" style="width:340px;height:200px;"name="content1" value='<%= editdata.achieveStarNum%>' />
                     </div>
                     <h2 style="float:left;margin-left:20px;margin-top:25px;" >成就:</h2>
-                    <input type='text' id="create" style="width:265px;height:30px;margin-top:25px;"name='score1'/>
+                    <input type='text' id="achieveName" style="width:265px;height:30px;margin-top:25px;"name='score1'value='<%= editdata.achieveName%>'/>
                     <br/>
                     <input value="保存" id="save" type="submit" style="float:right;border:'1px soild #61b3ed';margin-right:20px;width:55px;height:30px;background-color:#79be3b;color:'#ffffff';margin-top: 10px;"/>
-                </form>
             </div>
         </div>
     </body>
@@ -97,6 +95,22 @@
         temp('pop-container1').style.display = 'none';
         window.location.href="/score/achievement"
     }
+    $("#save").click(function(){
+        $.ajax({
+            url:'editstar',
+            method:'post',
+            data:{achieveName:$("#achieveName").val(),
+            achieveStarNum:$('#achieveStarNum').val()
+                
+            },
+            success:function(data){
+                if(data=='success'){
+                    window.location.href='/score/achievement'
+                }
+            }
+
+        })
+    })
     function getzz() {
         var a = $("ul#all li");
         var zz =new Array(a.length);
