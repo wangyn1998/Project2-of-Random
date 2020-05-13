@@ -347,6 +347,7 @@ router.get('/score/edit1', function(req, res, next) {
 });
 //成就管理
 /**获取成就 */
+var achievementList;
 router.get('/score/achievement', function(req, res, next) {
   var con=mysql.createConnection(dbconfig);
   con.connect();
@@ -355,6 +356,8 @@ router.get('/score/achievement', function(req, res, next) {
       console.log(err);
     }
     else{
+      achievementList=result;
+      console.log(achievementList)
       res.render('Score/achievement', { achieveList:result });
      }
   })
