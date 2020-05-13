@@ -552,8 +552,9 @@ router.get('/box/deletecard', function(req, res, next) {
   });
 });
 // 学习记录
+let userName;
 router.get('/box/record', function(req, res, next) {
-  var userName=req.query.userName;
+  userName=req.query.userName;
   console.log(userName);
   con.query("select * from record where userName=?",[userName],function(err,result){
     if(err){
@@ -566,7 +567,14 @@ router.get('/box/record', function(req, res, next) {
 });
 // 成就
 router.get('/box/achievementdetail', function(req, res, next) {
-  res.render('Box/achievementDetail', { title: 'card' });
+  con.query("select * from record where userName=?",[userName],function(err,result){
+    if(err){
+      console.log(err);
+    }
+    else{
+     res.render("Box/achievementDetail",{recordList:result,userName:userName});
+    }
+  })
 });
 /**发现管理*/
 router.get('/discovery', function(req, res, next) {
