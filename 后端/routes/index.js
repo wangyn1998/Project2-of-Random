@@ -373,7 +373,7 @@ router.get('/score/deletestar', function(req, res, next) {
 });
 let achieveStarNum='';
 /**搜索成就 */
-router.post('/searchstar', function(req, res, next) {
+router.post('/score/searchstar', function(req, res, next) {
   achieveStarNum=req.body.achieveStarNum;
   con.query("select * from achieve where achieveStarNum=?",[achieveStarNum],function(err,result){
     if(err){
@@ -385,7 +385,7 @@ router.post('/searchstar', function(req, res, next) {
   })
 });
 /**添加成就 */
-router.post('/addstar', function(req, res, next) {
+router.post('/score/addstar', function(req, res, next) {
   var score=req.body.score;
   var content=req.body.content;
   console.log(score);
@@ -400,41 +400,43 @@ router.post('/addstar', function(req, res, next) {
 });
 let achieveId=0;
 /**编辑成就 */
-router.post('/editstar', function(req, res, next) {
-  achieveId=req.body.achieve;
-  con.query("select * from achieve",function (err,result) {
+router.get('/score/editstar', function(req, res, next) {
+  achieveId=req.query.achieveId;
+  con.query("select * from achieve;select * from achieve where achieveId=?",[achieveId],function (err,result) {
     if(err){
       console.log(err);
     }else{
-      res.render("Score/editStar",{achieveList:result});
-    }
-  });
-});
-/**编辑搜索成就 */
-router.post('/editstar1', function(req, res, next) {
-  achieveId=req.body.achieve;
-  con.query("select * from achieve where achieveStarNum=?",[achieveStarNum],function (err,result) {
-    if(err){
-      console.log(err);
-    }else{
-      res.render("Score/editStar1",{achieveList:result});
+      res.render("Score/editStar",{achieveList:result[0],editdata:result[1][0]});
     }
   });
 });
 /** 更新成就*/
-router.post('/updatestar', function(req, res, next) {
-  var achieveName=req.body.content1;
-  var achieveStarNum=req.body.score1;
+router.post('/score/editstar', function(req, res, next) {
+  var achieveName=req.body.achieveName;
+  var achieveStarNum=req.body.achieveStarNum;
+  console.log(achieveId)
   console.log(achieveName);
   console.log(achieveStarNum)
   con.query("update achieve set achieveName=?,achieveStarNum=? where achieveId=?",[achieveName,achieveStarNum, achieveId],function (err,result) {
     if(err){
       console.log(err);
     }else{
-      res.render('Score/updateStar', { title: 'updatestar'});
+      res.end('success');
     }
   });
 });
+/**编辑搜索成就 */
+router.get('/score/editstar1', function(req, res, next) {
+  achieveId=req.query.achieveId;
+  con.query("select * from achieve where achieveStarNum=?",[achieveStarNum],function (err,result) {
+    if(err){
+      console.log(err);
+    }else{
+      res.render("Score/editStar1",{achieveList:result,editdata:result[0]});
+    }
+  });
+});
+
 /* 盒子管理*/
 // 获取盒子用户列表
 router.get('/box', function(req, res, next) {
