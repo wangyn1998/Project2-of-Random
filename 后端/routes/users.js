@@ -311,6 +311,49 @@ router.post('/addbox', function(req, res, next) {
     }
   });
 });
+var boxid=0;
+router.post('/boxId',function(req,res,next){
+  boxid=req.body.id;
+  console.log(boxid);
+})
+router.get('/allcard', function(req, res, next) {
+  var username='fym'
+  con.query("select * from card where boxId=?",[boxid],function(err,result){
+    if(err){
+      console.log(err);
+    }else{
+      res.send(result);
+    }
+  });
+});
+router.post('/addcard', function(req, res, next) {
+  con.query("insert into card(boxId,cardQues,cardAns) values(?,?,?)",[boxid,req.body.que,req.body.ans],function(err,result){
+    if(err){
+      console.log(err);
+    }else{
+      res.send({success:true})
+    }
+  });
+});
+router.post('/delcard', function(req, res, next) {
+  console.log(req.body);
+  con.query("delete from card where cardId=?",[req.body.id],function(err,result){
+    if(err){
+      console.log(err);
+    }else{
+      res.send({success:true})
+    }
+  });
+});
+router.post('/updatecard', function(req, res, next) {
+  con.query("update card set cardQues=?,cardAns=? where cardId=?",[req.body.que,req.body.ans,req.body.id],function(err,result){
+    if(err){
+      console.log(err);
+    }else{
+      res.send({success:true})
+    }
+  });
+});
 //张结束
 
 
