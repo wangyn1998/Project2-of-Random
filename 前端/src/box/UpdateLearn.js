@@ -6,6 +6,50 @@ import { Actions } from 'react-native-router-flux';
 const {width,scale,height}=Dimensions.get('window');
 const w=width,h=height;
 export default class UpdateLearn extends Component {
+    constructor(){
+        super();
+        this.state={
+            text1:'',
+            text2:''
+        }
+    }
+    componentDidMount(){
+        var a=this.props.que,
+        b=this.props.ans;
+        this.state={
+            text1:a,
+            text2:b
+        }
+        console.log(this.state.text1);
+    }
+    save=()=>{
+        let text1 = {id:this.props.id,que:this.state.text1,ans:this.state.text2} 
+        let send = JSON.stringify(text1); 
+        fetch(`http://172.17.100.2:3000/users/updatecard`,{
+            method: 'POST',
+            headers: {'Content-Type': 'application/json; charset=utf-8'},
+            body: send
+        })
+        .then(res => res.json())
+        .then(
+            data => {
+                if(data.success){
+                    Actions.pop({refresh:{'key':'333'}});
+                    
+                }
+            }
+        )
+    }
+    changeText1=(text)=>{
+        this.setState({
+            text1:text
+        })
+    }
+    changeText2=(text)=>{
+        this.setState({
+            text2:text
+        })
+    }
     render() {
         return (
             <View style={{flex:1,width:w,height:h,justifyContent:'center',alignItems:'center',backgroundColor:'#fff'}}>
@@ -15,14 +59,14 @@ export default class UpdateLearn extends Component {
                     <View style={styles.que}>
                         <Text style={{fontSize:27,marginRight:20}}>问题</Text>
                         <Image source={require('../../images/box-a1.png')} style={{position:'relative',width:'50%',height:h*0.2,resizeMode:'stretch'}}/>
-                        <TextInput style={{left:w*0.36,top:10,position:'absolute',width:'45%',height:h*0.18,fontSize:16}} multiline={true} autoFocus={true} defaultValue='Apple'/>
+                        <TextInput style={{left:w*0.36,top:10,position:'absolute',width:'45%',height:h*0.18,fontSize:16}} multiline={true} autoFocus={true} defaultValue={this.props.que} onChangeText={(text)=>{this.changeText1(text)}}/>
                     </View>
                     <View style={styles.que}>
                         <Text style={{fontSize:27,marginRight:20}}>答案</Text>
                         <Image source={require('../../images/box-a1.png')} style={{position:'relative',width:'50%',height:h*0.2,resizeMode:'stretch'}}/>
-                        <TextInput style={{left:w*0.36,top:10,position:'absolute',width:'45%',height:h*0.18,fontSize:16}} multiline={true} defaultValue='n. 苹果，苹果树，苹果似的东西；[美俚]炸弹，手榴弹，（棒球的）球；[美俚]人，家伙。[网络] 苹果；苹果公司；苹果电脑[专业] 苹果 [农业科学]；苹果 [机械工程]'/>
+                        <TextInput style={{left:w*0.36,top:10,position:'absolute',width:'45%',height:h*0.18,fontSize:16}} multiline={true} defaultValue={this.props.ans} onChangeText={(text)=>{this.changeText2(text)}}/>
                     </View>
-                    <TouchableOpacity style={styles.btn} onPress={()=>{Actions.pop()}}><Text style={{fontSize:20}}>保存</Text></TouchableOpacity>
+                    <TouchableOpacity style={styles.btn} onPress={()=>{this.save()}}><Text style={{fontSize:20}}>保存</Text></TouchableOpacity>
                </View>
             </View>
         )

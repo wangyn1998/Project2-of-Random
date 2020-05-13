@@ -71,7 +71,7 @@ export default class AddBox extends Component {
         .then(
             data => {
                 if(data.success){
-                    Actions.pop({refresh:{test:true}});
+                    Actions.pop({refresh:{'key':data}});
                 }
             }
         )

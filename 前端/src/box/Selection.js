@@ -15,6 +15,19 @@ export default class Selection extends Component {
             toValue:1,
             duration:1000
         }).start()
+        let text1 = {id:this.props.id} 
+        let send = JSON.stringify(text1); 
+        fetch(`http://172.17.100.2:3000/users/boxId`,{
+            method: 'POST',
+            headers: {'Content-Type': 'application/json; charset=utf-8'},
+            body: send
+        })
+        .then(res => res.json())
+        .then(
+            data => {
+
+            }
+        )
     }
     back=()=>{
         Animated.timing(this.state.opacity,{

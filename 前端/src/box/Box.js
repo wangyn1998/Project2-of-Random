@@ -89,13 +89,15 @@ export default class Box extends Component {
                     list:list
                 })
             })
+            list2=[];
             await fetch('http://172.17.100.2:3000/users/box')
                 .then((res)=>res.json())
                 .then((res)=>{
                     for(var i=0;i<res.length;i++){
                         var obj={
                             text:res[i].boxName,
-                            img:res[i].boxImg
+                            img:res[i].boxImg,
+                            id:res[i].boxId
                         }
                         list2.push(obj);
                     }
@@ -158,7 +160,7 @@ export default class Box extends Component {
                             )
                         }
                         return (
-                            <TouchableOpacity onPress={()=>{Actions.light();Actions.refresh()}} style={{alignItems:'center',width:'50%',padding:10}}>
+                            <TouchableOpacity onPress={()=>{Actions.light({'id':item.id});Actions.refresh()}} style={{alignItems:'center',width:'50%',padding:10}}>
                                     <Image source={{uri:item.img}} style={{height:h*0.18,width:'65%'}}/>
                                     <Text style={{color:'#E81414',marginTop:10}}>{item.text}</Text>
                             </TouchableOpacity>
