@@ -43,20 +43,24 @@
                             <h3 class='Gamehead1'>操作</h3>
                         </div>
                     </li>  -->
-                    <% for(var i=0;i<recommend.length;i++){ %>
-                        <li> 
-                            <p class='Gamebody'><%= i+1 %></p>
-                            <p class='Gamebody'><%= recommend[i].recommendTime %></p>
-                            <p class='Gamebody'><%= recommend[i].recommendContent %></p>
-                            <p class='Gamebody'>
-                                <a href='editrecommend1?recommendId=<%= recommend[i].recommendId %>'>
-                                    <button class='Gamebianji'>编辑</button>
-                                </a>
-                                <a href='deleterecommend?recommendId=<%= recommend[i].recommendId %>'>
-                                    <button class='Gamedel'>移除</button>
-                                </a>
-                            </p>
-                        </li>
+                    <% if(recommend.length == 0){ %>
+                        <li>&nbsp;</li>
+                    <% }else{ %>
+                        <% for(var i=0;i<recommend.length;i++){ %>
+                            <li> 
+                                <p class='Gamebody'><%= i+1 %></p>
+                                <p class='Gamebody'><%= recommend[i].recommendTime %></p>
+                                <p class='Gamebody'><%= recommend[i].recommendContent %></p>
+                                <p class='Gamebody'>
+                                    <a href='editrecommend1?recommendId=<%= recommend[i].recommendId %>'>
+                                        <button class='Gamebianji'>编辑</button>
+                                    </a>
+                                    <a href='deleterecommend?recommendId=<%= recommend[i].recommendId %>'>
+                                        <button class='Gamedel'>移除</button>
+                                    </a>
+                                </p>
+                            </li>
+                        <% } %>
                     <% } %>
                 </ul>
             </div>
