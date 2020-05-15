@@ -58,16 +58,30 @@
                         </div>
                     </li>
                     <li>
-                        <div class='recordhead'>                      
-                        <h2 class='recordhead1' style="margin-block-start:0;
-                        margin-block-end: 0;"><%=recordList[0]["recordDay"]%></h2>
-                        <h2 class='recordhead2' style="margin-block-start:0;
-                        margin-block-end: 0;"><%=recordList[0]["recordClockIn"]%></h2>
-                        <h2 class='recordhead3' style="margin-block-start:0;
-                        margin-block-end: 0;"><%=recordList[0]["recordStars"]%></h2>
-                        <a href="/box/achievementdetail"><h2 class='recordhead3' style="margin-block-start:0;
-                        margin-block-end: 0;"><%=recordList[0]["recordAchievement"]%></h2></a>
-                        </div>
+                        <%if(recordList.length!=0){%>
+                            <div class='recordhead' id="tag" ok="false" >                      
+                                <h2 class='recordhead1' style="margin-block-start:0;
+                                margin-block-end: 0;"><%=recordList[0]["recordDay"]%></h2>
+                                <h2 class='recordhead2' style="margin-block-start:0;
+                                margin-block-end: 0;"><%=recordList[0]["recordClockIn"]%></h2>
+                                <h2 class='recordhead3' style="margin-block-start:0;
+                                margin-block-end: 0;"><%=recordList[0]["recordStars"]%></h2>
+                                <a href="/box/achievementdetail"><h2 class='recordhead3' style="margin-block-start:0;
+                                margin-block-end: 0;"><%=recordList[0]["recordAchievement"]%></h2></a>
+                                </div>
+                            <%}else{%>
+                                <div class='recordhead' id="tag" ok="true" >                      
+                                    <h2 class='recordhead1' style="margin-block-start:0;
+                                    margin-block-end: 0;">-</h2>
+                                    <h2 class='recordhead2' style="margin-block-start:0;
+                                    margin-block-end: 0;">-</h2>
+                                    <h2 class='recordhead3' style="margin-block-start:0;
+                                    margin-block-end: 0;">-</h2>
+                                    <a href="/box/achievementdetail"><h2 class='recordhead3' style="margin-block-start:0;
+                                    margin-block-end: 0;">-</h2></a>
+                                </div>
+                            <%}%>
+                        
                     </li>
                 </ul>
             </div>
@@ -80,16 +94,26 @@
     <script src="https://cdn.bootcss.com/echarts/4.2.1-rc1/echarts.min.js"></script>
     <script type="text/javascript " src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script>
-        
+        var data;
+        var length=<%=recordList.length%>;
+        console.log("前"+length)
+        if(length!=0){ 
+            console.log('you');
+            length=0;
+            data=[<%=recordList[0]["recordStars"]%>,1,1,1];
+        }else if(length==0){
+            console.log('沒數據');
+            data=[0,0,0,0];
+        }
+        console.log("后"+length);
         var myChart = echarts.init(document.getElementById('recordbox3'));
-        // 指定图表的配置项和数据
         var option = {
             title: {
                 text: '周学习情况'
             },
             tooltip: {},
             xAxis: {
-                data: ["星期一","星期二","星期三","星期四","星期五","星期六","星期日"]
+                data: ["累计学习天数","打卡数","星星数","成就数"]
             },
             yAxis: {},
             tooltip: {
@@ -100,7 +124,7 @@
             series: [{
                 name: '排名',
                 type: 'bar',
-                data: [30, 25, 6, 0, 20]
+                data: data
             }]
         };
 

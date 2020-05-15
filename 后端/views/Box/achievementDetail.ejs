@@ -58,16 +58,29 @@
                         </div>
                     </li>
                     <li>
-                        <div class='recordhead'>
-                        <h2 class='recordhead1' style="margin-block-start:0;
-                        margin-block-end: 0;">41</h2>
-                        <h2 class='recordhead2' style="margin-block-start:0;
-                        margin-block-end: 0;">5</h2>
-                        <h2 class='recordhead3' style="margin-block-start:0;
-                        margin-block-end: 0;">6</h2>
-                        <h2 class='recordhead3' style="margin-block-start:0;
-                        margin-block-end: 0;">4</h2>
-                        </div>
+                        <%if(recordList.length==0){%>
+                            <div class='recordhead' id="tag" ok="true" >                      
+                                <h2 class='recordhead1' style="margin-block-start:0;
+                                margin-block-end: 0;">-</h2>
+                                <h2 class='recordhead2' style="margin-block-start:0;
+                                margin-block-end: 0;">-</h2>
+                                <h2 class='recordhead3' style="margin-block-start:0;
+                                margin-block-end: 0;">-</h2>
+                                <a href="/box/achievementdetail"><h2 class='recordhead3' style="margin-block-start:0;
+                                margin-block-end: 0;">-</h2></a>
+                                </div>
+                            <%}else{%>
+                                <div class='recordhead' id="tag" ok="false" >                      
+                                <h2 class='recordhead1' style="margin-block-start:0;
+                                margin-block-end: 0;"><%=recordList[0]["recordDay"]%></h2>
+                                <h2 class='recordhead2' style="margin-block-start:0;
+                                margin-block-end: 0;"><%=recordList[0]["recordClockIn"]%></h2>
+                                <h2 class='recordhead3' style="margin-block-start:0;
+                                margin-block-end: 0;"><%=recordList[0]["recordStars"]%></h2>
+                                <a href="/box/achievementdetail"><h2 class='recordhead3' style="margin-block-start:0;
+                                margin-block-end: 0;"><%=recordList[0]["recordAchievement"]%></h2></a>
+                                </div>
+                            <%}%>
                     </li>
                 </ul>
             </div>
@@ -81,9 +94,10 @@
                         <i id="close-pop1">&#10006;</i>
                         <div>
                             <h2>成就列表</h2>
-                            <p style="font-size: 20px;">111</p>
-                            <p style="font-size: 20px;">111</p>
-                            <p style="font-size: 20px;">111</p>
+                            <div id="achievement">
+                                
+                            </div>
+                            
                         </div>
                     </div>
             </div>
@@ -97,7 +111,30 @@
         }
         temp('close-pop1').onclick = function() {
             temp('pop-container1').style.display = 'none';
-            window.location.href="/box/record"
+            window.location.href="/box/record?userName=<%=userName%>"
+        }
+        var achievement=temp('achievement');
+        var star=<%=recordList[0]["recordStars"]%>
+        console.log(star);
+        switch(true){
+            case star<30:
+                console.log(1);
+                achievement.innerHTML='<p style="font-size: 20px;"><%=achievementList[4]["achieveName"]%></p>';
+                break;
+            case star>29&&star<60:
+                achievement.innerHTML='<p style="font-size: 20px;"><%=achievementList[4]["achieveName"]%></p><p style="font-size: 20px;"><%=achievementList[0]["achieveName"]%></p>';
+                break;
+            case star>59&&star<90:
+                achievement.innerHTML='<p style="font-size: 20px;"><%=achievementList[4]["achieveName"]%></p><p style="font-size: 20px;"><%=achievementList[0]["achieveName"]%></p><p style="font-size: 20px;"><%=achievementList[1]["achieveName"]%></p>';
+                break;
+            case star>89&&star<120:
+                achievement.innerHTML='<p style="font-size: 20px;"><%=achievementList[4]["achieveName"]%></p><p style="font-size: 20px;"><%=achievementList[0]["achieveName"]%></p><p style="font-size: 20px;"><%=achievementList[1]["achieveName"]%></p><p style="font-size: 20px;"><%=achievementList[5]["achieveName"]%></p>';
+            case star>119&&star<150:
+                achievement.innerHTML='<p style="font-size: 20px;"><%=achievementList[4]["achieveName"]%></p><p style="font-size: 20px;"><%=achievementList[0]["achieveName"]%></p><p style="font-size: 20px;"><%=achievementList[1]["achieveName"]%></p><p style="font-size: 20px;"><%=achievementList[5]["achieveName"]%></p><p style="font-size: 20px;"><%=achievementList[3]["achieveName"]%></p>';
+                break;
+            case star>149:
+                achievement.innerHTML='<p style="font-size: 20px;"><%=achievementList[4]["achieveName"]%></p><p style="font-size: 20px;"><%=achievementList[0]["achieveName"]%></p><p style="font-size: 20px;"><%=achievementList[1]["achieveName"]%></p><p style="font-size: 20px;"><%=achievementList[5]["achieveName"]%></p><p style="font-size: 20px;"><%=achievementList[3]["achieveName"]%></p><p style="font-size: 20px;"><%=achievementList[2]["achieveName"]%></p>';
+                break;
         }
         var myChart = echarts.init(document.getElementById('recordbox3'));
         // 指定图表的配置项和数据
@@ -107,7 +144,7 @@
             },
             tooltip: {},
             xAxis: {
-                data: ["星期一","星期二","星期三","星期四","星期五","星期六","星期日"]
+                data: ["累计学习天数","打卡数","星星数","成就数"]
             },
             yAxis: {},
             tooltip: {
@@ -118,7 +155,7 @@
             series: [{
                 name: '排名',
                 type: 'bar',
-                data: [30, 25, 6, 0, 20]
+                data: [<%=recordList[0]["recordDay"]%>, <%=recordList[0]["recordClockIn"]%>,<%=recordList[0]["recordStars"]%>, <%=recordList[0]["recordAchievement"]%>]
             }]
         };
 
