@@ -567,12 +567,23 @@ router.get('/box/record', function(req, res, next) {
 });
 // 成就
 router.get('/box/achievementdetail', function(req, res, next) {
+  let achievement1;
   con.query("select * from record where userName=?",[userName],function(err,result){
     if(err){
       console.log(err);
     }
     else{
-     res.render("Box/achievementDetail",{recordList:result,userName:userName});
+      let record=result;
+      con.query("select * from achieve",function(err,result){
+        if(err){
+          console.log(err);
+        }
+        else{
+         achievement1=result;
+         console.log(achievement1);
+         res.render("Box/achievementDetail",{recordList:record,userName:userName,achievementList:achievement1});
+        }
+      })
     }
   })
 });
