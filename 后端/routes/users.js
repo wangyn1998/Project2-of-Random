@@ -264,6 +264,22 @@ router.post('/logout', function (req, res) {  //接收POST请求
     res.send(message2);
   }
 })
+//获取卡片
+router.get('/kapian',function(req,res,next){
+  let message1 = {success:true};
+  let message2 = {success:false};
+  con.query('select * from box,card where card.boxId=box.boxId and box.userName = ?;',[username1],(err,result)=>{
+      if(err){
+        console.log(err);
+        res.send(message2)
+      }
+      else{
+          console.log('user');
+          console.log(result);
+          res.send(result);
+      }
+  })
+})
 //范结束
 
 /*box*/
