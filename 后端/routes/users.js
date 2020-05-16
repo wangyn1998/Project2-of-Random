@@ -284,13 +284,12 @@ router.get('/kapian',function(req,res,next){
 
 /*box*/
 router.get('/record', function(req, res, next) {
-  var username='fym'
-  con.query("select * from record where userName=?",[username],function(err,result){
+  con.query("select * from record where userName=?",[username1],function(err,result){
     if(err){
       console.log(err);
     }else{
       if(result==[]){
-        con.query("insert into record(userName) values(?)",[username],function(err,result){
+        con.query("insert into record(userName) values(?)",[username1],function(err,result){
           if(err){
             console.log(err);
           }else{
@@ -308,8 +307,7 @@ router.get('/record', function(req, res, next) {
   });
 });
 router.get('/box', function(req, res, next) {
-  var username='fym'
-  con.query("select * from box where userName=?",[username],function(err,result){
+  con.query("select * from box where userName=?",[username1],function(err,result){
     if(err){
       console.log(err);
     }else{
@@ -318,8 +316,7 @@ router.get('/box', function(req, res, next) {
   });
 });
 router.post('/addbox', function(req, res, next) {
-  var username='fym';
-  con.query("insert into box(userName,boxName,boxImg) values(?,?,?)",[username,req.body.text,req.body.img],function(err,result){
+  con.query("insert into box(userName,boxName,boxImg) values(?,?,?)",[username1,req.body.text,req.body.img],function(err,result){
     if(err){
       console.log(err);
     }else{
@@ -327,7 +324,7 @@ router.post('/addbox', function(req, res, next) {
     }
   });
 });
-var boxid=0;
+var boxid=0,cardid=0;
 router.post('/boxId',function(req,res,next){
   boxid=req.body.id;
   console.log(boxid);
@@ -367,6 +364,20 @@ router.post('/updatecard', function(req, res, next) {
       console.log(err);
     }else{
       res.send({success:true})
+    }
+  });
+});
+
+router.post('/cardid',function(req,res,next){
+  cardid=req.body.cardid;
+  console.log(cardid);
+})
+router.get('/selcard', function(req, res, next) {
+  con.query("select * from card where cardId=?",[cardid],function(err,result){
+    if(err){
+      console.log(err);
+    }else{
+      res.send(result);
     }
   });
 });
