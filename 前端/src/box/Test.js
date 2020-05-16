@@ -35,6 +35,41 @@ const data1=[
 const {width,scale,height}=Dimensions.get('window');
 const w=width,h=height;
 export default class Test extends Component {
+    constructor(){
+        super();
+        this.state={
+            data:[]
+        }
+    }
+    getRandomArrayElements(arr, count) {
+        var shuffled = arr.slice(0), i = arr.length, min = i - count, temp, index;
+        while (i-- > min) {
+            index = Math.floor((i + 1) * Math.random());
+            temp = shuffled[index];
+            shuffled[index] = shuffled[i];
+            shuffled[i] = temp;
+        }
+        return shuffled.slice(min);
+    }
+    async componentDidMount(){
+        await fetch('http://172.17.100.2:3000/users/allcard')
+            .then((res)=>res.json())
+            .then((res)=>{
+                res=this.getRandomArrayElements(res,9);
+                var list=[];
+                for(var i=0;i<res.length;i++){
+                    list.push({
+                        que:res[i].cardQues,
+                        ans:res[i].cardAns,
+                        id:res[i].cardId
+                    })
+                }
+                console.log(list);
+                this.setState({
+                    data:list
+                })
+            })
+    }
     render() {
         return (
             <View style={{backgroundColor:'#ffffff'}}>

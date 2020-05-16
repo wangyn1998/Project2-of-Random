@@ -34,8 +34,8 @@ export default class UpdateLearn extends Component {
         .then(
             data => {
                 if(data.success){
-                    Actions.pop({refresh:{'key':'333'}});
-                    
+                    Actions.pop({que:this.state.text1,ans:this.state.text2});
+                    this.props.change();
                 }
             }
         )
@@ -64,7 +64,7 @@ export default class UpdateLearn extends Component {
                     <View style={styles.que}>
                         <Text style={{fontSize:27,marginRight:20}}>答案</Text>
                         <Image source={require('../../images/box-a1.png')} style={{position:'relative',width:'50%',height:h*0.2,resizeMode:'stretch'}}/>
-                        <TextInput style={{left:w*0.36,top:10,position:'absolute',width:'45%',height:h*0.18,fontSize:16}} multiline={true} defaultValue={this.props.ans} onChangeText={(text)=>{this.changeText2(text)}}/>
+                        <TextInput style={{left:w*0.36,top:10,position:'absolute',width:'45%',height:h*0.18,fontSize:16}} multiline={true} defaultValue={this.props.ans} onBlur={(text)=>{this.changeText2(text)}}/>
                     </View>
                     <TouchableOpacity style={styles.btn} onPress={()=>{this.save()}}><Text style={{fontSize:20}}>保存</Text></TouchableOpacity>
                </View>

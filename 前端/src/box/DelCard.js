@@ -36,7 +36,7 @@ export default class DelCard extends Component {
                 if(data.success){
                     Actions.popTo('learn');
                     Actions.refresh({'key':'1111'});
-
+                    this.props.change();
                 }
             }
         )
