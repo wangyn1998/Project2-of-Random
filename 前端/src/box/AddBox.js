@@ -72,6 +72,7 @@ export default class AddBox extends Component {
             data => {
                 if(data.success){
                     Actions.pop({refresh:{'key':data}});
+                    this.props.change();
                 }
             }
         )

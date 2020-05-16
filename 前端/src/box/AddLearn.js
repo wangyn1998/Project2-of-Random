@@ -36,6 +36,7 @@ export default class AddLearn extends Component {
             data => {
                 if(data.success){
                     Actions.pop({refresh:{'key':'111'}});
+                    this.props.change();
                 }
             }
         )

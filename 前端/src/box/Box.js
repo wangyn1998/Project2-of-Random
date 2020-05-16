@@ -48,7 +48,8 @@ export default class Box extends Component {
         this.state={
             text:'',
             data:list1,
-            list:list
+            list:list,
+            num:1
         }
     }
     async componentDidMount(){
@@ -128,6 +129,37 @@ export default class Box extends Component {
             })
         }
     }
+    changeNum=()=>{
+        this.setState({
+            num:2
+        })
+    }
+    async componentDidUpdate(){
+        if(this.state.num==2){
+            list2=[];
+            console.log('aaa')
+            await fetch('http://172.17.100.2:3000/users/box')
+                .then((res)=>res.json())
+                .then((res)=>{
+                    for(var i=0;i<res.length;i++){
+                        var obj={
+                            text:res[i].boxName,
+                            img:res[i].boxImg,
+                            id:res[i].boxId
+                        }
+                        list2.push(obj);
+                    }
+                    list2.push({
+                        img:"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADEAAAAzCAYAAAA+VOAXAAACEUlEQVRoge2ZS0sCURTHzzx8ZYYpQi83plBEiwKDatO2RZta9AVa1r5tn6GW9QnatGtTEEQQLRIyahE9KCpqelhU2uho3gsazVyV0atdh/sDUe4Bz/8HM3fOzAi5PNDkiP8dgAZcghW4BCvI9fjTD/UVvrVPSGfV30aiDeyiE9ocAer9qEukMp+wdbkGl4lDUL6ui+t+Vzd0tIZhum8RXLKHak/qEvHHbTi42zCsPydv8SfkHYbRnhmqPamfE6dPu2XrZy/7tFvSl1C1VE31arDE7sQlWIFLsAKXYAUuwQqWkCg5AKpaEjL5UTqby1JvikZ1s9gkBzikFmKNKIHGaTSNoqkT/TYDkq9UR6O6Wbo8EejzjxHvRwT9I5tsToO9m3XYPF8x3ajeDAYmYHZgCURB+rNuOCfevhUmBRBxZQfn02OQeE3eNyRQtZDyWWJ3MkjojzfWIOUzSHidAXDK7oYEMosk2nA+PQSJToh2TWERQWDnaEN5wu1RnE8P8Tox2TuPv68Sx5DWvkw1e0ndl71W2CUX+AhBKhHxjxRz6TFcJ2plNbYAF4lYyXrIOwRzQ8s0W1p0d2pGuAQrcAlW4BKswCVYgUuQsImOmurVQF0i7IuWvB+RRTuu04b6i8fx4Cy8qwocPWyDlssU10VBhqCnH9dpQ30UL3Ci7GKZAm67Dz9yqQd1k2gkfHdiBUtI/ACe6Z+VsrbPGgAAAABJRU5ErkJggg==",
+                        text:'+'
+                    });
+                    this.setState({
+                        data:list2,
+                        num:1
+                    })
+                })
+        }
+    }
     render() {
         return (
             <View>
@@ -155,7 +187,7 @@ export default class Box extends Component {
                         if(item.text=='+'){
                             return (
                                 <View style={{width:'50%',padding:10,alignItems:'center',justifyContent:'center',height:h*0.2}}>
-                                    <TouchableOpacity onPress={()=>{Actions.addBox()}}><Image source={{uri:item.img}} style={{width:w*0.2,height:0.1*h}}/></TouchableOpacity>
+                                    <TouchableOpacity onPress={()=>{Actions.addBox({'change':this.changeNum})}}><Image source={{uri:item.img}} style={{width:w*0.2,height:0.1*h}}/></TouchableOpacity>
                                 </View>
                             )
                         }
