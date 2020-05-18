@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-import { Text, View ,Image,TouchableOpacity,ScrollView, StyleSheet } from 'react-native'
+import { Text, View ,Image,TouchableOpacity,ScrollView, StyleSheet,FlatList} from 'react-native'
 import { Actions } from 'react-native-router-flux'
 const styles = StyleSheet.create({
     kuang:{
-        width:'97%',
+        width:'100%',
         height:400,
         borderColor:'#bbb',
         borderWidth:1,
@@ -56,7 +56,22 @@ const styles = StyleSheet.create({
     }
 })
 export default class Block extends Component {
-    
+    constructor(){
+        super();
+        this.state={
+            posts:[]
+        }
+    }
+    componentDidMount(){
+        fetch('http://172.17.100.2:3000/users/block')
+        .then((res)=>res.json())
+        .then((res)=>{
+            // console.log(res);
+            this.setState({
+                posts:res,
+            })
+        })
+    }
     render() {
         return (
             <View>
@@ -94,70 +109,44 @@ export default class Block extends Component {
                                 </TouchableOpacity>
                             </View>  
                         </TouchableOpacity>
-                        <View style={styles.kuang}>
-                            <View style={styles.user}>
-                                <View style={styles.touxiang}>
-                                    <Image source={require('../../images/touxiang.png')} style={{width:80,height:80}}/>
+                        <FlatList
+                            data = {this.state.posts}
+                            numColumns = {1}
+                            style={{width:'97%'}}
+                            renderItem={({item})=>(
+                                <View style={styles.kuang}>
+                                    <View style={styles.user}>
+                                        <View style={styles.touxiang}>
+                                            <Image source={{uri:item.userImage}} style={{width:80,height:80}}/>
+                                        </View>
+                                        <View style={{marginLeft:'5%'}}>
+                                            <Text style={styles.intxt}>{item.userName}</Text>
+                                            <Text style={styles.intxt1}>{item.postTime}</Text>
+                                        </View>
+                                    </View>
+                                    <View style={styles.content}>
+                                        <Text>{item.postContent}</Text>
+                                        <View style={{flexDirection:'row',marginTop:'3%'}}>
+                                            <Image source={{uri:item.postImage}}/>
+                                        </View>
+                                    </View>
+                                    <View style={styles.last}>
+                                        <TouchableOpacity style={{flexDirection:'row',alignItems:'center',}}>
+                                            <Image source={require('../../images/block-zhuan.png')}/>
+                                            <Text style={styles.numtxt}>{item.postRepostNum}</Text>
+                                        </TouchableOpacity>
+                                        <TouchableOpacity style={{flexDirection:'row',alignItems:'center',marginLeft:'28%'}}>
+                                            <Image source={require('../../images/block-pinglun.png')}/>
+                                            <Text style={styles.numtxt}>{item.postReplyNum}</Text>
+                                        </TouchableOpacity>
+                                        <TouchableOpacity style={{flexDirection:'row',alignItems:'center',marginLeft:'28%'}}>
+                                            <Image source={require('../../images/block-zan.png')}/>
+                                            <Text style={styles.numtxt}>{item.postPointNumber}</Text>
+                                        </TouchableOpacity>
+                                    </View>
                                 </View>
-                                <View style={{marginLeft:'5%'}}>
-                                    <Text style={styles.intxt}>用户名</Text>
-                                    <Text style={styles.intxt1}>2019-12-31</Text>
-                                </View>
-                            </View>
-                            <View style={styles.content}>
-                                <Text>今日分享我的卡片</Text>
-                                <View style={{flexDirection:'row',marginTop:'3%'}}>
-                                    <Image source={require('../../images/block-card1.png')}/>
-                                    <Image source={require('../../images/block-card1.png')}/>
-                                </View>
-                            </View>
-                            <View style={styles.last}>
-                                <TouchableOpacity style={{flexDirection:'row',alignItems:'center',}}>
-                                    <Image source={require('../../images/block-zhuan.png')}/>
-                                    <Text style={styles.numtxt}>10</Text>
-                                </TouchableOpacity>
-                                <TouchableOpacity style={{flexDirection:'row',alignItems:'center',marginLeft:'28%'}}>
-                                    <Image source={require('../../images/block-pinglun.png')}/>
-                                    <Text style={styles.numtxt}>10</Text>
-                                </TouchableOpacity>
-                                <TouchableOpacity style={{flexDirection:'row',alignItems:'center',marginLeft:'28%'}}>
-                                    <Image source={require('../../images/block-zan.png')}/>
-                                    <Text style={styles.numtxt}>10</Text>
-                                </TouchableOpacity>
-                            </View>
-                        </View>
-                        <View style={styles.kuang}>
-                            <View style={styles.user}>
-                                <View style={styles.touxiang}>
-                                    <Image source={require('../../images/touxiang.png')} style={{width:80,height:80}}/>
-                                </View>
-                                <View style={{marginLeft:'5%'}}>
-                                    <Text style={styles.intxt}>用户名</Text>
-                                    <Text style={styles.intxt1}>2019-12-30</Text>
-                                </View>
-                            </View>
-                            <View style={styles.content}>
-                                <Text>今日分享我的卡片</Text>
-                                <View style={{flexDirection:'row',marginTop:'3%'}}>
-                                    <Image source={require('../../images/block-card1.png')}/>
-                                    <Image source={require('../../images/block-card1.png')}/>
-                                </View>
-                            </View>
-                            <View style={styles.last}>
-                                <TouchableOpacity style={{flexDirection:'row',alignItems:'center',}}>
-                                    <Image source={require('../../images/block-zhuan.png')}/>
-                                    <Text style={styles.numtxt}>10</Text>
-                                </TouchableOpacity>
-                                <TouchableOpacity style={{flexDirection:'row',alignItems:'center',marginLeft:'28%'}}>
-                                    <Image source={require('../../images/block-pinglun.png')}/>
-                                    <Text style={styles.numtxt}>10</Text>
-                                </TouchableOpacity>
-                                <TouchableOpacity style={{flexDirection:'row',alignItems:'center',marginLeft:'28%'}}>
-                                    <Image source={require('../../images/block-zan.png')}/>
-                                    <Text style={styles.numtxt}>10</Text>
-                                </TouchableOpacity>
-                            </View>
-                        </View>
+                            )}
+                        />
                         <Text style={{textAlign:'center',color:'#aaa',marginTop:10,fontSize:15}}>没有更多了...</Text>
                     </View>
                 </ScrollView>
