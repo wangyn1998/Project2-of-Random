@@ -26,6 +26,7 @@ import Knowledge from './src/discover/Knowledge';
 import Everyday from './src/discover/Everyday';
 import KnowledgeContent from './src/discover/KnowledgeContent';
 import ExamContent from './src/discover/ExamContent';
+import Score from './src/discover/Score';
 import My from './src/my/My';
 import Login from './src/common/Login';
 import Register from './src/common/Register';
@@ -210,6 +211,16 @@ const App = () => {
                       title='闯关答题'
                       key="answer" 
                       component={Answer} 
+                      hideTabBar
+                      navigationBarStyle={{backgroundColor:'#79be3b'}}
+                      titleStyle={{flex:1,textAlign:'center',color:'white'}}
+                      backButtonImage={require('./images/return.png')}
+                      renderRightButton={<Icon name='ellipsis' style={{marginRight:20,color:'white'}}/>}
+                    />
+                    <Scene 
+                      title='闯关答题'
+                      key="score" 
+                      component={Score} 
                       hideTabBar
                       navigationBarStyle={{backgroundColor:'#79be3b'}}
                       titleStyle={{flex:1,textAlign:'center',color:'white'}}
