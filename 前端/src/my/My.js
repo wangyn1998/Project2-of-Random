@@ -17,7 +17,13 @@ export default class My extends Component {
             taskContent:'',
             score:0,
             isClick:true,
+            num:1
         }
+    }
+    changeNum=()=>{
+        this.setState({
+            num:2
+        })
     }
     componentDidMount(){
         // 发起请求
@@ -27,7 +33,7 @@ export default class My extends Component {
             var d0 = [];
             for(var i = 0;i<res.length;i++){
                 var tupian = '';
-                (res[i].userImage=='-' || res[i].userImage==null)?tupian="http://img2.3png.com/eebe5ef277285d150546fd77d248786d2a9e.png":tupian=res[i].userImage
+                (res[i].userImage=='-' || res[i].userImage==null)?tupian="http://img2.3png.com/eebe5ef277285d150546fd77d248786d2a9e.png":tupian=res[i].userImage;
                 d0[i] = Object.assign({},res[i],{userImage:tupian},{mingci:i+1});
             }
             this.setState({
@@ -40,8 +46,10 @@ export default class My extends Component {
             console.log(res);
             var d0 = [];
             var tupian = '';
+            console.log(res[0].userImage);
             (res[0].userImage=='-' || res[0].userImage==null)?tupian="http://img2.3png.com/eebe5ef277285d150546fd77d248786d2a9e.png":tupian=res[0].userImage;
             d0[0] = Object.assign({},res[0],{userImage:tupian});
+            console.log(tupian);
             this.setState({
                 user:d0[0],
                 // username:res[0].userName,
@@ -73,6 +81,42 @@ export default class My extends Component {
                 })
             }
         })
+        fetch('http://172.17.100.2:3000/users/kapian')
+        .then((res)=>res.json())
+        .then((res)=>{
+            if(res.success == false){
+                console.log('没有该用户')
+            }
+            else{
+                console.log('有该用户')
+                var box = this.state.boxes;
+                box[1].num = res.length;
+                this.setState({
+                    boxes:box
+                })
+            }
+        })
+    }
+    async componentDidUpdate(){
+        if(this.state.num==2){
+            fetch('http://172.17.100.2:3000/users/my')
+            .then((res)=>res.json())
+            .then((res)=>{
+                console.log(res);
+                var d0 = [];
+                var tupian = '';
+                console.log(res[0].userImage);
+                (res[0].userImage=='-' || res[0].userImage==null)?tupian="http://img2.3png.com/eebe5ef277285d150546fd77d248786d2a9e.png":tupian=res[0].userImage;
+                d0[0] = Object.assign({},res[0],{userImage:tupian});
+                console.log(tupian);
+                this.setState({
+                    user:d0[0],
+                    num:1
+                    // username:res[0].userName,
+                    // phone:res[0].userPhone,
+                })
+            })
+        }
     }
     successToast=()=> {
         if (this.state.isClick==true) {   //如果为true 开始执行
@@ -167,7 +211,7 @@ export default class My extends Component {
                         <View style={{marginLeft:'10%'}}>
                             <Text style={styles.intxt}>{this.state.user.userName}</Text>
                             <TouchableOpacity onPress={()=>{
-                                Actions.personal()}}>
+                                Actions.personal({'change':this.changeNum})}}>
                                 <Text style={styles.intxt}>点击编辑个人资料></Text>
                             </TouchableOpacity>
                         </View>

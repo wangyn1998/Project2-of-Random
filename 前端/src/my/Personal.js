@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-import {View,Text,Image,TextInput,TouchableOpacity, AsyncStorage, StyleSheet,Alert,ScrollView, FlatList} from 'react-native'
+import {View,Text,Image,TextInput,TouchableOpacity, AsyncStorage, StyleSheet,Alert,ScrollView, ToastAndroid} from 'react-native'
 import ImagePicker from 'react-native-image-picker';
+import { Actions } from 'react-native-router-flux';
 const options = {
     title: '设置头像',
     cancelButtonTitle:'取消',
@@ -21,6 +22,7 @@ export default class Personal extends Component {
             class:'',
             sign:'',
             userImage:'',
+            num:1
         }
     }
     usernamehandle=(text)=>{
@@ -90,10 +92,11 @@ export default class Personal extends Component {
         .then(
             res => {
                 if(res.success){
-                    console.log('修改成功');
+                    ToastAndroid.show('修改成功！', ToastAndroid.SHORT);
+                    Actions.my(this.props.change());
                 }
                 else{
-                    console.log('验证失败，用户名或密码错误')
+                    ToastAndroid.show('出现错误，请重新修改资料', ToastAndroid.SHORT);
                 }
             }
         )

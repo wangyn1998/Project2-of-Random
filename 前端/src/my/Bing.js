@@ -9,8 +9,75 @@ import {
 import Echarts from 'native-echarts';
 
 export default class Bing extends Component {
+    constructor(){
+        super();
+        this.state={
+          xaxis:[],
+          series:[],
+          data:[]
+        }
+    }
+    componentDidMount(){
+        fetch('http://172.17.100.2:3000/users/hezi')
+            .then((res)=>res.json())
+            .then((res)=>{
+                if(res.success == false){
+                    console.log('没有该用户')
+                }
+                else{
+                    console.log('有该用户')
+                    var xaxis = [];
+                    for(var i = 0;i<res.length;i++){
+                        xaxis[i] = res[i].boxName;
+                    }
+                    console.log(xaxis);
+                    this.setState({
+                    xaxis:xaxis
+                })
+              }
+            })
+            fetch('http://172.17.100.2:3000/users/kapian')
+            .then((res)=>res.json())
+            .then((res)=>{
+                if(res.success == false){
+                  console.log('没有该用户')
+                }
+                else{
+                    var heng = this.state.xaxis;
+                    var series = [];
+                    for(var n = 0;n<heng.length;n++){
+                        series[n] = 0;
+                    }
+                    console.log(series);
+                    for(var i = 0;i<res.length;i++){
+                        for(var j = 0;j<heng.length;j++){
+                        if(heng[j] == res[i].boxName){
+                            series[j]++
+                        }
+                        }
+                    }
+                    console.log(series);
+                    this.setState({
+                        series:series
+                    })
+                    var writerInfoArr = new Array();//js的数度组不要设置长知度，我们就道当他是4个。
+                    var writerInfo = new Object();
+                    var data = [];
+                    for(var i=0;i<heng.length;i++){
+                        writerInfo.name=this.state.xaxis[i];
+                        writerInfo.value=this.state.series[i];
+                        console.log(writerInfo);
+                        writerInfoArr[i]=writerInfo;
+                    }
+                    console.log(writerInfoArr);
+                    this.setState({
+                        data:writerInfoArr
+                    })
+                }
+            })
+    }
     render() {
-        const option = {
+        var option = {
             tooltip: {
                 trigger: 'item',
                 formatter: '{a} <br/>{b}: {c} ({d}%)'
@@ -18,7 +85,7 @@ export default class Bing extends Component {
             legend: {
                 orient: 'vertical',
                 left: 10,
-                data: ['语文', '数学', '英语']
+                data: this.state.xaxis
             },
             series: [
                 {
@@ -40,10 +107,10 @@ export default class Bing extends Component {
                     labelLine: {
                         show: false
                     },
-                    data: [
-                        {value: 335, name: '语文'},
-                        {value: 310, name: '数学'},
-                        {value: 234, name: '英语'},
+                    data:[
+                    // {value:2,name:''},
+                    // {value:2,name:''},
+                    // {value:2,name:''}
                     ]
                 }
             ]
