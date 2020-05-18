@@ -420,6 +420,19 @@ router.get('/test', function(req, res, next) {
 
 //wang
 
+//论坛开始
+//所有帖子
+router.get('/block',function(req,res,next){
+  con.query("select * from post ",function(err,result){
+    if(err){
+      console.log(err);
+    }
+    else{
+      res.send(result);
+    }
+  });
+})
+//论坛结束
 
 
 module.exports = router;
