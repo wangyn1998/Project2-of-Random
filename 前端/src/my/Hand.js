@@ -14,7 +14,7 @@ export default class Hand extends Component {
                             multiline={true}
                         />
                     </View>
-                    <View style={styles.heng}>
+                    {/* <View style={styles.heng}>
                         <TouchableOpacity style={{marginLeft:'5%'}}>
                             <Image source={require('../../images/my-picture.png')}/>
                         </TouchableOpacity>
@@ -27,7 +27,7 @@ export default class Hand extends Component {
                         <TouchableOpacity style={{marginLeft:'20%'}}>
                             <Image source={require('../../images/my-emo.png')}/>
                         </TouchableOpacity>
-                    </View>
+                    </View> */}
                 </View>
             </ScrollView>
         )
