@@ -351,13 +351,13 @@ var achievementList;
 router.get('/score/achievement', function(req, res, next) {
   var con=mysql.createConnection(dbconfig);
   con.connect();
-  con.query("select * from achieve",function(err,result){
+  con.query("select * from achieve order by achieveId",function(err,result){
     if(err){
       console.log(err);
     }
     else{
-      achievementList=result;
-      console.log(achievementList)
+      // achievementList=result;
+      // console.log(achievementList)
       res.render('Score/achievement', { achieveList:result });
      }
   })
