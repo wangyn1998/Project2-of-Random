@@ -46,6 +46,14 @@ router.post('/register',(req,res)=>{
                   console.log(result); 
                 }
             })
+            con.query("insert into record(recordDay,recordClockIn,recordStars,recordAchievement,userName) values(?,?,?,?,?)",[0,0,0,1,data.username],function(err,result){
+              if(err){
+                console.log(err);
+              }
+              else{
+                console.log(result); 
+              }
+            })
           }
           else{
             console.log('该用户已存在');
@@ -281,7 +289,6 @@ router.get('/kapian',function(req,res,next){
   })
 })
 //范结束
-
 /*box*/
 router.get('/record', function(req, res, next) {
   con.query("select * from record where userName=?",[username1],function(err,result){
