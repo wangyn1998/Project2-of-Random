@@ -405,7 +405,7 @@ let achieveId=0;
 /**编辑成就 */
 router.get('/score/editstar', function(req, res, next) {
   achieveId=req.query.achieveId;
-  con.query("select * from achieve;select * from achieve where achieveId=?",[achieveId],function (err,result) {
+  con.query("select * from achieve order by achieveId;select * from achieve where achieveId=?",[achieveId],function (err,result) {
     if(err){
       console.log(err);
     }else{
