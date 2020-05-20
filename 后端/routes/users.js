@@ -388,6 +388,23 @@ router.get('/selcard', function(req, res, next) {
     }
   });
 });
+router.post('/addstar',function(req,res,next){
+  con.query("select * from record where userName=?",[username1],function(err,result){
+    if(err){
+      console.log(err);
+    }else{
+      console.log(result);
+      var num=result[0].recordStars+1;
+      con.query("update record set recordStars=? where userName=?",[num,username1],function(err,result){
+        if(err){
+          console.log(err);
+        }else{
+
+        }
+      })
+    }
+  });
+})
 //张结束
 
 
