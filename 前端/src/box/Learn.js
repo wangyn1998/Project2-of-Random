@@ -74,7 +74,6 @@ export default class Learn extends Component {
         })
     }
     async componentDidUpdate(){
-        // console.log(this.props.num)
         if(this.state.num==2){
             await fetch('http://172.17.100.2:3000/users/allcard')
             .then((res)=>res.json())

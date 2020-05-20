@@ -136,8 +136,44 @@ export default class Box extends Component {
     }
     async componentDidUpdate(){
         if(this.state.num==2){
+            await fetch('http://172.17.100.2:3000/users/record')
+            .then((res)=>res.json())
+            .then((res)=>{
+                var list=[
+                    {
+                        num:res[0].recordDay,
+                        num2:'天',
+                        img:'clock-circle',
+                        text:'学习',
+                        color:'#FD8F71'
+                    },
+                    {
+                        num:res[0].recordClockIn,
+                        num2:'次',
+                        img:'snippets',
+                        text:'打卡',
+                        color:'#34C7FC'
+                    },
+                    {
+                        num:res[0].recordStars,
+                        num2:'个',
+                        img:'star',
+                        text:'星星',
+                        color:'#FFD331'
+                    },
+                    {
+                        num:res[0].recordAchievement,
+                        num2:'座',
+                        img:'trophy',
+                        text:'成就',
+                        color:'#FD84AB'
+                    }
+                ]
+                this.setState({
+                    list:list
+                })
+            })
             list2=[];
-            console.log('aaa')
             await fetch('http://172.17.100.2:3000/users/box')
                 .then((res)=>res.json())
                 .then((res)=>{
@@ -192,7 +228,7 @@ export default class Box extends Component {
                             )
                         }
                         return (
-                            <TouchableOpacity onPress={()=>{Actions.light({'id':item.id});Actions.refresh()}} style={{alignItems:'center',width:'50%',padding:10}}>
+                            <TouchableOpacity onPress={()=>{Actions.light({'id':item.id,'change':this.changeNum});Actions.refresh()}} style={{alignItems:'center',width:'50%',padding:10}}>
                                     <Image source={{uri:item.img}} style={{height:h*0.18,width:'65%'}}/>
                                     <Text style={{color:'#E81414',marginTop:10}}>{item.text}</Text>
                             </TouchableOpacity>
