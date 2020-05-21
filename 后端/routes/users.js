@@ -460,6 +460,30 @@ router.get('/sended',function(req,res,next){
     }
   });
 })
+
+//发布帖子
+router.post('/addpost', function(req, res, next) {
+  var data = req.body;
+  let now='';
+  var time=new Date();
+  var year = time.getFullYear();
+  var month = time.getMonth() + 1;
+  var date = time.getDate();
+  now = year + '-' + conver(month) + "-" + conver(date);
+  function conver(s) {
+      return s < 10 ? '0' + s : s;
+  }
+  console.log(data);
+  con.query("insert into post(postContent,userName,userImage,postTime,postPointNumber,postReplyNum,postRepostNum,adminUsername,postImage) values(?,?,?,?,?,?,?,?,?)",
+            [data.content,data.user.userName,data.user.userImage,now,0,0,0,'admin',data.imgUrl],function(err,result){
+    if(err){
+      console.log(err);
+    }else{
+      res.send({success:true})
+    }
+  });
+});
+
 //论坛结束
 
 
