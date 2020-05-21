@@ -77,44 +77,12 @@ export default class Block extends Component {
             <View>
                 <ScrollView style={{backgroundColor:'#fff',width:'100%',height:'100%',padding:10}}>
                     <View style={{flex:1,alignItems:'center',paddingBottom:50}}>
-                        <TouchableOpacity style={styles.kuang} onPress={()=>{Actions.blockMsg()}}>
-                            <View style={styles.user}>
-                                <View style={styles.touxiang}>
-                                    <Image source={require('../../images/touxiang.png')} style={{width:80,height:80}}/>
-                                </View>
-                                <View style={{marginLeft:'5%'}}>
-                                    <Text style={styles.intxt}>用户名</Text>
-                                    <Text style={styles.intxt1}>2020-01-01</Text>
-                                </View>
-                            </View>
-                            <View style={styles.content}>
-                                <Text>今日分享我的卡片</Text>
-                                <View style={{flexDirection:'row',marginTop:'3%'}}>
-                                    <Image source={require('../../images/block-card1.png')}/>
-                                    <Image source={require('../../images/block-card1.png')}/>
-                                </View>
-                            </View>
-                            <View style={styles.last}>
-                                <TouchableOpacity style={{flexDirection:'row',alignItems:'center',}}>
-                                    <Image source={require('../../images/block-zhuan.png')}/>
-                                    <Text style={styles.numtxt}>10</Text>
-                                </TouchableOpacity>
-                                <TouchableOpacity style={{flexDirection:'row',alignItems:'center',marginLeft:'28%'}}>
-                                    <Image source={require('../../images/block-pinglun.png')}/>
-                                    <Text style={styles.numtxt}>10</Text>
-                                </TouchableOpacity>
-                                <TouchableOpacity style={{flexDirection:'row',alignItems:'center',marginLeft:'28%'}}>
-                                    <Image source={require('../../images/block-zan.png')}/>
-                                    <Text style={styles.numtxt}>10</Text>
-                                </TouchableOpacity>
-                            </View>  
-                        </TouchableOpacity>
                         <FlatList
                             data = {this.state.posts}
                             numColumns = {1}
                             style={{width:'97%'}}
                             renderItem={({item})=>(
-                                <View style={styles.kuang}>
+                                <TouchableOpacity style={styles.kuang} onPress={()=>{Actions.blockMsg({xiangqing:item})}}>
                                     <View style={styles.user}>
                                         <View style={styles.touxiang}>
                                             <Image source={{uri:item.userImage}} style={{width:80,height:80}}/>
@@ -126,8 +94,8 @@ export default class Block extends Component {
                                     </View>
                                     <View style={styles.content}>
                                         <Text>{item.postContent}</Text>
-                                        <View style={{flexDirection:'row',marginTop:'3%'}}>
-                                            <Image source={{uri:item.postImage}}/>
+                                        <View style={{flexDirection:'row',marginTop:'3%',width:'50%',height:'80%'}}>
+                                            <Image source={{uri:item.postImage}} style={{width:'100%',height:'100%'}}/>
                                         </View>
                                     </View>
                                     <View style={styles.last}>
@@ -144,7 +112,7 @@ export default class Block extends Component {
                                             <Text style={styles.numtxt}>{item.postPointNumber}</Text>
                                         </TouchableOpacity>
                                     </View>
-                                </View>
+                                </TouchableOpacity>
                             )}
                         />
                         <Text style={{textAlign:'center',color:'#aaa',marginTop:10,fontSize:15}}>没有更多了...</Text>
