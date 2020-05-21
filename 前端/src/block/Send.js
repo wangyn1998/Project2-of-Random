@@ -50,6 +50,21 @@ export default class Send extends Component {
             res => {
                 if(res.success){
                     Actions.block();
+                    
+                }
+            }
+        )
+        let text2 = {userName:this.state.user.userName,updateTime:new Date(),taskId:4,taskContent:'发帖',taskScore:10,phone:this.state.user.userPhone} //获取数据
+        let send2 = JSON.stringify(text2);   //重要！将对象转换成json字符串
+        fetch('http://172.17.100.2:3000/users/getscore',{   //Fetch方法y
+            method: 'POST',
+            headers: {'Content-Type': 'application/json; charset=utf-8'},
+            body: send2
+        })
+        .then(res => res.json())
+        .then(
+            res => {
+                if(res.success){
                     ToastAndroid.show('发帖子成功，积分+10',ToastAndroid.SHORT);
                 }
                 else{
