@@ -314,7 +314,7 @@ router.get('/record', function(req, res, next) {
   });
 });
 router.get('/box', function(req, res, next) {
-  con.query("select * from box where userName=?",[username1],function(err,result){
+  con.query("select * from box where userName=? order by boxId desc",[username1],function(err,result){
     if(err){
       console.log(err);
     }else{
@@ -338,7 +338,7 @@ router.post('/boxId',function(req,res,next){
 })
 router.get('/allcard', function(req, res, next) {
   var username='fym'
-  con.query("select * from card where boxId=?",[boxid],function(err,result){
+  con.query("select * from card where boxId=? order by cardId desc",[boxid],function(err,result){
     if(err){
       console.log(err);
     }else{
@@ -405,6 +405,7 @@ router.post('/addstar',function(req,res,next){
     }
   });
 })
+
 var clickid=0;
 router.post('/clicknum',function(req,res,next){
     clickid=req.body.postId;
