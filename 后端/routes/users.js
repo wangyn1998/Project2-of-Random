@@ -405,6 +405,30 @@ router.post('/addstar',function(req,res,next){
     }
   });
 })
+var clickid=0;
+router.post('/clicknum',function(req,res,next){
+    clickid=req.body.postId;
+    console.log(clickid);
+})
+router.get('/reply',function(req,res,next){
+    con.query('select * from reply where postId=?',[clickid],function(err,result){
+        if(err){
+            console.log(err);
+        }
+        else{
+            res.send(result);
+        }
+    })
+})
+router.post('/postreply', function(req, res, next) {
+  con.query("insert into reply(userName,postId,replyContent) values(?,?,?)",[username1,clickid,req.body.text],function(err,result){
+    if(err){
+      console.log(err);
+    }else{
+      res.send({success:true})
+    }
+  });
+});
 //张结束
 
 
