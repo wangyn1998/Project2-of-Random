@@ -8,10 +8,6 @@ const data1=[
     {
         que:'apple',
         ans:'苹果'
-    },
-    {
-        que:'apple',
-        ans:'苹果'
     }
 ]
 export default class BlockMsg extends Component {
@@ -91,7 +87,7 @@ export default class BlockMsg extends Component {
                     <View>
                         <Image source={require('../../images/pic1.jpg')} style={{width:w,height:h*0.78,resizeMode:'stretch',position:'relative'}}/>
                         <View style={styles.msg}>
-                            <View style={{borderRadius:80,borderWidth:1,borderColor:'red',width:w*0.13,height:h*0.08,overflow:'hidden'}}><Image source={{uri:this.props.xiangqing.userImage}} style={{width:w*0.13,height:h*0.08,resizeMode:'stretch'}}/></View>
+                            <View style={{borderRadius:80,borderWidth:1,borderColor:'#ccc',width:w*0.13,height:h*0.08,overflow:'hidden'}}><Image source={{uri:this.props.xiangqing.userImage}} style={{width:w*0.13,height:h*0.08,resizeMode:'stretch'}}/></View>
                             <View  style={{marginLeft:20,marginRight:16,width:'45%'}}>
                                 <Text style={{fontSize:20}}>{this.props.xiangqing.userName}</Text>
                                 <Text style={{color:'#B5B4AA'}}>这个人很懒，什么也没留下</Text>
@@ -111,16 +107,18 @@ export default class BlockMsg extends Component {
                             }
                         </View>
                         <View style={styles.main}>
-                            <Text style={{fontSize:19,marginBottom:20}}>{this.props.xiangqing.postContent}</Text>
+                            <Text style={{fontSize:17,marginBottom:20}}>{this.props.xiangqing.postContent}</Text>
                             <FlatList data={data1} numColumns={4}  renderItem={({item})=>(
-                                    <TouchableOpacity style={{width:'25%',alignItems:'center',paddingTop:20,position:'relative'}}>
-                                        <Image source={require('../../images/pic1.jpg')} style={{width:0.13*w,height:0.1*h}}/>
-                                        <View style={styles.card}>
+                                    <TouchableOpacity style={{width:'50%',alignItems:'center',paddingTop:20,position:'relative'}}>
+                                        {/* <Image source={require('../../images/pic1.jpg')} style={{width:0.13*w,height:0.1*h}}/> */}
+                                        {/* <View style={styles.card}>
                                             <Text style={{marginBottom:5,fontSize:13}}>{item.que}</Text>
                                             <Text style={{fontSize:13}}>{item.ans}</Text>
-                                        </View>
+                                        </View> */}
+                                        <Image source={{uri:this.props.xiangqing.postImage}} style={{width:0.5*w,height:0.2*h}}/>
                                     </TouchableOpacity>
                             )}/>
+
                         </View>
                         <View style={styles.time}>
                             <Text style={{marginRight:15,color:'#B5B4AA'}}>{this.props.xiangqing.postTime}发布</Text>
@@ -135,9 +133,9 @@ export default class BlockMsg extends Component {
                                     if(idx==0){
                                         return (
                                             <View style={{flexDirection:'row',padding:10,paddingLeft:20}}>
-                                                <View style={{borderRadius:80,borderWidth:1,borderColor:'red',width:w*0.13,height:h*0.08,overflow:'hidden'}}><Image source={{uri:item.userImage}} style={{width:w*0.13,height:h*0.08,resizeMode:'stretch'}}/></View>
+                                                <View style={{borderRadius:80,borderWidth:1,borderColor:'#ccc',width:w*0.13,height:h*0.08,overflow:'hidden'}}><Image source={{uri:item.userImage}} style={{width:w*0.13,height:h*0.08,resizeMode:'stretch'}}/></View>
                                                 <View  style={{marginLeft:20,marginRight:16,width:'45%'}}>
-                                                <Text style={{fontSize:20}}>{item.userName}</Text>
+                                                <Text style={{fontSize:20,color:'#79be3b'}}>{item.userName}</Text>
                                                 <Text>{item.replyContent}</Text>
                                                 </View>
                                                 {
@@ -158,7 +156,7 @@ export default class BlockMsg extends Component {
                                     }
                                     else if(idx==1||idx==2){
                                         return (
-                                            <View  style={{marginLeft:20,marginRight:16,width:'45%',flexDirection:'row',alignItems:'center',marginBottom:5}}>
+                                            <View  style={{marginLeft:50,marginRight:16,width:'45%',flexDirection:'row',alignItems:'center',marginBottom:5}}>
                                                 <Text style={{fontSize:17,marginRight:10,color:'#79be3b'}}>{item.userName}:</Text>
                                                 <Text>{item.replyContent}</Text>
                                             </View>
