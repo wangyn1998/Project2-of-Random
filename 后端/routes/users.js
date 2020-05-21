@@ -449,6 +449,17 @@ router.get('/block',function(req,res,next){
     }
   });
 })
+//我发出的
+router.get('/sended',function(req,res,next){
+  con.query("select * from post where userName=?",[username1],function(err,result){
+    if(err){
+      console.log(err);
+    }
+    else{
+      res.send(result);
+    }
+  });
+})
 //论坛结束
 
 
