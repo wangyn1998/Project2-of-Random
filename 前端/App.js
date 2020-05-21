@@ -138,10 +138,7 @@ const App = () => {
                     key="send" 
                     component={Send} 
                     hideTabBar
-                    navigationBarStyle={{backgroundColor:'#fff'}}
-                    titleStyle={{flex:1,textAlign:'center'}}
-                    backButtonImage={require('./images/my-cuo.png')}
-                    renderRightButton={<Text style={{marginRight:20,color:'#79be3b'}}>提交</Text>}
+                    hideNavBar
                   />
                   <Scene 
                     title='我的发出'
