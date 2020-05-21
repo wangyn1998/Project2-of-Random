@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View, Image,Dimensions, TouchableOpacity,StyleSheet, TextInput, FlatList } from 'react-native'
+import { Text, View, Image,Dimensions, TouchableOpacity,StyleSheet, TextInput, FlatList,ToastAndroid } from 'react-native'
 import {Icon} from '@ant-design/react-native';
 import { Actions } from 'react-native-router-flux';
 
@@ -42,8 +42,18 @@ export default class AddBox extends Component {
         super();
         this.state={
             num:1,
-            text:''
+            text:'',
+            user:{}
         }
+    }
+    componentDidMount(){
+        fetch('http://172.17.100.2:3000/users/my')
+        .then((res)=>res.json())
+        .then((res)=>{
+            this.setState({
+                user:res[0],
+            })
+        })
     }
     clickNum=(num1)=>{
         this.setState({
@@ -61,21 +71,38 @@ export default class AddBox extends Component {
         }
         console.log(img1);
         let text1 = {text:this.state.text,img:img1} 
-        let send = JSON.stringify(text1); 
+        let send1 = JSON.stringify(text1); 
         fetch(`http://172.17.100.2:3000/users/addbox`,{
+            method: 'POST',
+            headers: {'Content-Type': 'application/json; charset=utf-8'},
+            body: send1
+        })
+        .then(res => res.json())
+        .then(
+            data => {
+            }
+        )
+        let text = {userName:this.state.user.userName,updateTime:new Date(),taskId:1,taskContent:'添加盒子',taskScore:10,phone:this.state.user.userPhone} //获取数据
+        let send = JSON.stringify(text);   //重要！将对象转换成json字符串
+        fetch('http://172.17.100.2:3000/users/getscore',{   //Fetch方法y
             method: 'POST',
             headers: {'Content-Type': 'application/json; charset=utf-8'},
             body: send
         })
         .then(res => res.json())
         .then(
-            data => {
-                if(data.success){
-                    Actions.pop({refresh:{'key':data}});
+            res => {
+                if(res.success){
+                    ToastAndroid.show('添加盒子成功，积分+10',ToastAndroid.SHORT);
+                    Actions.pop({refresh:{'key':res}});
                     this.props.change();
+                }
+                else{
+                    ToastAndroid.show('添加盒子发生错误，请重新添加',ToastAndroid.SHORT);
                 }
             }
         )
+
     }
     changeText=(text)=>{
         this.setState({
