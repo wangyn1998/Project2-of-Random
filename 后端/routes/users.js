@@ -148,6 +148,18 @@ router.post('/updateuser',(req,res)=>{
           
       }
   })
+  con.query("update post set userImage=? where userName = ?",[data.userImage,username1],(err,result)=>{
+    if(err){
+        throw err;
+    }
+    else{
+        if(result == false){
+            console.log(message2);
+        }else{
+            console.log(message1);
+        }
+    }
+  })
 })
 //获取积分sum
 router.get('/fen',function(req,res,next){
