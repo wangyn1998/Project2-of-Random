@@ -337,7 +337,7 @@ const App = () => {
                       backButtonImage={require('./images/return.png')}
                       renderRightButton={<Icon name='ellipsis' style={{marginRight:20,color:'white'}}/>}
                     />
-                    <Scene 
+                  <Scene 
                       title='帮助反馈'
                       key="hand" 
                       component={Hand} 

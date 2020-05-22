@@ -47,9 +47,15 @@
                             <% for(var i = 0 ; i < postList.length; i++) {%>
                                 <li> 
                                     <div class='Blockbody'>
-                                        <a href="/block/detail?id=<%=postList[i]["postId"]%>"><img class="Blockimg"
-                                            src="http://img2.3png.com/eebe5ef277285d150546fd77d248786d2a9e.png"
-                                        ></a>
+                                        <% if(postList[i]["userImage"] == '-'){ %>
+                                            <a href="/block/detail?id=<%=postList[i]["postId"]%>"><img class="Blockimg"
+                                                src="http://img2.3png.com/eebe5ef277285d150546fd77d248786d2a9e.png"
+                                            ></a>
+                                        <% }else{ %>
+                                            <a href="/block/detail?id=<%=postList[i]["postId"]%>"><img class="Blockimg"
+                                                src="<%= postList[i]["userImage"]%>"
+                                            ></a>
+                                        <% } %>
                                         <p class="post-text" style="font-weight: bold;"><%=postList[i]["userName"]%></p>
                                         <p class="post-text" style="height: 17px;overflow: hidden;"><%=postList[i]["postContent"]%></p>
                                     </div>
@@ -58,7 +64,6 @@
                                             <button class='Blockdel' id="remove">移除</button>
                                         </a>
                                     </p>
-                                    <p class='Blockbody'><%=postList[i]["adminUsername"]%></p>
                                     <p class='Blockbody'><%=postList[i]["postTime"]%></p>
                                 </li>
                             <%}%> 
@@ -104,7 +109,6 @@
                             +'<div class="Blockhead">'
                                 +'<h3 class="Blockhead1">帖子内容</h3>'
                                 +'<h3 class="Blockhead1">操作</h3>'
-                                +'<h3 class="Blockhead1">操作人</h3>'
                                 +'<h3 class="Blockhead1">操作时间</h3>'
                             +'</div>'
                         +'</li>';
@@ -114,7 +118,6 @@
                             +'<div class="Blockhead">'
                                 +'<h3 class="Blockhead1">帖子内容</h3>'
                                 +'<h3 class="Blockhead1">操作</h3>'
-                                +'<h3 class="Blockhead1">操作人</h3>'
                                 +'<h3 class="Blockhead1">操作时间</h3>'
                             +'</div>'
                         +'</li>';

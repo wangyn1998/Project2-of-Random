@@ -51,7 +51,7 @@ export default class Score extends Component {
                 <View style={styles.score}>
                     <Text style={styles.scoretext}>您的得分是：{this.props.score} </Text>
                 </View>
-                <TouchableOpacity style={styles.btn} onPress={()=>Actions.game()}>
+                <TouchableOpacity style={styles.btn} onPress={()=>Actions.reset('game')}>
                     <Text style={styles.btntxt}>返回主页</Text>
                 </TouchableOpacity>
             </View>

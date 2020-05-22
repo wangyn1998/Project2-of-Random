@@ -62,9 +62,15 @@
                     <% for(var i = 0 ; i < postList.length; i++) {%>
                         <li> 
                             <div class='Blockbody'>
-                                <a href="/block/detail?id=<%=postList[i]["postId"]%>"><img class="Blockimg"
-                                    src="http://img2.3png.com/eebe5ef277285d150546fd77d248786d2a9e.png"
-                                ></a>
+                                <% if(postList[i]["userImage"] == '-'){ %>
+                                    <a href="/block/detail?id=<%=postList[i]["postId"]%>"><img class="Blockimg"
+                                        src="http://img2.3png.com/eebe5ef277285d150546fd77d248786d2a9e.png"
+                                    ></a>
+                                <% }else{ %>
+                                    <a href="/block/detail?id=<%=postList[i]["postId"]%>"><img class="Blockimg"
+                                        src="<%= postList[i]["userImage"]%>"
+                                    ></a>
+                                <% } %>
                                 <p class="post-text" style="font-weight: bold;"><%=postList[i]["userName"]%></p>
                                 <p class="post-text" style="height: 17px;overflow: hidden;"><%=postList[i]["postContent"]%></p>
                             </div> 
@@ -93,8 +99,12 @@
                             <div class='postdetail'>
                                 <% for(var i=0;i<1;i++){%>
                                     <div style="margin-top: 20px;width: 105px;height: 103px;margin-left:135px;border: 2px dashed  #79be3b;">
-                                        <img class="Postimg" style="width: 100px;height: 100px;" src="http://img2.3png.com/eebe5ef277285d150546fd77d248786d2a9e.png">
-                                    </div>
+                                        <% if(postList[i]["userImage"] == '-'){ %>
+                                            <img class="Postimg" style="width: 100px;height: 100px;" src="http://img2.3png.com/eebe5ef277285d150546fd77d248786d2a9e.png">
+                                        <% }else{ %>
+                                            <img class="Postimg" style="width: 100px;height: 100px;" src="<%=postList[i]["userImage"]%>">
+                                        <%}%>
+                                        </div>
                                     <h3 style="margin-block-start:0px;margin-block-end: 0;float: left;margin-left: 175px;"><%=postList[i]["userName"]%></h3>
                                     <div style="margin:30px 0 0 40px;width: 300px;height: 180px;border: 2px groove     #79be3b;text-align: center;">
                                         <div style="float: left;"><%=postList[i]["postContent"]%></div>
@@ -149,7 +159,6 @@
                             +'<div class="Blockhead">'
                                 +'<h3 class="Blockhead1">帖子内容</h3>'
                                 +'<h3 class="Blockhead1">操作</h3>'
-                                +'<h3 class="Blockhead1">操作人</h3>'
                                 +'<h3 class="Blockhead1">操作时间</h3>'
                             +'</div>'
                         +'</li>';
@@ -159,7 +168,6 @@
                             +'<div class="Blockhead">'
                                 +'<h3 class="Blockhead1">帖子内容</h3>'
                                 +'<h3 class="Blockhead1">操作</h3>'
-                                +'<h3 class="Blockhead1">操作人</h3>'
                                 +'<h3 class="Blockhead1">操作时间</h3>'
                             +'</div>'
                         +'</li>';

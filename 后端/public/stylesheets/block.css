@@ -55,13 +55,13 @@
 }
 .Blockhead1{
     float: left;
-    width: 25%;
+    width: 33.3%;
     background: #79be3b;
     color:white;
 }
 .Blockbody{
     float: left;
-    width: 25%;
+    width: 33.3%;
     text-align: center;
     line-height:3.7rem;
 }

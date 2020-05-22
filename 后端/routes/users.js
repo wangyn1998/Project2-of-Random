@@ -148,18 +148,6 @@ router.post('/updateuser',(req,res)=>{
           
       }
   })
-  con.query("update post set userImage=? where userName = ?",[data.userImage,username1],(err,result)=>{
-    if(err){
-        throw err;
-    }
-    else{
-        if(result == false){
-            console.log(message2);
-        }else{
-            console.log(message1);
-        }
-    }
-  })
 })
 //获取积分sum
 router.get('/fen',function(req,res,next){
@@ -434,7 +422,15 @@ router.get('/reply',function(req,res,next){
     })
 })
 router.post('/postreply', function(req, res, next) {
-  con.query("insert into reply(userName,postId,replyContent) values(?,?,?)",[username1,clickid,req.body.text],function(err,result){
+  var img;
+  con.query("select * from user where userName=?",[username1],function(err,result){
+    if(err){
+      console.log(err);
+    }else{
+      img=result[0].userImage;
+    }
+  })
+  con.query("insert into reply(userName,postId,replyContent,userImage) values(?,?,?,?)",[username1,clickid,req.body.text,img],function(err,result){
     if(err){
       console.log(err);
     }else{
@@ -477,7 +473,7 @@ router.get('/test', function(req, res, next) {
 //论坛开始
 //所有帖子
 router.get('/block',function(req,res,next){
-  con.query("select * from post ",function(err,result){
+  con.query("select * from post order by postId desc",function(err,result){
     if(err){
       console.log(err);
     }
@@ -511,8 +507,8 @@ router.post('/addpost', function(req, res, next) {
       return s < 10 ? '0' + s : s;
   }
   console.log(data);
-  con.query("insert into post(postContent,userName,userImage,postTime,postPointNumber,postReplyNum,postRepostNum,adminUsername,postImage) values(?,?,?,?,?,?,?,?,?)",
-            [data.content,data.user.userName,data.user.userImage,now,0,0,0,'admin',data.imgUrl],function(err,result){
+  con.query("insert into post(postContent,userName,userImage,postTime,postPointNumber,postReplyNum,postRepostNum,postImage) values(?,?,?,?,?,?,?,?)",
+            [data.content,data.user.userName,data.user.userImage,now,0,0,0,data.imgUrl],function(err,result){
     if(err){
       console.log(err);
     }else{
