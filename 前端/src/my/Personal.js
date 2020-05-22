@@ -109,12 +109,22 @@ export default class Personal extends Component {
             var d0 = [];
             var tupian = '';
             (res[0].userImage=='-' || res[0].userImage==null)?tupian="http://img2.3png.com/eebe5ef277285d150546fd77d248786d2a9e.png":tupian=res[0].userImage;
+            var username = '',
+                sex = '',
+                birthday = '',
+                class1 = '',
+                sign = '';
+            (res[0].userName=='-')?username="":username=res[0].userName;
+            (res[0].userSex=='-')?sex="":sex=res[0].userSex;
+            (res[0].userBir=='-')?birthday="":birthday=res[0].userBir;
+            (res[0].userStudy=='-')?class1="":class1=res[0].userStudy;
+            (res[0].userSign=='-')?sign="":sign=res[0].userSign;
             this.setState({
-                username:res[0].userName,
-                sex:res[0].userSex,
-                birthday:res[0].userBir,
-                class:res[0].userStudy,
-                sign:res[0].userSign,
+                username:username,
+                sex:sex,
+                birthday:birthday,
+                class:class1,
+                sign:sign,
                 userImage:tupian
             })
         })
