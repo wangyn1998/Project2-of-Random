@@ -93,7 +93,7 @@ export default class Personal extends Component {
             res => {
                 if(res.success){
                     ToastAndroid.show('修改成功！', ToastAndroid.SHORT);
-                    Actions.my(this.props.change());
+                    Actions.pop(this.props.change());
                 }
                 else{
                     ToastAndroid.show('出现错误，请重新修改资料', ToastAndroid.SHORT);
