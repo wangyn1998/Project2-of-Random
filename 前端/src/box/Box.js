@@ -134,8 +134,36 @@ export default class Box extends Component {
             num:2
         })
     }
+    changeNum2=()=>{
+        this.setState({
+            num:3
+        })
+    }
     async componentDidUpdate(){
         if(this.state.num==2){
+            list2=[];
+            await fetch('http://172.17.100.2:3000/users/box')
+                .then((res)=>res.json())
+                .then((res)=>{
+                    for(var i=0;i<res.length;i++){
+                        var obj={
+                            text:res[i].boxName,
+                            img:res[i].boxImg,
+                            id:res[i].boxId
+                        }
+                        list2.push(obj);
+                    }
+                    list2.push({
+                        img:"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADEAAAAzCAYAAAA+VOAXAAACEUlEQVRoge2ZS0sCURTHzzx8ZYYpQi83plBEiwKDatO2RZta9AVa1r5tn6GW9QnatGtTEEQQLRIyahE9KCpqelhU2uho3gsazVyV0atdh/sDUe4Bz/8HM3fOzAi5PNDkiP8dgAZcghW4BCvI9fjTD/UVvrVPSGfV30aiDeyiE9ocAer9qEukMp+wdbkGl4lDUL6ui+t+Vzd0tIZhum8RXLKHak/qEvHHbTi42zCsPydv8SfkHYbRnhmqPamfE6dPu2XrZy/7tFvSl1C1VE31arDE7sQlWIFLsAKXYAUuwQqWkCg5AKpaEjL5UTqby1JvikZ1s9gkBzikFmKNKIHGaTSNoqkT/TYDkq9UR6O6Wbo8EejzjxHvRwT9I5tsToO9m3XYPF8x3ajeDAYmYHZgCURB+rNuOCfevhUmBRBxZQfn02OQeE3eNyRQtZDyWWJ3MkjojzfWIOUzSHidAXDK7oYEMosk2nA+PQSJToh2TWERQWDnaEN5wu1RnE8P8Tox2TuPv68Sx5DWvkw1e0ndl71W2CUX+AhBKhHxjxRz6TFcJ2plNbYAF4lYyXrIOwRzQ8s0W1p0d2pGuAQrcAlW4BKswCVYgUuQsImOmurVQF0i7IuWvB+RRTuu04b6i8fx4Cy8qwocPWyDlssU10VBhqCnH9dpQ30UL3Ci7GKZAm67Dz9yqQd1k2gkfHdiBUtI/ACe6Z+VsrbPGgAAAABJRU5ErkJggg==",
+                        text:'+'
+                    });
+                    this.setState({
+                        data:list2,
+                        num:1
+                    })
+                })
+        }
+        if(this.state.num==3){
             await fetch('http://172.17.100.2:3000/users/record')
             .then((res)=>res.json())
             .then((res)=>{
@@ -170,30 +198,10 @@ export default class Box extends Component {
                     }
                 ]
                 this.setState({
-                    list:list
+                    list:list,
+                    num:1
                 })
             })
-            list2=[];
-            await fetch('http://172.17.100.2:3000/users/box')
-                .then((res)=>res.json())
-                .then((res)=>{
-                    for(var i=0;i<res.length;i++){
-                        var obj={
-                            text:res[i].boxName,
-                            img:res[i].boxImg,
-                            id:res[i].boxId
-                        }
-                        list2.push(obj);
-                    }
-                    list2.push({
-                        img:"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADEAAAAzCAYAAAA+VOAXAAACEUlEQVRoge2ZS0sCURTHzzx8ZYYpQi83plBEiwKDatO2RZta9AVa1r5tn6GW9QnatGtTEEQQLRIyahE9KCpqelhU2uho3gsazVyV0atdh/sDUe4Bz/8HM3fOzAi5PNDkiP8dgAZcghW4BCvI9fjTD/UVvrVPSGfV30aiDeyiE9ocAer9qEukMp+wdbkGl4lDUL6ui+t+Vzd0tIZhum8RXLKHak/qEvHHbTi42zCsPydv8SfkHYbRnhmqPamfE6dPu2XrZy/7tFvSl1C1VE31arDE7sQlWIFLsAKXYAUuwQqWkCg5AKpaEjL5UTqby1JvikZ1s9gkBzikFmKNKIHGaTSNoqkT/TYDkq9UR6O6Wbo8EejzjxHvRwT9I5tsToO9m3XYPF8x3ajeDAYmYHZgCURB+rNuOCfevhUmBRBxZQfn02OQeE3eNyRQtZDyWWJ3MkjojzfWIOUzSHidAXDK7oYEMosk2nA+PQSJToh2TWERQWDnaEN5wu1RnE8P8Tox2TuPv68Sx5DWvkw1e0ndl71W2CUX+AhBKhHxjxRz6TFcJ2plNbYAF4lYyXrIOwRzQ8s0W1p0d2pGuAQrcAlW4BKswCVYgUuQsImOmurVQF0i7IuWvB+RRTuu04b6i8fx4Cy8qwocPWyDlssU10VBhqCnH9dpQ30UL3Ci7GKZAm67Dz9yqQd1k2gkfHdiBUtI/ACe6Z+VsrbPGgAAAABJRU5ErkJggg==",
-                        text:'+'
-                    });
-                    this.setState({
-                        data:list2,
-                        num:1
-                    })
-                })
         }
     }
     render() {
@@ -228,7 +236,7 @@ export default class Box extends Component {
                             )
                         }
                         return (
-                            <TouchableOpacity onPress={()=>{Actions.light({'id':item.id,'change':this.changeNum});Actions.refresh()}} style={{alignItems:'center',width:'50%',padding:10}}>
+                            <TouchableOpacity onPress={()=>{Actions.light({'id':item.id,'change':this.changeNum2});Actions.refresh()}} style={{alignItems:'center',width:'50%',padding:10}}>
                                     <Image source={{uri:item.img}} style={{height:h*0.18,width:'65%'}}/>
                                     <Text style={{color:'#E81414',marginTop:10}}>{item.text}</Text>
                             </TouchableOpacity>
