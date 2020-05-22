@@ -228,7 +228,7 @@ router.get('/score/slist', function(req, res, next) {
   var sum0=0;
   var userPhone=req.query.userPhone;
   var userName=req.query.userName;
-  con.query("select * from slist where userPhone=?",[userPhone],function(err,result){
+  con.query("select * from slist where userName=?",[userName],function(err,result){
     if(err){
       console.log(err);
     }
