@@ -345,7 +345,7 @@ const App = () => {
                       navigationBarStyle={{backgroundColor:'#fff'}}
                       titleStyle={{flex:1,textAlign:'center'}}
                       backButtonImage={require('./images/my-cuo.png')}
-                      renderRightButton={<Text style={{marginRight:20,color:'#79be3b'}}>提交</Text>}
+                      renderRightButton={<Text style={{marginRight:20,color:'#79be3b'}} onPress={()=>{ToastAndroid.show('感谢您的反馈，我们会认真思考，努力提升！', ToastAndroid.SHORT);Actions.pop()}}>提交</Text>}
                     />
                     <Scene 
                       title='关于我们'
