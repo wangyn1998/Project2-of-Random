@@ -72,21 +72,6 @@ export default class Block extends Component {
             })
         })
     }
-    post=(item)=>{
-        Actions.blockMsg({xiangqing:item});
-        let text = {postId:item.postId} //获取数据
-        let send = JSON.stringify(text);   //重要！将对象转换成json字符串
-        fetch(`http://172.17.100.2:3000/users/clicknum`,{   //Fetch方法y
-            method: 'POST',
-            headers: {'Content-Type': 'application/json; charset=utf-8'},
-            body: send
-        })
-        .then(res => res.json())
-        .then(
-            data => {
-            }
-        )
-    }
     render() {
         return (
             <View>
@@ -97,7 +82,7 @@ export default class Block extends Component {
                             numColumns = {1}
                             style={{width:'97%'}}
                             renderItem={({item})=>(
-                                <TouchableOpacity style={styles.kuang} onPress={()=>{this.post(item)}}>
+                                <TouchableOpacity style={styles.kuang} onPress={()=>{Actions.blockMsg({xiangqing:item})}}>
                                     <View style={styles.user}>
                                         <View style={styles.touxiang}>
                                             <Image source={{uri:item.userImage}} style={{width:80,height:80}}/>
