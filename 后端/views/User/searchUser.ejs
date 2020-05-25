@@ -45,7 +45,7 @@
             <br/>
             <div class='Userbox3'>
                 <ul id="all" >
-                    <li >
+                    <!-- <li >
                         <div class="Userhead">
                             <h3 class='Userhead1'>用户ID</h3>
                             <h3 class='Userhead1'>头像</h3>
@@ -56,7 +56,7 @@
                             <h3 class='Userhead1'>学段</h3>
                             <h3 class='Userhead1'>操作</h3>
                         </div>
-                    </li> 
+                    </li>  -->
                     <% for(var i = 0 ; i <  userList.length; i++) {%>
                     <li>
                         <p class='Userbody'><%= userList[i]["userId"] %></p>
@@ -111,7 +111,7 @@
             }
             $("#all").html("");//全部清空
             if(pageno==1){
-                var html="";
+                var html=" <li><div class='Userhead'><h3 class='Userhead1'>用户ID</h3><h3 class='Userhead1'>头像</h3><h3 class='Userhead1'>用户名</h3><h3 class='Userhead1'>手机号</h3><h3 class='Userhead1'>性别</h3><h3 class='Userhead1'>生日</h3><h3 class='Userhead1'>学段</h3><h3 class='Userhead1'>操作</h3></div></li> ";
             }
             else{
                 var html=" <li><div class='Userhead'><h3 class='Userhead1'>用户ID</h3><h3 class='Userhead1'>头像</h3><h3 class='Userhead1'>用户名</h3><h3 class='Userhead1'>手机号</h3><h3 class='Userhead1'>性别</h3><h3 class='Userhead1'>生日</h3><h3 class='Userhead1'>学段</h3><h3 class='Userhead1'>操作</h3></div></li> ";
@@ -146,7 +146,7 @@
         }
             var zz=getzz()
             var pageno=1 ; //当前页
-            var pagesize=5; //每页多少条信息
+            var pagesize=4; //每页多少条信息
             if(zz.length%pagesize==0){
                 var  pageall =zz.length/pagesize ;
             }else{

@@ -28,13 +28,13 @@
             <br/>
             <div class='starbox3'>
                 <ul id="all">
-                    <li>
+                    <!-- <li>
                         <div class='starhead'>
                         <h3 class='starhead1'><b>星星数</b></h3>
                         <h3 class='starhead1'><b>成就</b></h3>
                         <h3 class='starhead1'><b>操作</b></h3>
                          </div>
-                    </li>
+                    </li> -->
                     <% for(var i = 0 ; i < achieveList.length; i++) {%>
                         <li>
                             <p class='starbody'><%= achieveList[i]["achieveStarNum"] %></p>  
@@ -92,7 +92,7 @@
         }
         $("#all").html("");//全部清空
         if(pageno==1){
-            var html="";
+            var html="  <li><div class='starhead'><h3 class='starhead1'><b>星星数</b></h3><h3 class='starhead1'><b>成就</b></h3><h3 class='starhead1'><b>操作</b></h3></div></li>"
         }
         else{
             var html="  <li><div class='starhead'><h3 class='starhead1'><b>星星数</b></h3><h3 class='starhead1'><b>成就</b></h3><h3 class='starhead1'><b>操作</b></h3></div></li>"
@@ -120,7 +120,7 @@
     }
         var zz=getzz()
         var pageno=1 ; //当前页
-        var pagesize=5; //每页多少条信息
+        var pagesize=4; //每页多少条信息
         if(zz.length%pagesize==0){
             var  pageall =zz.length/pagesize ;
         }else{

@@ -88,6 +88,7 @@ router.post('/login', function (req, res) {  //接收POST请求
   })
 })
 //获取我的页面头像和用户名
+var img='';
 router.get('/my',function(req,res,next){
   con.query('select * from user where userName = ?',[username1],(err,result)=>{
       if(err){
@@ -97,6 +98,7 @@ router.get('/my',function(req,res,next){
           console.log('user');
           console.log(result);
           // aa = result;
+          img=result[0].userImage;
           res.send(result);
       }
   })
@@ -422,15 +424,8 @@ router.get('/reply',function(req,res,next){
     })
 })
 router.post('/postreply', function(req, res, next) {
-  var img;
-  con.query("select * from user where userName=?",[username1],function(err,result){
-    if(err){
-      console.log(err);
-    }else{
-      img=result[0].userImage;
-    }
-  })
-  con.query("insert into reply(userName,postId,replyContent,userImage) values(?,?,?,?)",[username1,clickid,req.body.text,img],function(err,result){
+  console.log(img)
+  con.query("insert into reply(userName,postId,replyContent,userImage) values(?,?,?,?)",[username1,clickid,req.body.text,req.body.user.userImage],function(err,result){
     if(err){
       console.log(err);
     }else{

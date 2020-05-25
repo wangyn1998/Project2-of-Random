@@ -44,7 +44,7 @@
             </div>
             <div class='Listbox3'>
                 <ul id="all"> 
-                    <li >
+                    <!-- <li >
                         <div class='Listhead'>
                             <h3 class='Listhead1'><b>用户名</b></h3>
                             <h3 class='Listhead1'><b>更新时间</b></h3>
@@ -52,7 +52,7 @@
                             <h3 class='Listhead1'><b>排名</b></h3>
                             <h3 class='Listhead1'><b>个人积分</b></h3>
                         </div>
-                    </li>
+                    </li> -->
                     <% for(var i = 0 ; i < scoreList.length; i++) {%>
                     <li>
                         <p class='Listbody'><%= scoreList[i]["userName"] %></p>  
@@ -93,7 +93,7 @@
             }
             $("#all").html("");//全部清空
             if(pageno==1){
-                var html="";
+                var html="  <li ><div class='Listhead'><h3 class='Listhead1'><b>用户名</b></h3><h3 class='Listhead1'><b>更新时间</b></h3><h3 class='Listhead1' ><b>总分</b></h3><h3 class='Listhead1' ><b>排名</b></h3><h3 class='Listhead1'><b>个人积分</b></h3></div></li>";
             }
             else{
                 var html="  <li ><div class='Listhead'><h3 class='Listhead1'><b>用户名</b></h3><h3 class='Listhead1'><b>更新时间</b></h3><h3 class='Listhead1' ><b>总分</b></h3><h3 class='Listhead1' ><b>排名</b></h3><h3 class='Listhead1'><b>个人积分</b></h3></div></li>";
@@ -120,7 +120,7 @@
         }
             var zz=getzz()
             var pageno=1 ; //当前页
-            var pagesize=5; //每页多少条信息
+            var pagesize=4; //每页多少条信息
             if(zz.length%pagesize==0){
                 var  pageall =zz.length/pagesize ;
             }else{

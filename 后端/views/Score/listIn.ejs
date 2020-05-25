@@ -35,7 +35,7 @@
         </div>
         <div class='ListInbox3'>
             <ul id="all" >
-                <li >
+                <!-- <li >
                     <div style='text-align: left;line-height:3.7rem;'>
                             <h1>用户名:<%= userName%>&nbsp;&nbsp;&nbsp;&nbsp;
                             手机号:<%= userPhone%></h1>
@@ -47,7 +47,7 @@
                     <h2 class='ListInhead1'>积分变换</h2>
                     <h2 class='ListInhead1'>总积分</h2>
                     </div>
-                </li> 
+                </li>  -->
                 <% for(var i = 0 ; i < slistList.length; i++) {%>
                     <li>
                         <p class='ListInbody'><%= slistList[i]["taskContent"] %></p>
@@ -90,7 +90,7 @@ function change(e){
     }
     $("#all").html("");//全部清空
     if(pageno==1){
-        var html="";
+        var html="<li ><div style='text-align: left;line-height:3.7rem;'><h1>用户名:<%= userName%>&nbsp;&nbsp;&nbsp;&nbsp;手机号:<%= userPhone%></h1></div> </li> <li ><div class='ListInhead'><h2 class='ListInhead1'>完成任务内容</h2><h2 class='ListInhead1'>积分变换</h2><h2 class='ListInhead1'>总积分</h2></div></li> ";
     }
     else{
         var html="<li ><div style='text-align: left;line-height:3.7rem;'><h1>用户名:<%= userName%>&nbsp;&nbsp;&nbsp;&nbsp;手机号:<%= userPhone%></h1></div> </li> <li ><div class='ListInhead'><h2 class='ListInhead1'>完成任务内容</h2><h2 class='ListInhead1'>积分变换</h2><h2 class='ListInhead1'>总积分</h2></div></li> ";
@@ -117,7 +117,7 @@ function change(e){
 }
     var zz=getzz()
     var pageno=1 ; //当前页
-    var pagesize=5; //每页多少条信息
+    var pagesize=3; //每页多少条信息
     if(zz.length%pagesize==0){
         var  pageall =zz.length/pagesize ;
     }else{
