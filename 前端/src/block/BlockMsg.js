@@ -18,13 +18,23 @@ export default class BlockMsg extends Component {
             activeSections:[],
             isCare2:false,
             reply:[],
-            text1:''
+            text1:'',
+            user:{}
         }
         this.onChange = activeSections => {
             this.setState({ activeSections });
         };
     }
     async componentDidMount(){
+        fetch('http://172.17.100.2:3000/users/my')
+            .then((res)=>res.json())
+            .then((res)=>{
+                
+                this.setState({
+                    user:res[0]
+                })
+                console.log(this.state.user);
+        })  
         fetch('http://172.17.100.2:3000/users/reply')
         .then((res)=>res.json())
         .then((res)=>{
@@ -56,7 +66,8 @@ export default class BlockMsg extends Component {
             ToastAndroid.show('发送内容不能为空',1000);
         }
         else{
-            let text1 = {text:this.state.text1} 
+            let text1 = {text:this.state.text1,user:this.state.user} 
+            
             let send = JSON.stringify(text1); 
             fetch(`http://172.17.100.2:3000/users/postreply`,{
                 method: 'POST',
