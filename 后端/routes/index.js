@@ -530,7 +530,7 @@ router.get('/box/answer', function(req, res, next) {
 // 搜索卡片
 router.post('/searchcard', function(req, res, next) {
   var cardname=req.body.cardname;
-  con.query("select * from card where cardQues=?",[cardname],function(err,result){
+  con.query("select * from card where cardQues=? and boxId=?",[cardname,boxId],function(err,result){
     if(err){
       console.log(err);
     }
@@ -555,13 +555,54 @@ router.get('/box/deletecard', function(req, res, next) {
 let userName;
 router.get('/box/record', function(req, res, next) {
   userName=req.query.userName;
-  console.log(userName);
   con.query("select * from record where userName=?",[userName],function(err,result){
     if(err){
       console.log(err);
     }
     else{
-     res.render("Box/record",{recordList:result,userName:userName});
+      let sList=result;
+      let userDay;
+      let now=new Date();
+      let day;
+      con.query("select userDay from user where userName=?",[userName],function (err,result) {
+        if(err){
+          console.log(err);
+        }else{
+          userDay=result;
+          day= Math.floor((now-userDay[0].userDay)/(24*3600*1000));
+        }
+      });
+      con.query("select recordStars from record where userName=?",[userName],function(err,result){
+        if(err){
+          console.log(err);
+        }
+        else{
+         console.log(result[0].recordStars);
+         var num=1;
+         var star=result[0].recordStars;
+        switch(true){
+            case star<30:
+                num=1;
+                break;
+            case star>29&&star<60:
+                num=2;
+                break;
+            case star>59&&star<90:
+                num=3;
+                break;
+            case star>89&&star<120:
+                num=4;
+                break;
+            case star>119&&star<150:
+                num=5;
+                break;
+            case star>149:
+                num=6;
+                break;
+          }
+         res.render("Box/record",{recordList:sList,star:num,day:day,userName:userName});
+        }
+      })
     }
   })
 });
