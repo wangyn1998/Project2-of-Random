@@ -433,6 +433,15 @@ router.post('/postreply', function(req, res, next) {
     }
   });
 });
+router.post('/postPoint', function(req, res, next) {
+  con.query("update reply set replyPoint=? where replyId=?",[req.body.point,req.body.id],function(err,result){
+    if(err){
+      console.log(err);
+    }else{
+      res.send({success:true})
+    }
+  });
+});
 //张结束
 
 
