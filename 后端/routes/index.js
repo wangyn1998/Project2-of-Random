@@ -561,17 +561,6 @@ router.get('/box/record', function(req, res, next) {
     }
     else{
       let sList=result;
-      let userDay;
-      let now=new Date();
-      let day;
-      con.query("select userDay from user where userName=?",[userName],function (err,result) {
-        if(err){
-          console.log(err);
-        }else{
-          userDay=result;
-          day= Math.floor((now-userDay[0].userDay)/(24*3600*1000));
-        }
-      });
       con.query("select recordStars from record where userName=?",[userName],function(err,result){
         if(err){
           console.log(err);
@@ -600,7 +589,14 @@ router.get('/box/record', function(req, res, next) {
                 num=6;
                 break;
           }
-         res.render("Box/record",{recordList:sList,star:num,day:day,userName:userName});
+          con.query("update record set recordAchievement=? where userName=?",[num,userName],function (err,result) {
+            if(err){
+              console.log(err);
+            }else{
+              console.log("ok");
+            }
+          });
+         res.render("Box/record",{recordList:sList,star:num,userName:userName});
         }
       })
     }
