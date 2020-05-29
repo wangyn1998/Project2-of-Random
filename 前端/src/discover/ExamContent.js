@@ -39,7 +39,7 @@ export default class KnowledgeContent extends Component {
     render() {
         return (
             <View>
-                <View style={{color:'white'}}>
+                <View style={{backgroundColor:'#f6f6f6',height:'100%',width:'100%'}}>
                     <ScrollView>
                         <Text  style={styles.top}>{this.props.top}</Text>
                         <ImageBackground

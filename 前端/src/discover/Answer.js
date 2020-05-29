@@ -8,7 +8,8 @@ import {
     ToastAndroid,
     Alert,
     FlatList,
-    Image 
+    Image, 
+    ImageBackground
 } from 'react-native'
 const styles = StyleSheet.create({
     line:{
@@ -18,7 +19,7 @@ const styles = StyleSheet.create({
     },
     top:{
         fontWeight:'bold',
-        color:'white',
+        color:'black',
         width:'100%',
         textAlign:"center",
         marginTop:10,
@@ -53,7 +54,8 @@ const styles = StyleSheet.create({
     optiontxt:{
         textAlign:'center',
         fontSize:30,
-        color:'black'
+        color:'black',
+        lineHeight:50
     },
     ans:{
         width:'50%',
@@ -143,7 +145,8 @@ export default class Answer extends Component {
         }
         else{
             this.setState({
-                num: this.state.num +1
+                num: this.state.num +1,
+                ans:''
             })
         }
     }
@@ -164,7 +167,8 @@ export default class Answer extends Component {
     }
     render() {
         return (
-            <View style={{height:'100%',width:'100%',backgroundColor:'rgba(121,190,59,0.8)'}}>
+            <ImageBackground source={require('../../images/game1.jpg')}  style={{height:'100%',width:'100%'}}>
+
                 <View style={styles.line}></View>
                 <Text style={styles.top}>第{this.state.num+1}题</Text>
                 <View style={styles.question}>
@@ -188,7 +192,7 @@ export default class Answer extends Component {
                     
                 </View>
                 
-            </View>
+            </ImageBackground>
         )
     }
 }

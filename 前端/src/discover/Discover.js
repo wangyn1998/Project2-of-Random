@@ -76,7 +76,7 @@ export default class Discover extends Component {
             <View>
                 <ScrollView>
                     <View style={styles.wrapper}>
-                        <Swiper>
+                        <Swiper autoplay={true}>
                             <View >
                                 <Image source={require('../../images/lb1.png')} style={{width:"100%",height:"100%"}} />
                             </View>

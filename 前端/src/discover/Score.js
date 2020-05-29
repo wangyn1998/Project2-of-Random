@@ -4,7 +4,8 @@ import {
     StyleSheet,
     Text,
     View,
-    TouchableOpacity
+    TouchableOpacity,
+    ImageBackground
 } from 'react-native'
 const styles = StyleSheet.create({
     line:{
@@ -13,10 +14,10 @@ const styles = StyleSheet.create({
         width:'100%'
     },
     score:{
-        height :300,
+        height :250,
         marginLeft:'15%',
         width:'70%',
-        marginTop:150,
+        marginTop:80,
         borderRadius:15,
         backgroundColor:'rgba(0,0,0,0.4)'
     },
@@ -46,15 +47,15 @@ const styles = StyleSheet.create({
 export default class Score extends Component {
     render() {
         return (
-            <View style={{height:'100%',width:'100%',backgroundColor:'rgba(121,190,59,0.8)'}}>
+            <ImageBackground source={require('../../images/game2.jpg')} style={{height:'100%',width:'100%'}}>
                 <View style={styles.line}></View>
                 <View style={styles.score}>
                     <Text style={styles.scoretext}>您的得分是：{this.props.score} </Text>
                 </View>
-                <TouchableOpacity style={styles.btn} onPress={()=>Actions.reset('game')}>
+                <TouchableOpacity style={styles.btn} onPress={()=>Actions.reset('discover')}>
                     <Text style={styles.btntxt}>返回主页</Text>
                 </TouchableOpacity>
-            </View>
+            </ImageBackground>
         )
     }
 }

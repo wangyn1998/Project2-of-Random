@@ -7,6 +7,7 @@ import {
     ScrollView,
     TouchableOpacity,
     FlatList,
+    ActivityIndicator,
     Image 
 } from 'react-native'
 const styles = StyleSheet.create({
@@ -115,7 +116,9 @@ export default class Exam extends Component {
                     <View style={{marginBottom:10,marginTop:10}}></View>
                     {
                         this.state.isLoading == false
-                        ?<View style={styles.line}></View>
+                        ?<View style={{width:'100%',height:250,backgroundColor:'white',justifyContent:'center'}}>
+                            <ActivityIndicator color="red" size='large'/>
+                        </View>
                         :<View>
                             <FlatList 
                                 data={this.state.data}
