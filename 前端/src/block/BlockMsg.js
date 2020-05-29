@@ -19,7 +19,8 @@ export default class BlockMsg extends Component {
             isCare2:false,
             reply:[],
             text1:'',
-            user:{}
+            user:{},
+            point:0
         }
         this.onChange = activeSections => {
             this.setState({ activeSections });
@@ -40,7 +41,8 @@ export default class BlockMsg extends Component {
         .then((res)=>{
             console.log(res);
             this.setState({
-                reply:res
+                reply:res,
+                point:res[0].replyPoint
             })
         })
     }
@@ -55,11 +57,35 @@ export default class BlockMsg extends Component {
             text1:text
         })
     }
-    changeCare2=()=>{
+    changeCare2=(id)=>{
         var a=!this.state.isCare2;
+        if(this.state.isCare2==false){
+            var b=this.state.point;
+            this.setState({
+                point:b+1
+            })
+        }else{
+            var b=this.state.point;
+            this.setState({
+                point:b-1
+            })
+        }
         this.setState({
             isCare2:a
         })
+            let text2 = {point:this.state.point,id:id} 
+            let send = JSON.stringify(text2); 
+            fetch(`http://172.17.100.2:3000/users/postPoint`,{
+                method: 'POST',
+                headers: {'Content-Type': 'application/json; charset=utf-8'},
+                body: send
+            })
+            .then(res => res.json())
+            .then(
+                data => {
+                    
+                }
+            )
     }
     push=()=>{
         if(this.state.text1==''){
@@ -149,15 +175,15 @@ export default class BlockMsg extends Component {
                                                 <Text style={{fontSize:20,color:'#79be3b'}}>{item.userName}</Text>
                                                 <Text>{item.replyContent}</Text>
                                                 </View>
-                                                {
+                                                 {
                                                     [1].map(()=>{
                                                         if(this.state.isCare2==true){
                                                             return (
-                                                                <TouchableOpacity style={styles.btn2} onPress={()=>{this.changeCare2()}}><Icon name='like' color='#79be3b'/><Text style={{color:'#79be3b'}}>121</Text></TouchableOpacity>
+                                                                <TouchableOpacity style={styles.btn2} onPress={()=>{this.changeCare2(item.replyId)}}><Icon name='like' color='#79be3b'/><Text style={{color:'#79be3b'}}>{this.state.point}</Text></TouchableOpacity>
                                                             )
                                                         }else{
                                                             return (
-                                                                <TouchableOpacity  style={styles.btn2} onPress={()=>{this.changeCare2()}}><Icon name='like' color='#B5B4AA'/><Text style={{color:'#B5B4AA',marginLeft:2}}>120</Text></TouchableOpacity>
+                                                                <TouchableOpacity  style={styles.btn2} onPress={()=>{this.changeCare2(item.replyId)}}><Icon name='like' color='#B5B4AA'/><Text style={{color:'#B5B4AA',marginLeft:2}}>{this.state.point}</Text></TouchableOpacity>
                                                             )
                                                         }
                                                     })
