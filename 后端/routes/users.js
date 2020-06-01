@@ -88,7 +88,6 @@ router.post('/login', function (req, res) {  //接收POST请求
   })
 })
 //获取我的页面头像和用户名
-var img='';
 router.get('/my',function(req,res,next){
   con.query('select * from user where userName = ?',[username1],(err,result)=>{
       if(err){
@@ -98,7 +97,6 @@ router.get('/my',function(req,res,next){
           console.log('user');
           console.log(result);
           // aa = result;
-          img=result[0].userImage;
           res.send(result);
       }
   })
@@ -150,6 +148,18 @@ router.post('/updateuser',(req,res)=>{
           
       }
   })
+  con.query("update post set userImage=? where userName = ?",[data.userImage,username1],(err,result)=>{
+    if(err){
+        throw err;
+    }
+    else{
+        if(result == false){
+            console.log(message2);
+        }else{
+            console.log(message1);
+        }
+    }
+  })
 })
 //获取积分sum
 router.get('/fen',function(req,res,next){
@@ -193,6 +203,23 @@ router.post('/getscore', function (req, res) {  //接收POST请求
   console.log(data);
   let message1 = {success:true}
   let message2 = {success:false}
+  if(data.taskContent == '签到'){
+    con.query("select * from record where userName=?",[username1],function(err,result){
+      if(err){
+        console.log(err);
+      }else{
+        console.log(result);
+        var num=result[0].recordClockIn+1;
+        con.query("update record set recordClockIn=? where userName=?",[num,username1],function(err,result){
+          if(err){
+            console.log(err);
+          }else{
+            
+          }
+        })
+      }
+    });
+  }
   con.query("insert into sList(taskScore,updateTime,taskId,taskContent,userName,userPhone) values(?,?,?,?,?,?)",[data.taskScore,data.updateTime,data.taskId,data.taskContent,data.userName,data.hone],function(err,result){
     if(err){
         console.log(err);
@@ -536,7 +563,7 @@ router.get('/test', function(req, res, next) {
 //论坛开始
 //所有帖子
 router.get('/block',function(req,res,next){
-  con.query("select * from post order by postId desc",function(err,result){
+  con.query("select * from post ",function(err,result){
     if(err){
       console.log(err);
     }
@@ -553,6 +580,29 @@ router.get('/sended',function(req,res,next){
     }
     else{
       res.send(result);
+    }
+  });
+})
+//block点赞
+router.post('/zan', function (req, res) {  //接收POST请求
+  /**获取请求体数据 */
+  let data = req.body;   //解析body中的信息
+  console.log(data);
+  let message1 = {success:true};
+  let message2 = {success:false};
+  con.query("select * from post where postId=?",[req.body.postId],function(err,result){
+    if(err){
+      console.log(err);
+      res.send(message2);
+    }else{
+      con.query("update post set postPointNumber=? where postId=?",[req.body.postPointNumber,req.body.postId],function(err,result){
+        if(err){
+          console.log(err);
+          res.send(message2);
+        }else{
+          res.send(message1);
+        }
+      })
     }
   });
 })
