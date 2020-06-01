@@ -60,65 +60,49 @@ export default class Bing extends Component {
                     this.setState({
                         series:series
                     })
-                    var writerInfoArr = new Array();//js的数度组不要设置长知度，我们就道当他是4个。
-                    var writerInfo = new Object();
                     var data = [];
-                    for(var i=0;i<heng.length;i++){
-                        writerInfo.name=this.state.xaxis[i];
-                        writerInfo.value=this.state.series[i];
-                        console.log(writerInfo);
-                        writerInfoArr[i]=writerInfo;
+                    for(let index in this.state.xaxis){
+                        data.push({name: this.state.xaxis[index], value: this.state.series[index]});
                     }
-                    console.log(writerInfoArr);
+                    console.log(data)
                     this.setState({
-                        data:writerInfoArr
+                        data:data
                     })
                 }
             })
     }
     render() {
-        var option = {
-            tooltip: {
+        var option1 = {
+            tooltip : {
                 trigger: 'item',
-                formatter: '{a} <br/>{b}: {c} ({d}%)'
+                formatter: "{a} <br/>{b} : {c} ({d}%)"
             },
             legend: {
                 orient: 'vertical',
-                left: 10,
+                left: 'left',
                 data: this.state.xaxis
             },
-            series: [
+            series : [
                 {
-                    name: '盒子饼状图',
+                    name: '访问来源',
                     type: 'pie',
-                    radius: ['50%', '70%'],
-                    avoidLabelOverlap: false,
-                    label: {
-                        show: false,
-                        position: 'center'
-                    },
-                    emphasis: {
-                        label: {
-                            show: true,
-                            fontSize: '30',
-                            fontWeight: 'bold'
+                    radius : '55%',
+                    center: ['50%', '60%'],
+                    data:this.state.data,
+                    itemStyle: {
+                        emphasis: {
+                            shadowBlur: 10,
+                            shadowOffsetX: 0,
+                            shadowColor: 'rgba(0, 0, 0, 0.5)'
                         }
-                    },
-                    labelLine: {
-                        show: false
-                    },
-                    data:[
-                    // {value:2,name:''},
-                    // {value:2,name:''},
-                    // {value:2,name:''}
-                    ]
+                    }
                 }
             ]
         };
         return (
             <View style={{backgroundColor:'#fff',width:'100%',height:'100%'}}>
                 <Text style={{fontSize:20,textAlign:'center',marginBottom:20,marginTop:10}}>本周学科卡片分布</Text>
-                <Echarts option={option} height={300}/>
+                <Echarts option={option1} height={300}/>
             </View>
         )
     }

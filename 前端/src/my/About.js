@@ -16,7 +16,7 @@ export default class About extends Component {
             <ScrollView style={{backgroundColor:'#fff',width:'100%',height:'100%',padding:10}}>
                 <View style={{flex:1}}>
                     <Text style={styles.ltxt}>项目简介</Text>
-                    <Text style={styles.mtxt}>盒我学App是一款方便用户复习知识以及摄取新知识的软件的APP。</Text>
+                    <Text style={styles.mtxt}>盒我学App是一款方便用户复习知识以及摄取新知识的软件。</Text>
                     <Text style={styles.mtxt}>盒我学App努力让不同年龄阶段的用户体验在娱乐中学习，提高学生这一阶层用户对于课本知识（特别是英语单词）的记忆强度。</Text>
                     <Text style={styles.mtxt}>对于学生阶层来说，每天以及每周在学校学习很多课本上的知识，在复习的时候无法判断自己对于知识掌握的情况，这款APP模仿放在盒子中的卡片，卡片的正面写问题，背面写答案，学生用户可以通过卡片的这种手段判断自己对于知识点掌握的情况。对于其他用户可以通过小游戏以及知识推送，丰富自己的知识储备，还可以通过发表言论交到好朋友。</Text>
                     <Text style={styles.ltxt}>项目成员</Text>

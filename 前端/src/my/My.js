@@ -43,13 +43,10 @@ export default class My extends Component {
         fetch('http://172.17.100.2:3000/users/my')
         .then((res)=>res.json())
         .then((res)=>{
-            console.log(res);
             var d0 = [];
             var tupian = '';
-            console.log(res[0].userImage);
             (res[0].userImage=='-' || res[0].userImage==null)?tupian="http://img2.3png.com/eebe5ef277285d150546fd77d248786d2a9e.png":tupian=res[0].userImage;
             d0[0] = Object.assign({},res[0],{userImage:tupian});
-            console.log(tupian);
             this.setState({
                 user:d0[0],
                 // username:res[0].userName,
