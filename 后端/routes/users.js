@@ -442,6 +442,65 @@ router.post('/postPoint', function(req, res, next) {
     }
   });
 });
+router.post('/postday',function(req,res,next){
+  let userDay;
+  let now=new Date();
+  let day;
+  console.log(req.body.username);
+  con.query("select userDay from user where userName=?",[req.body.username],function (err,result) {
+        if(err){
+          console.log(err);
+        }else{
+          userDay=result;
+          day= Math.floor((now-userDay[0].userDay)/(24*3600*1000));
+          con.query("update record set recordDay=? where userName=?",[day,req.body.username],function(err,result){
+            if(err){
+              console.log(err);
+            }else{
+        
+            }
+          })
+        }
+  });
+  con.query("select recordStars from record where userName=?",[req.body.username],function(err,result){
+    if(err){
+      console.log(err);
+    }
+    else{
+      console.log(result[0].recordStars);
+      var num=1;
+      var star=result[0].recordStars;
+      switch(true){
+        case star<30:
+            num=1;
+            break;
+        case star>29&&star<60:
+            num=2;
+            break;
+        case star>59&&star<90:
+            num=3;
+            break;
+        case star>89&&star<120:
+            num=4;
+            break;
+        case star>119&&star<150:
+            num=5;
+            break;
+        case star>149:
+            num=6;
+            break;
+      }
+      con.query("update record set recordAchievement=? where username=?",[num,req.body.username],function (err,result) {
+        if(err){
+          console.log(err);
+        }else{
+           
+        }
+      })
+    }
+  })
+
+})
 //张结束
 
 
