@@ -37,6 +37,19 @@ export default class Login extends Component {
       .then(
         res => {
           if(res.success){
+            let text2 = {username:this.state.username} 
+            let send = JSON.stringify(text2); 
+            fetch(`http://172.17.100.2:3000/users/postday`,{
+                method: 'POST',
+                headers: {'Content-Type': 'application/json; charset=utf-8'},
+                body: send
+            })
+            .then(res => res.json())
+            .then(
+                data => {
+                    
+                }
+            )
             AsyncStorage.setItem('user',this.state.username);
             AsyncStorage.setItem('logif',true);
             ToastAndroid.show('即将进入主页面...', ToastAndroid.SHORT);
