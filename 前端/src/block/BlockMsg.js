@@ -34,12 +34,10 @@ export default class BlockMsg extends Component {
                 this.setState({
                     user:res[0]
                 })
-                console.log(this.state.user);
         })  
         fetch('http://172.17.100.2:3000/users/reply')
         .then((res)=>res.json())
         .then((res)=>{
-            console.log(res);
             this.setState({
                 reply:res,
                 point:res[0].replyPoint

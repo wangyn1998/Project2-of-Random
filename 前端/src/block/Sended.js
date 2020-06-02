@@ -42,8 +42,8 @@ export default class Sended extends Component {
                                     </View>
                                     <View style={styles.content}>
                                         <Text>{item.postContent}</Text>
-                                        <View style={{flexDirection:'row',marginTop:'3%'}}>
-                                            <Image source={{uri:item.postImage}}/>
+                                        <View style={{flexDirection:'row',marginTop:'3%',width:'50%',height:'80%'}}>
+                                            <Image source={{uri:item.postImage}} style={{width:'100%',height:'100%'}}/>
                                         </View>
                                     </View>
                                     <View style={styles.last}>
