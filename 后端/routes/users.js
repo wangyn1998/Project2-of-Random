@@ -593,6 +593,7 @@ router.post('/zan', function (req, res) {  //接收POST请求
   });
 })
 
+
 //发布帖子
 router.post('/addpost', function(req, res, next) {
   var data = req.body;
