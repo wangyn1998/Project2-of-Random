@@ -549,7 +549,7 @@ router.get('/test', function(req, res, next) {
 //论坛开始
 //所有帖子
 router.get('/block',function(req,res,next){
-  con.query("select * from post ",function(err,result){
+  con.query("select * from post order by postId desc",function(err,result){
     if(err){
       console.log(err);
     }
