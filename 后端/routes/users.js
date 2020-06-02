@@ -86,6 +86,7 @@ router.post('/login', function (req, res) {  //接收POST请求
   })
 })
 //获取我的页面头像和用户名
+var img='';
 router.get('/my',function(req,res,next){
   con.query('select * from user where userName = ?',[username1],(err,result)=>{
       if(err){
@@ -93,7 +94,9 @@ router.get('/my',function(req,res,next){
       }
       else{
           console.log('user');
+          console.log(result);
           // aa = result;
+          img=result[0].userImage;
           res.send(result);
       }
   })
@@ -592,7 +595,6 @@ router.post('/zan', function (req, res) {  //接收POST请求
     }
   });
 })
-
 
 //发布帖子
 router.post('/addpost', function(req, res, next) {
