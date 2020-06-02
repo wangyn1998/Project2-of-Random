@@ -17,7 +17,6 @@ router.post('/register',(req,res)=>{
   let data = req.body;
   let message1 = {success:true};
   let message2 = {success:false};
-  console.log(data);
   if(data.pwd != data.repwd){
     console.log('两次输入密码不一致')
     res.send(message2);
@@ -68,7 +67,6 @@ var username1='';
 router.post('/login', function (req, res) {  //接收POST请求
   /**获取请求体数据 */
   let data = req.body;   //解析body中的信息
-  console.log(data);
   let message1 = {success:true}
   let message2 = {success:false}
   /**连接数据库 */
@@ -95,7 +93,6 @@ router.get('/my',function(req,res,next){
       }
       else{
           console.log('user');
-          console.log(result);
           // aa = result;
           res.send(result);
       }
@@ -111,7 +108,6 @@ router.get('/rank',function(req,res,next){
       }
       else{
           console.log("111111111")
-          console.log(result);
           res.send(result);
       }
   })
@@ -169,7 +165,6 @@ router.get('/fen',function(req,res,next){
       }
       else{
           console.log('user');
-          console.log(result);
           // aa = result;
           res.send(result);
       }
@@ -189,7 +184,6 @@ router.get('/hezi',function(req,res,next){
           res.send(message2)
         }else{
           console.log('user');
-          console.log(result);
           res.send(result);
         }
         
@@ -200,7 +194,6 @@ router.get('/hezi',function(req,res,next){
 router.post('/getscore', function (req, res) {  //接收POST请求
   /**获取请求体数据 */
   let data = req.body;   //解析body中的信息
-  console.log(data);
   let message1 = {success:true}
   let message2 = {success:false}
   if(data.taskContent == '签到'){
@@ -208,7 +201,6 @@ router.post('/getscore', function (req, res) {  //接收POST请求
       if(err){
         console.log(err);
       }else{
-        console.log(result);
         var num=result[0].recordClockIn+1;
         con.query("update record set recordClockIn=? where userName=?",[num,username1],function(err,result){
           if(err){
@@ -239,7 +231,6 @@ router.post('/getscore', function (req, res) {  //接收POST请求
       }
       else{
         //显示到页面--渲染方法--render,
-        console.log(result);
           con.query("update score set sum=?,updateTime=? where userName=?",[result[0].sumsum,new Date(),data.userName],function(err,result){
           if(err){
             console.log(err);
@@ -255,7 +246,6 @@ router.post('/getscore', function (req, res) {  //接收POST请求
 router.post('/alterpwd', function (req, res) {  //接收POST请求
   /**获取请求体数据 */
   let data = req.body;   //解析body中的信息
-  console.log(data);
   let message1 = {success:true}
   let message2 = {success:false}
   con.query('select * from user where userName = ?',[username1],(err,result)=>{
@@ -264,7 +254,6 @@ router.post('/alterpwd', function (req, res) {  //接收POST请求
     }
     else{
       console.log(result[0].userPwd);
-      console.log(data.oldpwd);
       var rb = /(?!.*\s)(?!^[\u4e00-\u9fa5]+$)(?!^[0-9]+$)(?!^[A-z]+$)(?!^[^A-z0-9]+$)^.{8,14}$/g;
       if(result[0].userPwd == data.oldpwd && rb.test(data.newpwd)){
         con.query("update user set userPwd=? where userName=?",[data.newpwd,username1],function(err,result){
@@ -287,10 +276,8 @@ router.post('/alterpwd', function (req, res) {  //接收POST请求
 router.post('/logout', function (req, res) {  //接收POST请求
   /**获取请求体数据 */
   let data = req.body;   //解析body中的信息
-  console.log(data);
   let message1 = {success:true};
   let message2 = {success:false};
-  console.log(data.logout);
   console.log(typeof(data.logout));
   if(data.logout){
     username1='';
@@ -312,7 +299,6 @@ router.get('/kapian',function(req,res,next){
       }
       else{
           console.log('user');
-          console.log(result);
           res.send(result);
       }
   })
